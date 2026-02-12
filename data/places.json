@@ -1,0 +1,983 @@
+{
+  "prefectures": [
+    { "display": "北海道", "reading": "ほっかいどう", "korean": "홋카이도" },
+    { "display": "青森県", "reading": "あおもりけん", "korean": "아오모리현" },
+    { "display": "岩手県", "reading": "いわてけん", "korean": "이와테현" },
+    { "display": "宮城県", "reading": "みやぎけん", "korean": "미야기현" },
+    { "display": "秋田県", "reading": "あきたけん", "korean": "아키타현" },
+    { "display": "山形県", "reading": "やまがたけん", "korean": "야마가타현" },
+    { "display": "福島県", "reading": "ふくしまけん", "korean": "후쿠시마현" },
+    { "display": "茨城県", "reading": "いばらきけん", "korean": "이바라키현" },
+    { "display": "栃木県", "reading": "とちぎけん", "korean": "토치기현" },
+    { "display": "群馬県", "reading": "ぐんまけん", "korean": "군마현" },
+    { "display": "埼玉県", "reading": "さいたまけん", "korean": "사이타마현" },
+    { "display": "千葉県", "reading": "ちばけん", "korean": "치바현" },
+    { "display": "東京都", "reading": "とうきょうと", "korean": "도쿄도" },
+    {
+      "display": "神奈川県",
+      "reading": "かながわけん",
+      "korean": "카나가와현"
+    },
+    { "display": "新潟県", "reading": "にいがたけん", "korean": "니가타현" },
+    { "display": "富山県", "reading": "とやまけん", "korean": "토야마현" },
+    { "display": "石川県", "reading": "いしかわけん", "korean": "이시카와현" },
+    { "display": "福井県", "reading": "ふくいけん", "korean": "후쿠이현" },
+    { "display": "山梨県", "reading": "やまなしけん", "korean": "야마나시현" },
+    { "display": "長野県", "reading": "ながのけん", "korean": "나가노현" },
+    { "display": "岐阜県", "reading": "ぎふけん", "korean": "기후현" },
+    { "display": "静岡県", "reading": "しずおかけん", "korean": "시즈오카현" },
+    { "display": "愛知県", "reading": "あいちけん", "korean": "아이치현" },
+    { "display": "三重県", "reading": "みえけん", "korean": "미에현" },
+    { "display": "滋賀県", "reading": "しがけん", "korean": "시가현" },
+    { "display": "京都府", "reading": "きょうとふ", "korean": "교토부" },
+    { "display": "大阪府", "reading": "おおさかふ", "korean": "오사카부" },
+    { "display": "兵庫県", "reading": "ひょうごけん", "korean": "효고현" },
+    { "display": "奈良県", "reading": "ならけん", "korean": "나라현" },
+    {
+      "display": "和歌山県",
+      "reading": "わかやまけん",
+      "korean": "와카야마현"
+    },
+    { "display": "鳥取県", "reading": "とっとりけん", "korean": "돗토리현" },
+    { "display": "島根県", "reading": "しまねけん", "korean": "시마네현" },
+    { "display": "岡山県", "reading": "おかやまけん", "korean": "오카야마현" },
+    { "display": "広島県", "reading": "ひろしまけん", "korean": "히로시마현" },
+    { "display": "山口県", "reading": "やまぐちけん", "korean": "야마구치현" },
+    { "display": "徳島県", "reading": "とくしまけん", "korean": "도쿠시마현" },
+    { "display": "香川県", "reading": "かがわけん", "korean": "카가와현" },
+    { "display": "愛媛県", "reading": "えひめけん", "korean": "에히메현" },
+    { "display": "高知県", "reading": "こうちけん", "korean": "고치현" },
+    { "display": "福岡県", "reading": "ふくおかけん", "korean": "후쿠오카현" },
+    { "display": "佐賀県", "reading": "さがけん", "korean": "사가현" },
+    { "display": "長崎県", "reading": "ながさきけん", "korean": "나가사키현" },
+    { "display": "熊本県", "reading": "くまもとけん", "korean": "구마모토현" },
+    { "display": "大分県", "reading": "おおいたけん", "korean": "오이타현" },
+    { "display": "宮崎県", "reading": "みやざきけん", "korean": "미야자키현" },
+    {
+      "display": "鹿児島県",
+      "reading": "かごしまけん",
+      "korean": "가고시마현"
+    },
+    { "display": "沖縄県", "reading": "おきなわけん", "korean": "오키나와현" }
+  ],
+  "tokyoStations": [
+    { "display": "東京", "reading": "とうきょう", "korean": "도쿄" },
+    { "display": "品川", "reading": "しながわ", "korean": "시나가와" },
+    { "display": "新宿", "reading": "しんじゅく", "korean": "신주쿠" },
+    { "display": "渋谷", "reading": "しぶや", "korean": "시부야" },
+    { "display": "池袋", "reading": "いけぶくろ", "korean": "이케부쿠로" },
+    { "display": "上野", "reading": "うえの", "korean": "우에노" },
+    { "display": "秋葉原", "reading": "あきはばら", "korean": "아키하바라" },
+    { "display": "新橋", "reading": "しんばし", "korean": "신바시" },
+    { "display": "日本橋", "reading": "にほんばし", "korean": "니혼바시" },
+    { "display": "銀座", "reading": "ぎんざ", "korean": "긴자" },
+    { "display": "有楽町", "reading": "ゆうらくちょう", "korean": "유락초" },
+    {
+      "display": "浜松町",
+      "reading": "はままつちょう",
+      "korean": "하마마츠초"
+    },
+    { "display": "田町", "reading": "たまち", "korean": "타마치" },
+    {
+      "display": "高輪ゲートウェイ",
+      "reading": "たかなわげーとうぇい",
+      "korean": "타카나와 게이트웨이"
+    },
+    { "display": "大崎", "reading": "おおさき", "korean": "오사키" },
+    { "display": "五反田", "reading": "ごたんだ", "korean": "고탄다" },
+    { "display": "目黒", "reading": "めぐろ", "korean": "메구로" },
+    { "display": "恵比寿", "reading": "えびす", "korean": "에비스" },
+    { "display": "原宿", "reading": "はらじゅく", "korean": "하라주쿠" },
+    { "display": "代々木", "reading": "よよぎ", "korean": "요요기" },
+    { "display": "新大久保", "reading": "しんおおくぼ", "korean": "신오쿠보" },
+    {
+      "display": "高田馬場",
+      "reading": "たかだのばば",
+      "korean": "타카다노바바"
+    },
+    { "display": "目白", "reading": "めじろ", "korean": "메지로" },
+    { "display": "大塚", "reading": "おおつか", "korean": "오오츠카" },
+    { "display": "巣鴨", "reading": "すがも", "korean": "스가모" },
+    { "display": "駒込", "reading": "こまごめ", "korean": "코마고메" },
+    { "display": "田端", "reading": "たばた", "korean": "타바타" },
+    {
+      "display": "西日暮里",
+      "reading": "にしにっぽり",
+      "korean": "니시닛포리"
+    },
+    { "display": "日暮里", "reading": "にっぽり", "korean": "닛포리" },
+    { "display": "鶯谷", "reading": "うぐいすだに", "korean": "우구이스다니" },
+    { "display": "御徒町", "reading": "おかちまち", "korean": "오카치마치" },
+    { "display": "神田", "reading": "かんだ", "korean": "칸다" },
+    {
+      "display": "御茶ノ水",
+      "reading": "おちゃのみず",
+      "korean": "오차노미즈"
+    },
+    { "display": "水道橋", "reading": "すいどうばし", "korean": "스이도바시" },
+    { "display": "飯田橋", "reading": "いいだばし", "korean": "이이다바시" },
+    { "display": "市ケ谷", "reading": "いちがや", "korean": "이치가야" },
+    { "display": "四ツ谷", "reading": "よつや", "korean": "요츠야" },
+    { "display": "信濃町", "reading": "しなのまち", "korean": "시나노마치" },
+    { "display": "千駄ケ谷", "reading": "せんだがや", "korean": "센다가야" },
+    { "display": "中野", "reading": "なかの", "korean": "나카노" },
+    { "display": "高円寺", "reading": "こうえんじ", "korean": "코엔지" },
+    { "display": "阿佐ケ谷", "reading": "あさがや", "korean": "아사가야" },
+    { "display": "荻窪", "reading": "おぎくぼ", "korean": "오기쿠보" },
+    {
+      "display": "西荻窪",
+      "reading": "にしおぎくぼ",
+      "korean": "니시오기쿠보"
+    },
+    { "display": "吉祥寺", "reading": "きちじょうじ", "korean": "키치죠지" },
+    { "display": "三鷹", "reading": "みたか", "korean": "미타카" },
+    { "display": "六本木", "reading": "ろっぽんぎ", "korean": "롯폰기" },
+    {
+      "display": "麻布十番",
+      "reading": "あざぶじゅうばん",
+      "korean": "아자부쥬반"
+    },
+    { "display": "赤坂", "reading": "あかさか", "korean": "아카사카" },
+    {
+      "display": "青山一丁目",
+      "reading": "あおやまいっちょうめ",
+      "korean": "아오야마잇초메"
+    },
+    {
+      "display": "表参道",
+      "reading": "おもてさんどう",
+      "korean": "오모테산도"
+    },
+    { "display": "広尾", "reading": "ひろお", "korean": "히로오" },
+    { "display": "代官山", "reading": "だいかんやま", "korean": "다이칸야마" },
+    { "display": "中目黒", "reading": "なかめぐろ", "korean": "나카메구로" },
+    {
+      "display": "自由が丘",
+      "reading": "じゆうがおか",
+      "korean": "지유가오카"
+    },
+    {
+      "display": "二子玉川",
+      "reading": "ふたこたまがわ",
+      "korean": "후타코타마가와"
+    },
+    {
+      "display": "下北沢",
+      "reading": "しもきたざわ",
+      "korean": "시모키타자와"
+    },
+    {
+      "display": "明大前",
+      "reading": "めいだいまえ",
+      "korean": "메이다이마에"
+    },
+    { "display": "笹塚", "reading": "ささづか", "korean": "사사즈카" },
+    { "display": "調布", "reading": "ちょうふ", "korean": "쵸후" },
+    { "display": "府中", "reading": "ふちゅう", "korean": "후츄" },
+    {
+      "display": "聖蹟桜ヶ丘",
+      "reading": "せいせきさくらがおか",
+      "korean": "세이세키사쿠라가오카"
+    },
+    { "display": "八王子", "reading": "はちおうじ", "korean": "하치오지" },
+    { "display": "立川", "reading": "たちかわ", "korean": "타치카와" },
+    { "display": "国分寺", "reading": "こくぶんじ", "korean": "코쿠분지" },
+    { "display": "町田", "reading": "まちだ", "korean": "마치다" },
+    { "display": "浅草", "reading": "あさくさ", "korean": "아사쿠사" },
+    { "display": "押上", "reading": "おしあげ", "korean": "오시아게" },
+    { "display": "錦糸町", "reading": "きんしちょう", "korean": "킨시초" },
+    { "display": "両国", "reading": "りょうごく", "korean": "료고쿠" },
+    {
+      "display": "門前仲町",
+      "reading": "もんぜんなかちょう",
+      "korean": "몬젠나카초"
+    },
+    { "display": "豊洲", "reading": "とよす", "korean": "토요스" },
+    { "display": "月島", "reading": "つきしま", "korean": "츠키시마" },
+    { "display": "勝どき", "reading": "かちどき", "korean": "카치도키" },
+    { "display": "築地", "reading": "つきじ", "korean": "츠키지" },
+    {
+      "display": "霞ヶ関",
+      "reading": "かすみがせき",
+      "korean": "카스미가세키"
+    },
+    { "display": "永田町", "reading": "ながたちょう", "korean": "나가타초" },
+    { "display": "大手町", "reading": "おおてまち", "korean": "오테마치" },
+    { "display": "九段下", "reading": "くだんした", "korean": "쿠단시타" },
+    { "display": "神保町", "reading": "じんぼうちょう", "korean": "진보초" },
+    { "display": "後楽園", "reading": "こうらくえん", "korean": "코라쿠엔" },
+    { "display": "春日", "reading": "かすが", "korean": "카스가" },
+    {
+      "display": "本郷三丁目",
+      "reading": "ほんごうさんちょうめ",
+      "korean": "혼고산초메"
+    },
+    { "display": "湯島", "reading": "ゆしま", "korean": "유시마" },
+    {
+      "display": "末広町",
+      "reading": "すえひろちょう",
+      "korean": "스에히로초"
+    },
+    {
+      "display": "三越前",
+      "reading": "みつこしまえ",
+      "korean": "미츠코시마에"
+    },
+    { "display": "人形町", "reading": "にんぎょうちょう", "korean": "닌교초" },
+    {
+      "display": "水天宮前",
+      "reading": "すいてんぐうまえ",
+      "korean": "스이텐구마에"
+    },
+    { "display": "茅場町", "reading": "かやばちょう", "korean": "카야바초" },
+    { "display": "八丁堀", "reading": "はっちょうぼり", "korean": "핫쵸보리" },
+    {
+      "display": "清澄白河",
+      "reading": "きよすみしらかわ",
+      "korean": "키요스미시라카와"
+    },
+    { "display": "森下", "reading": "もりした", "korean": "모리시타" },
+    { "display": "住吉", "reading": "すみよし", "korean": "스미요시" },
+    { "display": "亀戸", "reading": "かめいど", "korean": "카메이도" },
+    { "display": "小岩", "reading": "こいわ", "korean": "코이와" },
+    { "display": "金町", "reading": "かなまち", "korean": "카나마치" },
+    { "display": "亀有", "reading": "かめあり", "korean": "카메아리" },
+    { "display": "北千住", "reading": "きたせんじゅ", "korean": "키타센쥬" },
+    {
+      "display": "南千住",
+      "reading": "みなみせんじゅ",
+      "korean": "미나미센쥬"
+    },
+    { "display": "町屋", "reading": "まちや", "korean": "마치야" },
+    { "display": "赤羽", "reading": "あかばね", "korean": "아카바네" },
+    { "display": "十条", "reading": "じゅうじょう", "korean": "쥬죠" },
+    { "display": "板橋", "reading": "いたばし", "korean": "이타바시" },
+    { "display": "練馬", "reading": "ねりま", "korean": "네리마" },
+    {
+      "display": "光が丘",
+      "reading": "ひかりがおか",
+      "korean": "히카리가오카"
+    },
+    { "display": "成増", "reading": "なります", "korean": "나리마스" }
+  ],
+  "osakaStations": [
+    { "display": "大阪", "reading": "おおさか", "korean": "오사카" },
+    { "display": "梅田", "reading": "うめだ", "korean": "우메다" },
+    {
+      "display": "東梅田",
+      "reading": "ひがしうめだ",
+      "korean": "히가시우메다"
+    },
+    { "display": "西梅田", "reading": "にしうめだ", "korean": "니시우메다" },
+    { "display": "新大阪", "reading": "しんおおさか", "korean": "신오사카" },
+    { "display": "難波", "reading": "なんば", "korean": "난바" },
+    { "display": "心斎橋", "reading": "しんさいばし", "korean": "신사이바시" },
+    { "display": "本町", "reading": "ほんまち", "korean": "혼마치" },
+    { "display": "淀屋橋", "reading": "よどやばし", "korean": "요도야바시" },
+    { "display": "北浜", "reading": "きたはま", "korean": "키타하마" },
+    { "display": "天満橋", "reading": "てんまばし", "korean": "텐마바시" },
+    { "display": "京橋", "reading": "きょうばし", "korean": "쿄바시" },
+    { "display": "天王寺", "reading": "てんのうじ", "korean": "텐노지" },
+    { "display": "阿倍野", "reading": "あべの", "korean": "아베노" },
+    { "display": "鶴橋", "reading": "つるはし", "korean": "츠루하시" },
+    { "display": "上本町", "reading": "うえほんまち", "korean": "우에혼마치" },
+    { "display": "日本橋", "reading": "にっぽんばし", "korean": "닛폰바시" },
+    { "display": "恵美須町", "reading": "えびすちょう", "korean": "에비스쵸" },
+    {
+      "display": "大国町",
+      "reading": "だいこくちょう",
+      "korean": "다이코쿠쵸"
+    },
+    { "display": "弁天町", "reading": "べんてんちょう", "korean": "벤텐쵸" },
+    { "display": "西九条", "reading": "にしくじょう", "korean": "니시쿠죠" },
+    { "display": "福島", "reading": "ふくしま", "korean": "후쿠시마" },
+    { "display": "野田", "reading": "のだ", "korean": "노다" },
+    { "display": "塚本", "reading": "つかもと", "korean": "츠카모토" },
+    { "display": "十三", "reading": "じゅうそう", "korean": "쥬소" },
+    { "display": "南方", "reading": "みなみがた", "korean": "미나미가타" },
+    { "display": "淡路", "reading": "あわじ", "korean": "아와지" },
+    { "display": "上新庄", "reading": "かみしんじょう", "korean": "카미신죠" },
+    { "display": "江坂", "reading": "えさか", "korean": "에사카" },
+    {
+      "display": "千里中央",
+      "reading": "せんりちゅうおう",
+      "korean": "센리츄오"
+    },
+    {
+      "display": "万博記念公園",
+      "reading": "ばんぱくきねんこうえん",
+      "korean": "반파쿠기념공원"
+    },
+    { "display": "茨木", "reading": "いばらき", "korean": "이바라키" },
+    { "display": "高槻", "reading": "たかつき", "korean": "타카츠키" },
+    { "display": "枚方市", "reading": "ひらかたし", "korean": "히라카타시" },
+    { "display": "樟葉", "reading": "くずは", "korean": "쿠즈하" },
+    { "display": "寝屋川市", "reading": "ねやがわし", "korean": "네야가와시" },
+    { "display": "守口市", "reading": "もりぐちし", "korean": "모리구치시" },
+    { "display": "門真市", "reading": "かどまし", "korean": "카도마시" },
+    { "display": "大正", "reading": "たいしょう", "korean": "타이쇼" },
+    {
+      "display": "芦原橋",
+      "reading": "あしはらばし",
+      "korean": "아시하라바시"
+    },
+    { "display": "今宮", "reading": "いまみや", "korean": "이마미야" },
+    { "display": "新今宮", "reading": "しんいまみや", "korean": "신이마미야" },
+    { "display": "天下茶屋", "reading": "てんがちゃや", "korean": "텐가차야" },
+    { "display": "岸里", "reading": "きしのさと", "korean": "키시노사토" },
+    { "display": "玉出", "reading": "たまで", "korean": "타마데" },
+    {
+      "display": "住之江公園",
+      "reading": "すみのえこうえん",
+      "korean": "스미노에공원"
+    },
+    { "display": "堺", "reading": "さかい", "korean": "사카이" },
+    { "display": "中百舌鳥", "reading": "なかもず", "korean": "나카모즈" },
+    { "display": "鳳", "reading": "おおとり", "korean": "오토리" },
+    {
+      "display": "和泉府中",
+      "reading": "いずみふちゅう",
+      "korean": "이즈미후츄"
+    },
+    { "display": "岸和田", "reading": "きしわだ", "korean": "키시와다" },
+    { "display": "泉佐野", "reading": "いずみさの", "korean": "이즈미사노" },
+    {
+      "display": "りんくうタウン",
+      "reading": "りんくうたうん",
+      "korean": "린쿠타운"
+    },
+    {
+      "display": "関西空港",
+      "reading": "かんさいくうこう",
+      "korean": "간사이공항"
+    },
+    { "display": "八尾", "reading": "やお", "korean": "야오" },
+    {
+      "display": "河内小阪",
+      "reading": "かわちこさか",
+      "korean": "카와치코사카"
+    },
+    { "display": "布施", "reading": "ふせ", "korean": "후세" },
+    { "display": "長田", "reading": "ながた", "korean": "나카타" },
+    { "display": "荒本", "reading": "あらもと", "korean": "아라모토" },
+    { "display": "生駒", "reading": "いこま", "korean": "이코마" },
+    {
+      "display": "谷町四丁目",
+      "reading": "たにまちよんちょうめ",
+      "korean": "타니마치욘초메"
+    },
+    {
+      "display": "谷町九丁目",
+      "reading": "たにまちきゅうちょうめ",
+      "korean": "타니마치큐초메"
+    },
+    {
+      "display": "四天王寺前夕陽ヶ丘",
+      "reading": "してんのうじまえゆうひがおか",
+      "korean": "시텐노지마에유히가오카"
+    },
+    { "display": "森ノ宮", "reading": "もりのみや", "korean": "모리노미야" },
+    {
+      "display": "大阪城公園",
+      "reading": "おおさかじょうこうえん",
+      "korean": "오사카성공원"
+    },
+    { "display": "天満", "reading": "てんま", "korean": "텐마" },
+    {
+      "display": "桜ノ宮",
+      "reading": "さくらのみや",
+      "korean": "사쿠라노미야"
+    },
+    {
+      "display": "南森町",
+      "reading": "みなみもりまち",
+      "korean": "미나미모리마치"
+    },
+    { "display": "扇町", "reading": "おうぎまち", "korean": "오기마치" },
+    {
+      "display": "天神橋筋六丁目",
+      "reading": "てんじんばしすじろくちょうめ",
+      "korean": "텐진바시스지로쿠초메"
+    },
+    { "display": "都島", "reading": "みやこじま", "korean": "미야코지마" },
+    {
+      "display": "コスモスクエア",
+      "reading": "こすもすくえあ",
+      "korean": "코스모스퀘어"
+    },
+    {
+      "display": "トレードセンター前",
+      "reading": "とれーどせんたーまえ",
+      "korean": "트레이드센터마에"
+    },
+    { "display": "中ふ頭", "reading": "なかふとう", "korean": "나카후토" },
+    { "display": "大阪港", "reading": "おおさかこう", "korean": "오사카항" },
+    {
+      "display": "朝潮橋",
+      "reading": "あさしおばし",
+      "korean": "아사시오바시"
+    },
+    { "display": "阿波座", "reading": "あわざ", "korean": "아와좌" },
+    {
+      "display": "西長堀",
+      "reading": "にしながほり",
+      "korean": "니시나가호리"
+    },
+    { "display": "桜川", "reading": "さくらがわ", "korean": "사쿠라가와" },
+    { "display": "汐見橋", "reading": "しおみばし", "korean": "시오미바시" },
+    { "display": "ドーム前", "reading": "どーむまえ", "korean": "돔마에" },
+    { "display": "九条", "reading": "くじょう", "korean": "쿠죠" },
+    { "display": "肥後橋", "reading": "ひごばし", "korean": "히고바시" },
+    {
+      "display": "渡辺橋",
+      "reading": "わたなべばし",
+      "korean": "와타나베바시"
+    },
+    { "display": "中之島", "reading": "なかのしま", "korean": "나카노시마" },
+    {
+      "display": "住吉大社",
+      "reading": "すみよしたいしゃ",
+      "korean": "스미요시대사"
+    },
+    { "display": "我孫子", "reading": "あびこ", "korean": "아비코" },
+    { "display": "長居", "reading": "ながい", "korean": "나가이" },
+    { "display": "西田辺", "reading": "にしたなべ", "korean": "니시타나베" },
+    { "display": "昭和町", "reading": "しょうわちょう", "korean": "쇼와초" },
+    {
+      "display": "動物園前",
+      "reading": "どうぶつえんまえ",
+      "korean": "동물원앞"
+    },
+    { "display": "恵美須町", "reading": "えびすちょう", "korean": "에비스초" },
+    { "display": "松屋町", "reading": "まつやまち", "korean": "마츠야마치" },
+    { "display": "長堀橋", "reading": "ながほりばし", "korean": "나고리바시" },
+    { "display": "心斎橋", "reading": "しんさいばし", "korean": "신사이바시" },
+    { "display": "四ツ橋", "reading": "よつばし", "korean": "요츠바시" },
+    { "display": "西大橋", "reading": "にしおおはし", "korean": "니시오하시" }
+  ],
+  "tokyoLines": [
+    { "display": "山手線", "reading": "やまのてせん", "korean": "야마노테선" },
+    {
+      "display": "中央線快速",
+      "reading": "ちゅうおうせんかいそく",
+      "korean": "중앙선 쾌속"
+    },
+    {
+      "display": "中央・総武緩行線",
+      "reading": "ちゅうおう・そうぶかんこうせん",
+      "korean": "중앙·소부 완행선"
+    },
+    {
+      "display": "京浜東北線",
+      "reading": "けいひんとうほくせん",
+      "korean": "케이힌토호쿠선"
+    },
+    { "display": "埼京선", "reading": "さいきょうせん", "korean": "사이쿄선" },
+    {
+      "display": "湘南新宿ライン",
+      "reading": "しょうなん신주쿠らいん",
+      "korean": "쇼난신주쿠라인"
+    },
+    {
+      "display": "上野東京ライン",
+      "reading": "うえのとうきょうらいん",
+      "korean": "우에노도쿄라인"
+    },
+    { "display": "京葉線", "reading": "け이ようせん", "korean": "케이요선" },
+    {
+      "display": "武蔵野線",
+      "reading": "むさしのせん",
+      "korean": "무사시노선"
+    },
+    {
+      "display": "常磐線快速",
+      "reading": "じょうばんせんかいそく",
+      "korean": "조반선 쾌속"
+    },
+    {
+      "display": "常磐線各駅停車",
+      "reading": "じょうばんせんかくえきていしゃ",
+      "korean": "조반선 각역정차"
+    },
+    {
+      "display": "横須賀線",
+      "reading": "よこすかせん",
+      "korean": "요코스카선"
+    },
+    {
+      "display": "総武快速線",
+      "reading": "そうぶかいそくせん",
+      "korean": "소부 쾌속선"
+    },
+    { "display": "青梅線", "reading": "おうめせん", "korean": "오메선" },
+    {
+      "display": "五日市線",
+      "reading": "いつかいちせん",
+      "korean": "이츠카이치선"
+    },
+    { "display": "銀座線", "reading": "ぎんざせん", "korean": "긴자선" },
+    {
+      "display": "丸ノ内선",
+      "reading": "まるのうちせん",
+      "korean": "마루노우치선"
+    },
+    { "display": "日比谷線", "reading": "ひびやせん", "korean": "히비야선" },
+    { "display": "東西線", "reading": "とうざいせん", "korean": "토자이선" },
+    { "display": "千代田線", "reading": "ちよだせん", "korean": "치요다선" },
+    {
+      "display": "有楽町線",
+      "reading": "ゆうらくちょうせん",
+      "korean": "유라쿠초선"
+    },
+    {
+      "display": "半蔵門線",
+      "reading": "はんぞうもんせん",
+      "korean": "한조몬선"
+    },
+    { "display": "南北線", "reading": "なんぼくせん", "korean": "난보쿠선" },
+    {
+      "display": "副都心線",
+      "reading": "ふくとしんせん",
+      "korean": "후쿠토심선"
+    },
+    { "display": "浅草線", "reading": "あさくさせん", "korean": "아사쿠사선" },
+    { "display": "三田線", "reading": "みたせん", "korean": "미타선" },
+    { "display": "新宿線", "reading": "しんじゅくせん", "korean": "신주쿠선" },
+    { "display": "大江戸線", "reading": "おおえ도せん", "korean": "오에도선" },
+    { "display": "京王線", "reading": "けいおうせん", "korean": "게이오선" },
+    {
+      "display": "京王新線",
+      "reading": "けいおうしんせん",
+      "korean": "게이오 신선"
+    },
+    {
+      "display": "京王相模原線",
+      "reading": "けいおうさがみはらせん",
+      "korean": "게이오 사가미하라선"
+    },
+    {
+      "display": "京王競馬場線",
+      "reading": "けいおうけいばじょうせん",
+      "korean": "게이오 경마장선"
+    },
+    {
+      "display": "京王動物園線",
+      "reading": "けいおうどうぶつえんせん",
+      "korean": "게이오 동물원선"
+    },
+    {
+      "display": "京王高尾線",
+      "reading": "けいおうたかおせん",
+      "korean": "게이오 타카오선"
+    },
+    {
+      "display": "京王井の頭線",
+      "reading": "けいおういのかしらせん",
+      "korean": "게이오 이노카시라선"
+    },
+    {
+      "display": "小田急小田原線",
+      "reading": "おだきゅうおだわらせん",
+      "korean": "오다큐 오다와라선"
+    },
+    {
+      "display": "小田急江ノ島線",
+      "reading": "おだきゅうえのしません",
+      "korean": "오다큐 에노시마선"
+    },
+    {
+      "display": "小田急多摩線",
+      "reading": "おだきゅうたません",
+      "korean": "오다큐 타마선"
+    },
+    {
+      "display": "東急東横線",
+      "reading": "とうきゅうとうよこせん",
+      "korean": "도큐 도요코선"
+    },
+    {
+      "display": "東急田園都市線",
+      "reading": "とうきゅうでんえんとしせん",
+      "korean": "도큐 덴엔토시선"
+    },
+    {
+      "display": "東急大井町線",
+      "reading": "とうきゅうおおいまちせん",
+      "korean": "도큐 오이마치선"
+    },
+    {
+      "display": "東急目黒線",
+      "reading": "とうきゅうめぐろせん",
+      "korean": "도큐 메구로선"
+    },
+    {
+      "display": "東急池上線",
+      "reading": "とうきゅういけがみせん",
+      "korean": "도큐 이케가미선"
+    },
+    {
+      "display": "東急多摩川線",
+      "reading": "とうきゅうたま가わせん",
+      "korean": "도큐 타마가와선"
+    },
+    {
+      "display": "東急世田谷線",
+      "reading": "とうきゅうせたがやせん",
+      "korean": "도큐 세타가야선"
+    },
+    {
+      "display": "西武池袋線",
+      "reading": "せいぶいけぶくろせん",
+      "korean": "세이부 이케부쿠로선"
+    },
+    {
+      "display": "西武新宿線",
+      "reading": "せいぶしんじゅくせん",
+      "korean": "세이부 신주쿠선"
+    },
+    {
+      "display": "西武有楽町線",
+      "reading": "せいぶゆうらくちょうせん",
+      "korean": "세이부 유라쿠초선"
+    },
+    {
+      "display": "西武豊島線",
+      "reading": "せいぶとしません",
+      "korean": "세이부 토시마선"
+    },
+    {
+      "display": "西武狭山線",
+      "reading": "せいぶさやません",
+      "korean": "세이부 사야마선"
+    },
+    {
+      "display": "西武多摩湖線",
+      "reading": "せいぶたまこせん",
+      "korean": "세이부 타마코선"
+    },
+    {
+      "display": "西武多摩川線",
+      "reading": "せいぶたまがわせん",
+      "korean": "세이부 타마가와선"
+    },
+    {
+      "display": "東武伊勢崎線",
+      "reading": "とうぶいせさきせん",
+      "korean": "토부 이세사키선"
+    },
+    {
+      "display": "東武東上線",
+      "reading": "とうぶとうじょうせん",
+      "korean": "토부 토죠선"
+    },
+    {
+      "display": "東武亀戸線",
+      "reading": "とうぶかめいどせん",
+      "korean": "토부 카메이도선"
+    },
+    {
+      "display": "東武大師線",
+      "reading": "とうぶだいしせん",
+      "korean": "토부 다이시선"
+    },
+    {
+      "display": "京急본선",
+      "reading": "けいきゅうほんせん",
+      "korean": "게이큐 본선"
+    },
+    {
+      "display": "京急空港線",
+      "reading": "けいきゅうくうこうせん",
+      "korean": "게이큐 공항선"
+    },
+    {
+      "display": "京成本線",
+      "reading": "け이せいほんせん",
+      "korean": "게이세이 본선"
+    },
+    {
+      "display": "京成押上線",
+      "reading": "けいせいお시아げせん",
+      "korean": "게이세이 오시아게선"
+    },
+    {
+      "display": "京成金町線",
+      "reading": "けいせいかなまちせん",
+      "korean": "게이세이 카나마치선"
+    },
+    {
+      "display": "成田スカイアクセス線",
+      "reading": "なりたすかいあくせすせん",
+      "korean": "나리타 스카이액세스선"
+    },
+    {
+      "display": "相鉄本線",
+      "reading": "そうてつほんせん",
+      "korean": "소테츠 본선"
+    },
+    {
+      "display": "相鉄いずみ野線",
+      "reading": "そうてついずみのせん",
+      "korean": "소테츠 이즈미노선"
+    },
+    {
+      "display": "りんかい線",
+      "reading": "りんかいせん",
+      "korean": "린카이선"
+    },
+    {
+      "display": "ゆりかもめ",
+      "reading": "ゆりかもめ",
+      "korean": "유리카모메"
+    },
+    {
+      "display": "東京モノレール",
+      "reading": "とうきょうものれーる",
+      "korean": "도쿄 모노레일"
+    },
+    {
+      "display": "日暮里・舎人ライナー",
+      "reading": "にっぽり・とねりらいなー",
+      "korean": "닛포리·토네리 라이너"
+    },
+    {
+      "display": "都電荒川線",
+      "reading": "とでんあらかわせん",
+      "korean": "도덴 아라카와선"
+    },
+    {
+      "display": "多摩モノレール",
+      "reading": "たまものれーる",
+      "korean": "타마 모노레일"
+    }
+  ],
+  "osakaLines": [
+    {
+      "display": "御堂筋線",
+      "reading": "みどうすじせん",
+      "korean": "미도스지선"
+    },
+    { "display": "谷町線", "reading": "たにまちせん", "korean": "타니마치선" },
+    {
+      "display": "四つ橋線",
+      "reading": "よつばしせん",
+      "korean": "요츠바시선"
+    },
+    {
+      "display": "中央線",
+      "reading": "ちゅうおうせん",
+      "korean": "중앙선(츄오선)"
+    },
+    {
+      "display": "千日前線",
+      "reading": "せんにちまえせん",
+      "korean": "센니치마에선"
+    },
+    {
+      "display": "堺筋線",
+      "reading": "さかいすじせん",
+      "korean": "사카이스지선"
+    },
+    {
+      "display": "長堀鶴見緑地線",
+      "reading": "ながほりつるみりょくちせん",
+      "korean": "나가호리츠루미료쿠치선"
+    },
+    {
+      "display": "今里筋線",
+      "reading": "いまざとすじせん",
+      "korean": "이마자토스지선"
+    },
+    {
+      "display": "南港ポートタウン線",
+      "reading": "なんこうぽーとたうんせん",
+      "korean": "난코 포트타운선"
+    },
+    {
+      "display": "大阪環状線",
+      "reading": "おおさかかんじょうせん",
+      "korean": "오사카 순환선"
+    },
+    {
+      "display": "JR京都線",
+      "reading": "じぇいあーるきょうとせん",
+      "korean": "JR 교토선"
+    },
+    {
+      "display": "JR神戸線",
+      "reading": "じぇいあーるこうべせん",
+      "korean": "JR 고베선"
+    },
+    {
+      "display": "JR宝塚線",
+      "reading": "じぇいあーるたからづかせん",
+      "korean": "JR 다카라즈카선"
+    },
+    {
+      "display": "大和路線",
+      "reading": "やまとじせん",
+      "korean": "야마토지선"
+    },
+    { "display": "阪和線", "reading": "はんわせん", "korean": "한와선" },
+    {
+      "display": "学研都市線",
+      "reading": "がっけんとしせん",
+      "korean": "갓켄도시선"
+    },
+    {
+      "display": "JR東西線",
+      "reading": "じぇいあーるとうざいせん",
+      "korean": "JR 토자이선"
+    },
+    {
+      "display": "おおさか東線",
+      "reading": "おおさかひがしせん",
+      "korean": "오사카 히가시선"
+    },
+    {
+      "display": "JRゆめ咲線",
+      "reading": "じぇいあーるゆめさきせん",
+      "korean": "JR 유메사키선"
+    },
+    {
+      "display": "関西空港線",
+      "reading": "かんさいくうこうせん",
+      "korean": "관서공항선"
+    },
+    {
+      "display": "阪急神戸本線",
+      "reading": "はんきゅうこうべほんせん",
+      "korean": "한큐 고베 본선"
+    },
+    {
+      "display": "阪急宝塚本線",
+      "reading": "はんきゅうたからづかほんせん",
+      "korean": "한큐 다카라즈카 본선"
+    },
+    {
+      "display": "阪急京都本線",
+      "reading": "はんきゅうきょうとほんせん",
+      "korean": "한큐 교토 본선"
+    },
+    {
+      "display": "阪急千里線",
+      "reading": "はんきゅうせんりせん",
+      "korean": "한큐 센리선"
+    },
+    {
+      "display": "阪急嵐山線",
+      "reading": "はんきゅうあらしやません",
+      "korean": "한큐 아라시야마선"
+    },
+    {
+      "display": "阪急箕面선",
+      "reading": "はんきゅうみのおせん",
+      "korean": "한큐 미노오선"
+    },
+    {
+      "display": "阪神本線",
+      "reading": "はんしんほんせん",
+      "korean": "한신 본선"
+    },
+    {
+      "display": "阪神なんば線",
+      "reading": "はんしんなんばせん",
+      "korean": "한신 난바선"
+    },
+    {
+      "display": "京阪본선",
+      "reading": "けいはんほんせん",
+      "korean": "게이한 본선"
+    },
+    {
+      "display": "京阪中之島線",
+      "reading": "けいはんなかのしません",
+      "korean": "게이한 나카노시마선"
+    },
+    {
+      "display": "京阪交野線",
+      "reading": "けいはんかたのせん",
+      "korean": "게이한 카타노선"
+    },
+    {
+      "display": "近鉄難波線",
+      "reading": "きんてつなん바せん",
+      "korean": "긴테츠 난바선"
+    },
+    {
+      "display": "近鉄大阪線",
+      "reading": "きんてつおおさかせん",
+      "korean": "긴테츠 오사카선"
+    },
+    {
+      "display": "近鉄奈良線",
+      "reading": "きんてつならせん",
+      "korean": "긴테츠 나라선"
+    },
+    {
+      "display": "近鉄けいはんな線",
+      "reading": "きんてつけいはんなせん",
+      "korean": "긴테츠 게이한나선"
+    },
+    {
+      "display": "近鉄南大阪線",
+      "reading": "きんてつみなみおおさかせん",
+      "korean": "긴테츠 미나미오사카선"
+    },
+    {
+      "display": "近鉄信貴線",
+      "reading": "きんてつしぎせん",
+      "korean": "긴테츠 시기선"
+    },
+    {
+      "display": "近鉄長野線",
+      "reading": "きんてつながのせん",
+      "korean": "긴테츠 나가노선"
+    },
+    {
+      "display": "南海本線",
+      "reading": "なんかいほんせん",
+      "korean": "난카이 본선"
+    },
+    {
+      "display": "南海高野線",
+      "reading": "なんかいこうやせん",
+      "korean": "난카이 코야선"
+    },
+    {
+      "display": "南海空港線",
+      "reading": "なんかいくうこうせん",
+      "korean": "난카이 공항선"
+    },
+    {
+      "display": "南海多奈川線",
+      "reading": "なんかいたながわせん",
+      "korean": "난카이 타나가와선"
+    },
+    {
+      "display": "北大阪急行電鉄",
+      "reading": "きたおお사카きゅうこうでんてつ",
+      "korean": "기타오사카 급행 전철"
+    },
+    {
+      "display": "大阪モノレール",
+      "reading": "おおさかものれーる",
+      "korean": "오사카 모노레일"
+    },
+    {
+      "display": "阪堺電気軌道",
+      "reading": "はんかいでんききどう",
+      "korean": "한카이 전기 궤도"
+    },
+    {
+      "display": "泉北高速鉄道",
+      "reading": "せんぼくこうそくてつどう",
+      "korean": "센보쿠 고속 철도"
+    },
+    {
+      "display": "水間鉄道",
+      "reading": "みずまてつどう",
+      "korean": "미즈마 철도"
+    }
+  ]
+}

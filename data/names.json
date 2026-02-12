@@ -1,0 +1,394 @@
+{
+  "surnames": [
+    { "kanji": "佐藤", "reading": "さとう" },
+    { "kanji": "鈴木", "reading": "すずき" },
+    { "kanji": "高橋", "reading": "たかはし" },
+    { "kanji": "田中", "reading": "たなか" },
+    { "kanji": "伊藤", "reading": "いとう" },
+    { "kanji": "渡辺", "reading": "わたなべ" },
+    { "kanji": "山本", "reading": "やまもと" },
+    { "kanji": "中村", "reading": "なかむら" },
+    { "kanji": "小林", "reading": "こばやし" },
+    { "kanji": "加藤", "reading": "かとう" },
+    { "kanji": "吉田", "reading": "よしだ" },
+    { "kanji": "山田", "reading": "やまだ" },
+    { "kanji": "佐々木", "reading": "ささき" },
+    { "kanji": "山口", "reading": "やまぐち" },
+    { "kanji": "松本", "reading": "まつもと" },
+    { "kanji": "井上", "reading": "いのうえ" },
+    { "kanji": "木村", "reading": "きむら" },
+    { "kanji": "林", "reading": "はやし" },
+    { "kanji": "斎藤", "reading": "さいとう" },
+    { "kanji": "清水", "reading": "しみず" },
+    { "kanji": "山崎", "reading": "やまざき" },
+    { "kanji": "森", "reading": "もり" },
+    { "kanji": "阿部", "reading": "あべ" },
+    { "kanji": "池다", "reading": "いけだ" },
+    { "kanji": "橋本", "reading": "はしもと" },
+    { "kanji": "山下", "reading": "やました" },
+    { "kanji": "石川", "reading": "いしかわ" },
+    { "kanji": "中島", "reading": "なかじま" },
+    { "kanji": "前田", "reading": "まえだ" },
+    { "kanji": "藤田", "reading": "ふじた" },
+    { "kanji": "小川", "reading": "おがわ" },
+    { "kanji": "後藤", "reading": "ごとう" },
+    { "kanji": "岡田", "reading": "おかだ" },
+    { "kanji": "長谷川", "reading": "はせがわ" },
+    { "kanji": "村上", "reading": "むらかみ" },
+    { "kanji": "近藤", "reading": "こんどう" },
+    { "kanji": "石井", "reading": "いしい" },
+    { "kanji": "斉藤", "reading": "さいとう" },
+    { "kanji": "坂本", "reading": "さかもと" },
+    { "kanji": "遠藤", "reading": "えんどう" },
+    { "kanji": "青木", "reading": "あおき" },
+    { "kanji": "藤井", "reading": "ふじい" },
+    { "kanji": "西村", "reading": "にしむら" },
+    { "kanji": "福田", "reading": "ふくだ" },
+    { "kanji": "太田", "reading": "おおた" },
+    { "kanji": "三浦", "reading": "みうら" },
+    { "kanji": "藤原", "reading": "ふじわら" },
+    { "kanji": "岡本", "reading": "おかもと" },
+    { "kanji": "松田", "reading": "まつだ" },
+    { "kanji": "中川", "reading": "なかがわ" },
+    { "kanji": "中野", "reading": "なかの" },
+    { "kanji": "原田", "reading": "はらだ" },
+    { "kanji": "小野", "reading": "おの" },
+    { "kanji": "田村", "reading": "たむら" },
+    { "kanji": "竹内", "reading": "たけうち" },
+    { "kanji": "金子", "reading": "かねこ" },
+    { "kanji": "和田", "reading": "わだ" },
+    { "kanji": "中山", "reading": "なかやま" },
+    { "kanji": "石田", "reading": "いしだ" },
+    { "kanji": "上田", "reading": "うえだ" },
+    { "kanji": "森田", "reading": "もりた" },
+    { "kanji": "小島", "reading": "こじま" },
+    { "kanji": "柴田", "reading": "しばた" },
+    { "kanji": "原", "reading": "はら" },
+    { "kanji": "宮崎", "reading": "みやざき" },
+    { "kanji": "酒井", "reading": "さかい" },
+    { "kanji": "工藤", "reading": "くどう" },
+    { "kanji": "横山", "reading": "よこやま" },
+    { "kanji": "宮本", "reading": "みやもと" },
+    { "kanji": "内田", "reading": "うちだ" },
+    { "kanji": "高木", "reading": "たかぎ" },
+    { "kanji": "安藤", "reading": "あんどう" },
+    { "kanji": "島田", "reading": "しまだ" },
+    { "kanji": "谷口", "reading": "たにぐち" },
+    { "kanji": "大野", "reading": "おおの" },
+    { "kanji": "高田", "reading": "たかだ" },
+    { "kanji": "丸山", "reading": "まるやま" },
+    { "kanji": "今井", "reading": "いまい" },
+    { "kanji": "河野", "reading": "こうの" },
+    { "kanji": "藤本", "reading": "ふじもと" },
+    { "kanji": "村田", "reading": "むらた" },
+    { "kanji": "武田", "reading": "たけだ" },
+    { "kanji": "上野", "reading": "うえの" },
+    { "kanji": "杉山", "reading": "すぎやま" },
+    { "kanji": "増田", "reading": "ますだ" },
+    { "kanji": "小山", "reading": "こやま" },
+    { "kanji": "大塚", "reading": "おおつか" },
+    { "kanji": "平野", "reading": "ひらの" },
+    { "kanji": "菅原", "reading": "すがわら" },
+    { "kanji": "久保", "reading": "くぼ" },
+    { "kanji": "松井", "reading": "まつい" },
+    { "kanji": "千葉", "reading": "ちば" },
+    { "kanji": "岩崎", "reading": "いわさき" },
+    { "kanji": "桜井", "reading": "さくらい" },
+    { "kanji": "木下", "reading": "きのした" },
+    { "kanji": "野口", "reading": "のぐち" },
+    { "kanji": "松尾", "reading": "まつお" },
+    { "kanji": "菊地", "reading": "きくち" },
+    { "kanji": "野村", "reading": "のむら" },
+    { "kanji": "新井", "reading": "あらい" }
+  ],
+
+  "givenNames": [
+    { "kanji": "蓮", "reading": "れん" },
+    { "kanji": "陽葵", "reading": "ひまり" },
+    { "kanji": "湊", "reading": "みなと" },
+    { "kanji": "凛", "reading": "りん" },
+    { "kanji": "悠真", "reading": "ゆうま" },
+    { "kanji": "結菜", "reading": "ゆいな" },
+    { "kanji": "大翔", "reading": "ひろと" },
+    { "kanji": "紬", "reading": "つむぎ" },
+    { "kanji": "陽翔", "reading": "はると" },
+    { "kanji": "莉子", "reading": "りこ" },
+    { "kanji": "伊織", "reading": "いおり" },
+    { "kanji": "芽依", "reading": "めい" },
+    { "kanji": "颯真", "reading": "そうま" },
+    { "kanji": "心春", "reading": "こはる" },
+    { "kanji": "樹", "reading": "いつき" },
+    { "kanji": "葵", "reading": "あおい" },
+    { "kanji": "朝陽", "reading": "あさひ" },
+    { "kanji": "咲良", "reading": "さくら" },
+    { "kanji": "律", "reading": "りつ" },
+    { "kanji": "澪", "reading": "みお" },
+    { "kanji": "結翔", "reading": "ゆいと" },
+    { "kanji": "陽菜", "reading": "ひな" },
+    { "kanji": "朔", "reading": "さく" },
+    { "kanji": "美月", "reading": "みつき" },
+    { "kanji": "蒼空", "reading": "そら" },
+    { "kanji": "結愛", "reading": "ゆあ" },
+    { "kanji": "颯", "reading": "はやて" },
+    { "kanji": "杏", "reading": "あん" },
+    { "kanji": "暖", "reading": "だん" },
+    { "kanji": "栞", "reading": "しおり" },
+    { "kanji": "凪", "reading": "なぎ" },
+    { "kanji": "一華", "reading": "いちか" },
+    { "kanji": "岳", "reading": "がく" },
+    { "kanji": "彩葉", "reading": "いろは" },
+    { "kanji": "大和", "reading": "やまと" },
+    { "kanji": "琴音", "reading": "ことね" },
+    { "kanji": "健太郎", "reading": "けんたろう" },
+    { "kanji": "愛", "reading": "あい" },
+    { "kanji": "翔", "reading": "しょう" },
+    { "kanji": "七海", "reading": "ななみ" },
+    { "kanji": "翼", "reading": "つばさ" },
+    { "kanji": "和花", "reading": "わか" },
+    { "kanji": "拓海", "reading": "たくみ" },
+    { "kanji": "千尋", "reading": "ちひろ" },
+    { "kanji": "琉生", "reading": "るい" },
+    { "kanji": "朱音", "reading": "あかね" },
+    { "kanji": "陸", "reading": "りく" },
+    { "kanji": "詩", "reading": "うた" },
+    { "kanji": "輝", "reading": "ひかる" },
+    { "kanji": "楓", "reading": "かえで" },
+    { "kanji": "陽太", "reading": "ようた" },
+    { "kanji": "光", "reading": "ひかり" },
+    { "kanji": "遼", "reading": "りょう" },
+    { "kanji": "日和", "reading": "ひより" },
+    { "kanji": "隼人", "reading": "はやと" },
+    { "kanji": "愛菜", "reading": "まな" },
+    { "kanji": "龍之介", "reading": "りゅうのすけ" },
+    { "kanji": "遥", "reading": "はるか" },
+    { "kanji": "大輝", "reading": "だいき" },
+    { "kanji": "花", "reading": "はな" },
+    { "kanji": "結衣", "reading": "ゆい" },
+    { "kanji": "優希", "reading": "ゆうき" },
+    { "kanji": "大輔", "reading": "だいすけ" },
+    { "kanji": "紗良", "reading": "さら" },
+    { "kanji": "直樹", "reading": "なおき" },
+    { "kanji": "真央", "reading": "まお" },
+    { "kanji": "慎太郎", "reading": "しんたろう" },
+    { "kanji": "千夏", "reading": "ちなつ" },
+    { "kanji": "康介", "reading": "こうすけ" },
+    { "kanji": "菜々子", "reading": "ななこ" },
+    { "kanji": "哲也", "reading": "てつや" },
+    { "kanji": "明日香", "reading": "あすか" },
+    { "kanji": "翔太", "reading": "しょうた" },
+    { "kanji": "由美", "reading": "ゆみ" },
+    { "kanji": "圭介", "reading": "けいすけ" },
+    { "kanji": "恵", "reading": "めぐみ" },
+    { "kanji": "智也", "reading": "ともや" },
+    { "kanji": "桃子", "reading": "ももこ" },
+    { "kanji": "雄大", "reading": "ゆうだい" },
+    { "kanji": "里奈", "reading": "りな" },
+    { "kanji": "裕太", "reading": "ゆうた" },
+    { "kanji": "舞", "reading": "まい" },
+    { "kanji": "剛", "reading": "つよし" },
+    { "kanji": "涼子", "reading": "りょうこ" },
+    { "kanji": "健一", "reading": "けんいち" },
+    { "kanji": "結", "reading": "ゆい" },
+    { "kanji": "洋介", "reading": "ようすけ" },
+    { "kanji": "千晶", "reading": "ちあき" },
+    { "kanji": "俊介", "reading": "しゅんすけ" },
+    { "kanji": "美咲", "reading": "みさき" },
+    { "kanji": "誠", "reading": "まこと" },
+    { "kanji": "香織", "reading": "かおり" },
+    { "kanji": "一樹", "reading": "かずき" },
+    { "kanji": "沙織", "reading": "さおり" },
+    { "kanji": "達也", "reading": "たつや" },
+    { "kanji": "瑞希", "reading": "みずき" },
+    { "kanji": "修平", "reading": "しゅうへい" },
+    { "kanji": "夏帆", "reading": "かほ" },
+    { "kanji": "正樹", "reading": "まさき" },
+    { "kanji": "彩", "reading": "あや" }
+  ],
+
+  "celebrities": [
+    {
+      "display": "木村拓哉",
+      "reading": "きむらたくや",
+      "korean": "기무라 타쿠야"
+    },
+    {
+      "display": "石原さとみ",
+      "reading": "いしはらさとみ",
+      "korean": "이시하라 사토미"
+    },
+    {
+      "display": "新垣結衣",
+      "reading": "あらがきゆい",
+      "korean": "아라가키 유이"
+    },
+    {
+      "display": "堺雅人",
+      "reading": "さかいまさと",
+      "korean": "사카이 마사토"
+    },
+    {
+      "display": "福山雅治",
+      "reading": "ふくやままさはる",
+      "korean": "후쿠야마 마사하루"
+    },
+    {
+      "display": "北川景子",
+      "reading": "きたがわけいこ",
+      "korean": "기타가와 게이코"
+    },
+    {
+      "display": "山﨑賢人",
+      "reading": "やまざきけんと",
+      "korean": "야마자키 켄토"
+    },
+    { "display": "小松菜奈", "reading": "こまつなな", "korean": "고마츠 나나" },
+    { "display": "菅田将暉", "reading": "すだまさき", "korean": "스다 마사키" },
+    {
+      "display": "有村架純",
+      "reading": "ありむらかすみ",
+      "korean": "아리무라 가스미"
+    },
+    {
+      "display": "大谷翔平",
+      "reading": "おおたにしょうへい",
+      "korean": "오타니 쇼헤이"
+    },
+    {
+      "display": "米津玄師",
+      "reading": "よねづけんし",
+      "korean": "요네즈 켄시"
+    },
+    { "display": "あいみょん", "reading": "あいみょん", "korean": "아이묭" },
+    { "display": "佐藤健", "reading": "さとうたける", "korean": "사토 타케루" },
+    {
+      "display": "長澤まさみ",
+      "reading": "ながさわまさみ",
+      "korean": "나가사와 마사미"
+    },
+    {
+      "display": "橋本環奈",
+      "reading": "はしもとかんな",
+      "korean": "하시모토 칸나"
+    },
+    { "display": "広瀬すず", "reading": "ひろせすず", "korean": "히로세 스즈" },
+    {
+      "display": "吉沢亮",
+      "reading": "よしざわりょう",
+      "korean": "요시자와 료"
+    },
+    {
+      "display": "横浜流星",
+      "reading": "よこはまりゅうせい",
+      "korean": "요코하마 류세이"
+    },
+    {
+      "display": "浜辺美波",
+      "reading": "はまべみなみ",
+      "korean": "하마베 미나미"
+    },
+    { "display": "阿部寛", "reading": "あべひろし", "korean": "아베 히로시" },
+    {
+      "display": "綾瀬はるか",
+      "reading": "あやせはるか",
+      "korean": "아야세 하루카"
+    },
+    { "display": "目黒蓮", "reading": "めぐろれん", "korean": "메구로 렌" },
+    {
+      "display": "道枝駿佑",
+      "reading": "みちえだしゅんすけ",
+      "korean": "미치에다 슌스케"
+    },
+    { "display": "今田美桜", "reading": "いまだみお", "korean": "이마다 미오" },
+    { "display": "永野芽郁", "reading": "ながのめい", "korean": "나가노 메이" },
+    {
+      "display": "高橋一生",
+      "reading": "たかはしいっせい",
+      "korean": "타카하시 잇세이"
+    },
+    {
+      "display": "竹内涼真",
+      "reading": "たけうちりょうま",
+      "korean": "타케우리 료마"
+    },
+    {
+      "display": "二宮和也",
+      "reading": "にのみやかずなり",
+      "korean": "니노미야 카즈나리"
+    },
+    {
+      "display": "櫻井翔",
+      "reading": "さくらいしょう",
+      "korean": "사쿠라이 쇼"
+    },
+    {
+      "display": "松本潤",
+      "reading": "まつもとじゅん",
+      "korean": "마츠모토 준"
+    },
+    {
+      "display": "岡田准一",
+      "reading": "おかだじゅんいち",
+      "korean": "오카다 준이치"
+    },
+    {
+      "display": "西島秀俊",
+      "reading": "にしじまひでとし",
+      "korean": "니시지마 히데토시"
+    },
+    { "display": "小栗旬", "reading": "おぐりしゅん", "korean": "오구리 슌" },
+    {
+      "display": "山田孝之",
+      "reading": "やまだたかゆき",
+      "korean": "야마다 타카유키"
+    },
+    {
+      "display": "ムロツヨシ",
+      "reading": "むろつよし",
+      "korean": "무로 츠요시"
+    },
+    { "display": "波瑠", "reading": "はる", "korean": "하루" },
+    {
+      "display": "多部未華子",
+      "reading": "たべみかこ",
+      "korean": "타베 미카코"
+    },
+    {
+      "display": "吉岡里帆",
+      "reading": "よしおかりほ",
+      "korean": "요시오카 리호"
+    },
+    { "display": "土屋太鳳", "reading": "つちやたお", "korean": "츠치야 타오" },
+    {
+      "display": "松坂桃李",
+      "reading": "まつざかとおり",
+      "korean": "마츠자카 토리"
+    },
+    {
+      "display": "窪田正孝",
+      "reading": "くぼたまさたか",
+      "korean": "쿠보타 마사타카"
+    },
+    { "display": "賀来賢人", "reading": "かくけんと", "korean": "카쿠 켄토" },
+    {
+      "display": "仲野太賀",
+      "reading": "なかのたいが",
+      "korean": "나카노 타이가"
+    },
+    {
+      "display": "杉咲花",
+      "reading": "すぎさきはな",
+      "korean": "스기사키 하나"
+    },
+    { "display": "清野菜名", "reading": "せいのなな", "korean": "세이노 나나" },
+    {
+      "display": "川口春奈",
+      "reading": "かわぐちはるな",
+      "korean": "카와구치 하루나"
+    },
+    {
+      "display": "広瀬アリス",
+      "reading": "ひろせありす",
+      "korean": "히로세 앨리스"
+    }
+  ]
+}

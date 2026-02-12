@@ -2,18 +2,6 @@
  * 일본어 숫자를 히라가나 읽기로 변환하는 함수
  */
 export function getJapaneseNumberReading(n: number): string {
-  const units = [
-    '',
-    'いち',
-    'に',
-    'さん',
-    'よん',
-    'ご',
-    'ろく',
-    'なな',
-    'はち',
-    'きゅう',
-  ];
   const units_base = [
     '',
     'いち',
@@ -117,7 +105,7 @@ const jpToKoMap: Record<string, string> = {
   む: '무',
   め: '메',
   も: '모',
-  야: '야',
+  や: '야',
   ゆ: '유',
   よ: '요',
   ら: '라',
@@ -169,7 +157,7 @@ const jpToKoMap: Record<string, string> = {
   ひゅ: '휴',
   ひょ: '효',
   みゃ: '먀',
-  미ゅ: '뮤',
+  みゅ: '뮤',
   みょ: '묘',
   りゃ: '랴',
   りゅ: '류',
@@ -190,13 +178,13 @@ const jpToKoMap: Record<string, string> = {
 };
 
 /**
- * 한글 유니코드를 계산하여 받침을 합성하는 함수
+ * 한글 유니코드를 계산하여 받침(ㄴ, ㅅ)을 앞 글자와 합성하는 함수
  */
 function combineHangul(prevChar: string, batchim: string): string {
-  const GA = 44032; // '가'의 유니코드
+  const GA = 44032; // '가'의 유니코드 시작점
   const uniCode = prevChar.charCodeAt(0) - GA;
 
-  // 한글 한 글자가 아니거나 이미 받침이 있는 경우 합성 불가
+  // 한글이 아니거나 이미 종성이 있는 경우(28로 나누어 떨어지지 않음) 합성 불가
   if (uniCode < 0 || uniCode > 11171 || uniCode % 28 !== 0) {
     return prevChar + batchim;
   }
@@ -211,17 +199,15 @@ function combineHangul(prevChar: string, batchim: string): string {
 }
 
 /**
- * 일본어 읽기를 한글 독음으로 변환 (받침 합성 적용)
+ * 일본어 텍스트를 한글 독음으로 변환
  */
 export function toKoreanPhonetic(japanese: string): string {
   let res: string[] = [];
   let i = 0;
 
-  // 공백 유지하면서 처리
   while (i < japanese.length) {
     const char = japanese[i];
 
-    // 공백 및 특수문자 처리
     if (/\s/.test(char)) {
       res.push(char);
       i++;
@@ -231,21 +217,20 @@ export function toKoreanPhonetic(japanese: string): string {
     const nextChar = japanese[i + 1];
     const twoChar = char + (nextChar || '');
 
-    // 1. 요음 우선 체크 (きゃ, しょ 등)
+    // 1. 요음(きゃ, しょ 등) 우선 체크
     if (nextChar && jpToKoMap[twoChar]) {
       res.push(jpToKoMap[twoChar]);
       i += 2;
     }
-    // 2. 일반 글자 및 받침 체크
+    // 2. 일반 가나 및 받침 체크
     else if (jpToKoMap[char]) {
       const hangeul = jpToKoMap[char];
 
-      // 받침(ㄴ, ㅅ)이고 앞 글자가 한글인 경우 합성
+      // 받침(ㄴ, ㅅ)이고 직전 글자가 받침 없는 한글인 경우 합성
       if ((hangeul === 'ㄴ' || hangeul === 'ㅅ') && res.length > 0) {
-        const lastIdx = res.length - 1;
-        // 앞 요소가 공백이 아닐 때만 합성 시도
-        if (/[가-힣]/.test(res[lastIdx])) {
-          res[lastIdx] = combineHangul(res[lastIdx], hangeul);
+        const lastChar = res[res.length - 1];
+        if (/[가-힣]/.test(lastChar)) {
+          res[res.length - 1] = combineHangul(lastChar, hangeul);
         } else {
           res.push(hangeul);
         }
@@ -285,16 +270,15 @@ export function convertNumberToJapanese(
   let displayCounter = counterDisplayMap[counterName] || counterName;
 
   if (counterName === '엔') {
-    // 4엔(요엔) 특수 처리
     if (n % 10 === 4 && Math.floor(n / 10) % 10 !== 1) {
-      reading = reading.slice(0, -2) + 'よ';
+      reading = reading.slice(0, -2) + 'よん';
     }
     reading += 'えん';
   } else if (counterName === '명') {
     if (n === 1) reading = 'ひとり';
     else if (n === 2) reading = 'ふたり';
     else if (n === 4) reading = 'よにん';
-    else reading += 'にん';
+    else reading += 'えん';
   } else if (counterName === '층') {
     if (n === 1) reading = 'いっかい';
     else if (n === 3) reading = 'さんがい';
@@ -327,7 +311,7 @@ export function convertNumberToJapanese(
 }
 
 /**
- * 날짜 데이터를 일본어 서기/연호 및 한글 독음으로 변환
+ * 날짜 데이터를 변환하는 내부 함수
  */
 function convertDateToJapanese(timestamp: number): {
   reading: string;
@@ -361,12 +345,12 @@ function convertDateToJapanese(timestamp: number): {
     9: 'くがつ',
     10: 'じゅうがつ',
     11: 'じゅういちがつ',
-    12: 'じゅう니がつ',
+    12: 'じゅうにがつ',
   };
 
   const dayReadings: Record<number, string> = {
     1: 'ついたち',
-    2: 'ふつ가',
+    2: 'ふつか',
     3: 'みっか',
     4: 'よっか',
     5: 'いつか',
@@ -377,7 +361,7 @@ function convertDateToJapanese(timestamp: number): {
     10: 'とおか',
     14: 'じゅうよっか',
     20: 'はつか',
-    24: 'にじゅうよっ카',
+    24: 'にじゅうよっか',
   };
 
   const era = getEra(year);
@@ -409,8 +393,23 @@ function convertDateToJapanese(timestamp: number): {
   };
 }
 
+/**
+ * 랜덤 날짜 타임스탬프 생성
+ */
 export function generateRandomDate(): number {
   const start = new Date(1900, 0, 1).getTime();
   const end = new Date(2100, 11, 31).getTime();
   return Math.floor(Math.random() * (end - start + 1)) + start;
+}
+
+/**
+ * 배열을 무작위로 섞는 함수 (피셔-예이츠 셔플)
+ */
+export function shuffleArray<T>(array: T[]): T[] {
+  const newArray = [...array];
+  for (let i = newArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+  }
+  return newArray;
 }

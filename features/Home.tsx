@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { AppView } from '../types';
 
@@ -11,8 +10,12 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
   const buttons = [
     { id: 'NUMBER_CONFIG' as AppView, label: '숫자 읽기', icon: 'fa-hashtag' },
     { id: 'NAME_CONFIG' as AppView, label: '인명 읽기', icon: 'fa-user' },
-    { id: 'PLACE_CONFIG' as AppView, label: '지명 읽기', icon: 'fa-map-marker-alt' },
-    { id: 'KEIGO_CONFIG' as AppView, label: '경어 학습', icon: 'fa-comments' },
+    {
+      id: 'PLACE_CONFIG' as AppView,
+      label: '지명 읽기',
+      icon: 'fa-map-marker-alt',
+    },
+    // { id: 'KEIGO_CONFIG' as AppView, label: '경어 학습', icon: 'fa-comments' },
   ];
 
   return (
