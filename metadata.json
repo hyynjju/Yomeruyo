@@ -1,0 +1,7 @@
+{
+  "name": "Hi-no-Maru Japanese",
+  "description": "An intensive Japanese reading and honorifics learning app with a fire-themed aesthetic. Master numbers, names, places, and Keigo with real-time TTS support.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
