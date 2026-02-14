@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { AppView, StudyItem, KeigoLine } from './types';
 import Home from './features/Home';
 import NumberConfigView from './features/NumberConfig';
@@ -18,6 +18,7 @@ import {
   CELEBRITIES,
   KEIGO_BASIC,
   KEIGO_CAFE,
+  PROVERBS,
 } from './constants';
 import {
   convertNumberToJapanese,
@@ -32,6 +33,10 @@ const App: React.FC = () => {
   const [keigoScript, setKeigoScript] = useState<KeigoLine[]>([]);
   const [globalShowKorean, setGlobalShowKorean] = useState(true);
 
+  const dailyProverb = useMemo(() => {
+    return PROVERBS[Math.floor(Math.random() * PROVERBS.length)];
+  }, []);
+
   const startStudy = (items: StudyItem[], showKorean: boolean) => {
     setStudyItems(items);
     setGlobalShowKorean(showKorean);
@@ -44,18 +49,23 @@ const App: React.FC = () => {
   };
 
   const handleBack = () => setView('HOME');
-  const ITEM_COUNT = 20; // 퀴즈 개수 조절
+  const ITEM_COUNT = 20;
 
-  const isPlayerView = view === 'KEIGO_PLAYER' || view === 'STUDY_SESSION';
+  // 1. 패딩이 없어야 하는 뷰 (홈 화면 포함)
+  const isNoPaddingView =
+    view === 'HOME' || view === 'STUDY_SESSION' || view === 'KEIGO_PLAYER';
+
+  // 2. 스크롤이 금지되어야 하는 뷰 (학습 화면만)
+  const isPlayerView = view === 'STUDY_SESSION' || view === 'KEIGO_PLAYER';
 
   return (
-    <div className="min-h-screen max-w-md mx-auto relative overflow-hidden flex flex-col bg-white">
+    <div className="min-h-screen max-w-xl mx-auto relative overflow-hidden flex flex-col bg-white">
       <main
-        className={`flex-1 flex flex-col ${
-          isPlayerView ? 'p-0 overflow-hidden' : 'p-6 overflow-y-auto'
+        className={`flex-1 flex flex-col ${isNoPaddingView ? 'p-0' : 'p-6'} ${
+          isPlayerView ? 'overflow-hidden' : 'overflow-y-auto'
         }`}
       >
-        {view === 'HOME' && <Home setView={setView} />}
+        {view === 'HOME' && <Home setView={setView} proverb={dailyProverb} />}
 
         {view === 'NUMBER_CONFIG' && (
           <NumberConfigView
@@ -81,7 +91,6 @@ const App: React.FC = () => {
             onStart={(config) => {
               let items: StudyItem[] = [];
               if (config.type === 'RANKING') {
-                // 성씨와 이름을 각각 섞어서 조합
                 const shuffledSurnames = shuffleArray(SURNAMES);
                 const shuffledGivens = shuffleArray(GIVEN_NAMES);
 
@@ -99,7 +108,6 @@ const App: React.FC = () => {
                   });
                 }
               } else {
-                // 연예인 목록을 통째로 섞음
                 const shuffledCelebs = shuffleArray(CELEBRITIES);
                 items = shuffledCelebs.slice(0, ITEM_COUNT).map((c) => ({
                   display: c.display,
@@ -116,7 +124,6 @@ const App: React.FC = () => {
           <PlaceConfigView
             onBack={handleBack}
             onStart={(config) => {
-              // 카테고리에 따른 데이터 풀 선택 로직 확장
               let selectedPool: any[] = [];
               switch (config.category) {
                 case 'PREFECTURE':
@@ -155,7 +162,7 @@ const App: React.FC = () => {
             onStart={(config) => {
               let script =
                 config.category === 'BASIC' ? KEIGO_BASIC : KEIGO_CAFE;
-              startKeigo(shuffleArray(script)); // 경어도 랜덤 순서 적용
+              startKeigo(shuffleArray(script));
             }}
           />
         )}
