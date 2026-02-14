@@ -7,6 +7,8 @@ import PlaceConfigView from './features/PlaceConfig';
 import KeigoConfigView from './features/KeigoConfig';
 import StudySession from './features/StudySession';
 import KeigoPlayer from './features/KeigoPlayer';
+import FeedbackView from './features/FeedbackView';
+import Footer from './features/Footer';
 import {
   PREFECTURES,
   TOKYO_STATIONS,
@@ -51,12 +53,13 @@ const App: React.FC = () => {
   const handleBack = () => setView('HOME');
   const ITEM_COUNT = 20;
 
-  // 1. 패딩이 없어야 하는 뷰 (홈 화면 포함)
   const isNoPaddingView =
-    view === 'HOME' || view === 'STUDY_SESSION' || view === 'KEIGO_PLAYER';
-
-  // 2. 스크롤이 금지되어야 하는 뷰 (학습 화면만)
+    view === 'HOME' ||
+    view === 'STUDY_SESSION' ||
+    view === 'KEIGO_PLAYER' ||
+    view === 'FEEDBACK';
   const isPlayerView = view === 'STUDY_SESSION' || view === 'KEIGO_PLAYER';
+  const showFooter = view === 'HOME' || view.includes('CONFIG');
 
   return (
     <div className="min-h-screen max-w-xl mx-auto relative overflow-hidden flex flex-col bg-white">
@@ -167,6 +170,8 @@ const App: React.FC = () => {
           />
         )}
 
+        {view === 'FEEDBACK' && <FeedbackView onBack={handleBack} />}
+
         {view === 'STUDY_SESSION' && (
           <StudySession
             items={studyItems}
@@ -177,6 +182,9 @@ const App: React.FC = () => {
         {view === 'KEIGO_PLAYER' && (
           <KeigoPlayer script={keigoScript} onEnd={handleBack} />
         )}
+
+        {/* 푸터 영역 */}
+        {showFooter && <Footer setView={setView} />}
       </main>
     </div>
   );

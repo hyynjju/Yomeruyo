@@ -1,5 +1,6 @@
 import React from 'react';
 import { AppView } from '../types';
+import Logo from '../assets/logo.svg?react';
 
 interface HomeProps {
   setView: (view: AppView) => void;
@@ -25,9 +26,9 @@ const Home: React.FC<HomeProps> = ({ setView, proverb }) => {
   return (
     <div className="min-h-screen bg-[#f8f8f8] flex flex-col">
       <div className="w-full aspect-square bg-[#ff4500] p-8 flex flex-col justify-between text-white relative">
-        {/* Header - 로고 이미지 교체 */}
         <header className="flex justify-between items-center w-full">
-          <img src="/assets/logo.svg" alt="logo" className="h-10 w-auto" />
+          <Logo className="h-8 w-auto mb-3 text-white" />
+
           <button className="w-10 h-10 flex items-center justify-end active:opacity-60 transition-opacity">
             <i className="fas fa-bars text-2xl"></i>
           </button>
