@@ -108,12 +108,12 @@ const NumberConfigView: React.FC<NumberConfigViewProps> = ({
         </div>
       </div>
 
-      <div className="fixed bottom-0 left-0 right-0 max-w-md mx-auto p-6 bg-white z-[9999]">
+      <div className="fixed bottom-0 left-0 right-0 max-w-xl mx-auto p-6 bg-white z-[9999]">
         <button
           onClick={() =>
             onStart({ range: [min, max], unit, counter, showKorean })
           }
-          className="w-full py-5 rounded-2xl bg-[#ff4500] text-white font-black text-xl active:scale-95 transition-all"
+          className="w-full py-5 rounded-2xl bg-[#ff4500] text-white font-bold text-xl active:scale-95 transition-all"
         >
           학습 시작
         </button>
