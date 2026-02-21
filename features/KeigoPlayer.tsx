@@ -1,193 +1,236 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { KeigoLine } from '../types';
-import { speakJapanese } from '../services/geminiService';
 
 interface KeigoPlayerProps {
-  script: KeigoLine[];
+  category: 'CAFE' | 'INTERVIEW';
   onEnd: () => void;
 }
 
-const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ script, onEnd }) => {
+const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
+  const [script, setScript] = useState<KeigoLine[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
-  const [audioCtx] = useState(
-    () => new (window.AudioContext || (window as any).webkitAudioContext)()
-  );
+  const [isFinished, setIsFinished] = useState(false);
+
+  const [playbackRate, setPlaybackRate] = useState(1.15);
+
+  const audioRef = useRef<HTMLAudioElement>(new Audio());
   const containerRef = useRef<HTMLDivElement>(null);
-  const isMounted = useRef(true);
 
+  // --- 오디오 제어 및 완료 로직 ---
   useEffect(() => {
-    isMounted.current = true;
-    return () => {
-      isMounted.current = false;
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!isPlaying) return;
-
-    const playLoop = async () => {
-      while (isMounted.current && isPlaying) {
-        const currentLine = script[activeIndex];
-        if (!currentLine) break;
-
-        try {
-          await speakJapanese(currentLine.japanese, audioCtx);
-
-          if (isMounted.current && isPlaying) {
-            // Wait after finishing speech
-            await new Promise((r) => setTimeout(r, 1500));
-            if (isMounted.current && isPlaying) {
-              setActiveIndex((prev) => (prev + 1) % script.length);
-            }
-          }
-        } catch (err) {
-          console.error('[KeigoPlayer] Loop error:', err);
-          await new Promise((r) => setTimeout(r, 2000));
-          if (isMounted.current) {
-            setActiveIndex((prev) => (prev + 1) % script.length);
-          }
+    const audio = audioRef.current;
+    const handleEnded = () => {
+      setActiveIndex((prev) => {
+        if (prev < script.length - 1) {
+          setTimeout(() => setActiveIndex(prev + 1), 1200 / playbackRate);
+          return prev;
+        } else {
+          setIsPlaying(false);
+          setIsFinished(true);
+          return prev;
         }
-      }
+      });
     };
 
-    playLoop();
-  }, [isPlaying, activeIndex, script, audioCtx]);
+    audio.addEventListener('ended', handleEnded);
+    return () => {
+      audio.removeEventListener('ended', handleEnded);
+      audio.pause();
+      audio.src = '';
+    };
+  }, [script.length, playbackRate]);
 
   useEffect(() => {
-    if (containerRef.current) {
-      const scrollContainer = containerRef.current;
-      const listContainer = scrollContainer.querySelector(
-        '.script-list'
-      ) as HTMLElement;
-      if (listContainer && listContainer.children[activeIndex]) {
-        const activeEl = listContainer.children[activeIndex] as HTMLElement;
-
-        // Target 1/3 down from the top for better visibility of the "current" and "next" lyrics
-        const targetTop =
-          activeEl.offsetTop - scrollContainer.clientHeight * 0.33;
-
-        scrollContainer.scrollTo({
-          top: targetTop,
-          behavior: 'smooth',
-        });
+    const loadScript = async () => {
+      try {
+        const fileName =
+          category === 'CAFE' ? '/data/cafe.json' : '/data/interview.json';
+        const res = await fetch(fileName);
+        const data = await res.json();
+        setScript(data);
+        setActiveIndex(0);
+        setIsPlaying(true);
+        setIsFinished(false);
+      } catch (err) {
+        console.error('데이터 로딩 오류:', err);
       }
+    };
+    loadScript();
+  }, [category]);
+
+  useEffect(() => {
+    if (!script.length || !script[activeIndex]) return;
+
+    const audio = audioRef.current;
+    const rawAudioPath = script[activeIndex].audio;
+    const correctedAudioPath = rawAudioPath.replace('/audio/', '/audio/keigo/');
+
+    if (isPlaying) {
+      if (audio.src !== window.location.origin + correctedAudioPath) {
+        audio.src = correctedAudioPath;
+      }
+      audio.playbackRate = playbackRate;
+      audio.play().catch(() => {});
+    } else {
+      audio.pause();
+    }
+  }, [activeIndex, isPlaying, script, playbackRate]);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const activeEl = containerRef.current.querySelector(
+      `[data-index="${activeIndex}"]`,
+    );
+    if (activeEl) {
+      activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   }, [activeIndex]);
 
   const togglePlay = () => {
-    if (audioCtx.state === 'suspended') {
-      audioCtx.resume();
+    if (isFinished) {
+      handleReset();
+    } else {
+      setIsPlaying(!isPlaying);
     }
-    setIsPlaying(!isPlaying);
+  };
+
+  const handleReset = () => {
+    setActiveIndex(0);
+    setIsPlaying(true);
+    setIsFinished(false);
+  };
+
+  const goToPrev = () => {
+    if (activeIndex > 0) {
+      setActiveIndex(activeIndex - 1);
+      setIsPlaying(true);
+      setIsFinished(false);
+    }
+  };
+
+  const goToNext = () => {
+    if (activeIndex < script.length - 1) {
+      setActiveIndex(activeIndex + 1);
+      setIsPlaying(true);
+      setIsFinished(false);
+    }
   };
 
   return (
-    <div className="flex flex-col h-full overflow-hidden bg-white relative">
-      {/* Strictly Fixed Header with Max Z-Index */}
-      <div className="absolute top-0 left-0 right-0 h-16 bg-white/95 backdrop-blur-xl border-b border-gray-100 z-[9999] flex items-center justify-between px-4">
+    <div className="fixed inset-0 flex flex-col bg-white overflow-hidden">
+      <header className="flex-shrink-0 h-16 bg-white border-b border-gray-100 flex items-center px-4 z-[100]">
         <button
           onClick={onEnd}
-          className="text-gray-400 p-2 active:scale-90 transition-transform"
+          className="text-gray-400 p-2 active:scale-90 mr-auto"
         >
-          <i className="fas fa-chevron-down"></i>
+          <i className="fas fa-chevron-down text-lg"></i>
         </button>
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center absolute left-1/2 -translate-x-1/2">
           <span className="font-bold text-[#ff4500] text-[10px] tracking-[0.2em] uppercase leading-none mb-1">
             Learning
           </span>
-          <span className="font-bold text-gray-900 text-sm">KEIGO RADIO</span>
+          <span className="font-bold text-gray-900 text-sm uppercase">
+            {category} Radio
+          </span>
         </div>
-        <button
-          onClick={togglePlay}
-          className="text-gray-800 p-2 active:scale-90 transition-transform"
-        >
-          <i className={`fas ${isPlaying ? 'fa-pause' : 'fa-play'}`}></i>
-        </button>
-      </div>
+        <div className="w-10 ml-auto"></div>
+      </header>
 
-      {/* Scrollable Content Area */}
-      <div
+      <main
         ref={containerRef}
-        className="flex-1 overflow-y-auto scroll-smooth no-scrollbar relative"
-        style={{
-          scrollbarWidth: 'none',
-          msOverflowStyle: 'none',
-          maskImage:
-            'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)',
-          WebkitMaskImage:
-            'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)',
-        }}
+        className="flex-1 overflow-y-auto no-scrollbar scroll-smooth"
       >
-        <style>{`.no-scrollbar::-webkit-scrollbar { display: none; }`}</style>
-
-        <div className="script-list px-8 pt-[35vh] pb-[45vh] space-y-12">
+        <div className="px-8 pt-[30vh] pb-[40vh] space-y-20">
           {script.map((line, i) => (
             <div
               key={i}
-              className={`transition-all duration-700 cursor-pointer origin-left py-2 ${
-                i === activeIndex ? 'keigo-active' : 'keigo-inactive'
+              data-index={i}
+              className={`transition-all duration-500 w-full ${
+                i === activeIndex
+                  ? 'opacity-100 scale-100'
+                  : 'opacity-10 scale-95'
               }`}
-              onClick={() => {
-                setActiveIndex(i);
-                if (!isPlaying) setIsPlaying(true);
-              }}
             >
-              <h2 className="text-3xl font-bold mb-3 leading-tight break-keep transition-all duration-500">
-                {line.japanese}
+              <h2
+                className={`text-3xl font-extrabold mb-4 break-all whitespace-normal leading-snug tracking-tighter ${
+                  i === activeIndex ? 'text-black' : 'text-gray-200'
+                }`}
+              >
+                {line.jp}
               </h2>
-              {line.korean && (
+              {line.ko && (
                 <p
-                  className={`text-lg font-medium transition-all duration-700 ${
+                  className={`text-xl font-bold break-all transition-opacity duration-500 ${
                     i === activeIndex
-                      ? 'opacity-50 text-gray-600 translate-y-0'
-                      : 'opacity-0 -translate-y-2'
+                      ? 'text-[#ff4500] opacity-100'
+                      : 'opacity-0'
                   }`}
                 >
-                  {line.korean}
+                  {line.ko}
                 </p>
               )}
             </div>
           ))}
         </div>
-      </div>
+      </main>
 
-      {/* Strictly Fixed Bottom Player with Max Z-Index */}
-      <div className="absolute bottom-0 left-0 right-0 p-8 pt-6 pb-10 bg-white/95 backdrop-blur-xl border-t border-gray-100 flex flex-col items-center z-[9999]">
-        <div className="w-full h-[3px] bg-gray-100 rounded-full mb-8 relative overflow-hidden">
-          <div
-            className="absolute top-0 left-0 h-full bg-[#ff4500] transition-all duration-700 ease-out rounded-full"
-            style={{ width: `${((activeIndex + 1) / script.length) * 100}%` }}
-          ></div>
+      <footer className="flex-shrink-0 bg-white border-t border-gray-100 px-6 pt-4 pb-12 z-[100] shadow-[0_-10px_40px_rgba(0,0,0,0.04)]">
+        <div className="max-w-md mx-auto flex flex-col items-center">
+          <div className="flex items-center gap-12 mb-8">
+            <button
+              onClick={goToPrev}
+              disabled={activeIndex === 0}
+              className={`p-2 transition-colors ${activeIndex === 0 ? 'text-gray-100' : 'text-gray-400 active:text-gray-900'}`}
+            >
+              <i className="fas fa-step-backward text-2xl"></i>
+            </button>
+
+            <button
+              onClick={togglePlay}
+              className={`w-16 h-16 rounded-full flex items-center justify-center active:scale-95 transition-all shadow-lg ${
+                isFinished
+                  ? 'bg-[#ff4500] text-white shadow-[#ff450033]'
+                  : 'bg-gray-900 text-white shadow-gray-200'
+              }`}
+            >
+              <i
+                className={`fas ${
+                  isFinished ? 'fa-redo' : isPlaying ? 'fa-pause' : 'fa-play'
+                } text-2xl ${!isPlaying && !isFinished && 'ml-1'}`}
+              ></i>
+            </button>
+
+            <button
+              onClick={goToNext}
+              disabled={activeIndex === script.length - 1}
+              className={`p-2 transition-colors ${activeIndex === script.length - 1 ? 'text-gray-100' : 'text-gray-400 active:text-gray-900'}`}
+            >
+              <i className="fas fa-step-forward text-2xl"></i>
+            </button>
+          </div>
+
+          <div className="w-full">
+            <div className="flex justify-between items-center mb-1 px-2">
+              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                Playback Speed
+              </span>
+              <span className="text-sm font-black text-[#ff4500]">
+                {(playbackRate - 0.1).toFixed(1)}x
+              </span>
+            </div>
+            <input
+              type="range"
+              min="0.6"
+              max="2.1"
+              step="0.1"
+              value={playbackRate}
+              onChange={(e) => setPlaybackRate(parseFloat(e.target.value))}
+              className="w-full h-1.5 bg-gray-100 rounded-lg appearance-none cursor-pointer accent-[#ff4500]"
+            />
+          </div>
         </div>
-
-        <div className="flex items-center justify-between w-full max-w-[280px]">
-          <button
-            className="w-12 h-12 rounded-full flex items-center justify-center text-gray-400 active:scale-75 active:text-[#ff4500] transition-all"
-            onClick={() =>
-              setActiveIndex(
-                (prev) => (prev - 1 + script.length) % script.length
-              )
-            }
-          >
-            <i className="fas fa-step-backward text-xl"></i>
-          </button>
-
-          <button
-            onClick={togglePlay}
-            className="w-16 h-16 rounded-full bg-[#ff4500] text-white flex items-center justify-center text-2xl active:scale-90 transition-all shadow-xl shadow-orange-200/50"
-          >
-            <i className={`fas ${isPlaying ? 'fa-pause' : 'fa-play'}`}></i>
-          </button>
-
-          <button
-            className="w-12 h-12 rounded-full flex items-center justify-center text-gray-400 active:scale-75 active:text-[#ff4500] transition-all"
-            onClick={() => setActiveIndex((prev) => (prev + 1) % script.length)}
-          >
-            <i className="fas fa-step-forward text-xl"></i>
-          </button>
-        </div>
-      </div>
+      </footer>
     </div>
   );
 };

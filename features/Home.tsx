@@ -20,7 +20,7 @@ const Home: React.FC<HomeProps> = ({ setView, proverb }) => {
       label: '지명 읽기',
       icon: 'fa-map-marker-alt',
     },
-    // { id: 'KEIGO_CONFIG' as AppView, label: '경어 학습', icon: 'fa-comments' },
+    { id: 'KEIGO_CONFIG' as AppView, label: '경어 학습', icon: 'fa-comments' },
   ];
 
   return (

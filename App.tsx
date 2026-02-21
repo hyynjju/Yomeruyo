@@ -32,7 +32,10 @@ import {
 const App: React.FC = () => {
   const [view, setView] = useState<AppView>('HOME');
   const [studyItems, setStudyItems] = useState<StudyItem[]>([]);
-  const [keigoScript, setKeigoScript] = useState<KeigoLine[]>([]);
+  // 경어 카테고리를 저장하기 위한 상태 추가
+  const [keigoCategory, setKeigoCategory] = useState<'CAFE' | 'INTERVIEW'>(
+    'CAFE',
+  );
   const [globalShowKorean, setGlobalShowKorean] = useState(true);
 
   const dailyProverb = useMemo(() => {
@@ -43,11 +46,6 @@ const App: React.FC = () => {
     setStudyItems(items);
     setGlobalShowKorean(showKorean);
     setView('STUDY_SESSION');
-  };
-
-  const startKeigo = (lines: KeigoLine[]) => {
-    setKeigoScript(lines);
-    setView('KEIGO_PLAYER');
   };
 
   const handleBack = () => setView('HOME');
@@ -87,18 +85,10 @@ const App: React.FC = () => {
                 if (config.counter === '날짜') {
                   val = generateRandomDate();
                 } else {
-                  // 범위 내 랜덤 숫자 생성
                   const randomVal =
                     Math.floor(Math.random() * (max - min + 1)) + min;
-
-                  // 지정된 단위(unit)로 내림 처리
                   val = Math.floor(randomVal / config.unit) * config.unit;
-
-                  // [수정] 내림 처리 결과가 0이 되거나 유닛보다 작아지는 경우 보정
-                  // 100단위 이상에서 '1' 같은 숫자가 나와 오류가 생기는 것을 방지
                   if (val < config.unit) val = config.unit;
-
-                  // 최종 값이 설정된 min보다 작으면 min으로 보정
                   if (val < min) val = min;
                 }
                 const result = convertNumberToJapanese(val, config.counter);
@@ -184,9 +174,9 @@ const App: React.FC = () => {
           <KeigoConfigView
             onBack={handleBack}
             onStart={(config) => {
-              let script =
-                config.category === 'BASIC' ? KEIGO_BASIC : KEIGO_CAFE;
-              startKeigo(shuffleArray(script));
+              // 선택된 카테고리를 저장하고 화면 전환
+              setKeigoCategory(config.category);
+              setView('KEIGO_PLAYER');
             }}
           />
         )}
@@ -202,7 +192,7 @@ const App: React.FC = () => {
         )}
 
         {view === 'KEIGO_PLAYER' && (
-          <KeigoPlayer script={keigoScript} onEnd={handleBack} />
+          <KeigoPlayer category={keigoCategory} onEnd={handleBack} />
         )}
 
         {showFooter && <Footer setView={setView} />}
