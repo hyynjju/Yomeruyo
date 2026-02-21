@@ -77,11 +77,30 @@ const App: React.FC = () => {
             onBack={handleBack}
             onStart={(config) => {
               const items: StudyItem[] = [];
+              let [min, max] = config.range;
+
+              if (config.unit === 1000 && max <= 1000) max = 10000;
+              if (config.unit === 10000 && max <= 10000) max = 100000;
+
               for (let i = 0; i < ITEM_COUNT; i++) {
-                const val =
-                  config.counter === '날짜'
-                    ? generateRandomDate()
-                    : Math.floor(Math.random() * 1000);
+                let val: number;
+                if (config.counter === '날짜') {
+                  val = generateRandomDate();
+                } else {
+                  // 범위 내 랜덤 숫자 생성
+                  const randomVal =
+                    Math.floor(Math.random() * (max - min + 1)) + min;
+
+                  // 지정된 단위(unit)로 내림 처리
+                  val = Math.floor(randomVal / config.unit) * config.unit;
+
+                  // [수정] 내림 처리 결과가 0이 되거나 유닛보다 작아지는 경우 보정
+                  // 100단위 이상에서 '1' 같은 숫자가 나와 오류가 생기는 것을 방지
+                  if (val < config.unit) val = config.unit;
+
+                  // 최종 값이 설정된 min보다 작으면 min으로 보정
+                  if (val < min) val = min;
+                }
                 const result = convertNumberToJapanese(val, config.counter);
                 items.push(result);
               }

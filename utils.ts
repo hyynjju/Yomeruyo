@@ -225,6 +225,7 @@ const counterDisplayMap: Record<string, string> = {
   개: '個',
   권: '冊',
   엔: '円',
+  본: '本',
 };
 
 /**
@@ -242,12 +243,9 @@ export function convertNumberToJapanese(
   const lastDigit = n % 10;
   const isMultipleOfTen = n > 0 && lastDigit === 0;
 
-  // 정교한 음편 처리를 위한 Prefix 추출 함수
   const getPrefix = (num: number, isTenth: boolean) => {
     if (num < 10) return '';
-    // 마지막 10단위 앞까지의 읽기를 생성 (예: 183 -> 180)
     const base = getJapaneseNumberReading(Math.floor(num / 10) * 10);
-    // 10의 배수 음편(っ)을 위해 'じゅう'의 마지막 'う'를 제거
     return isTenth ? base.slice(0, -1) : base;
   };
 
@@ -256,8 +254,13 @@ export function convertNumberToJapanese(
   } else if (counterName === '명') {
     if (n === 1) reading = 'ひとり';
     else if (n === 2) reading = 'ふたり';
-    else if (n === 4) reading = 'よにん';
-    else reading = getJapaneseNumberReading(n) + 'にん';
+    else if (lastDigit === 4) {
+      const prefix =
+        n > 10 ? getJapaneseNumberReading(Math.floor(n / 10) * 10) : '';
+      reading = prefix + 'よにん';
+    } else {
+      reading = getJapaneseNumberReading(n) + 'にん';
+    }
   } else if (counterName === '층') {
     const prefix = getPrefix(n, isMultipleOfTen);
     if (n === 1) reading = 'いっかい';
@@ -284,6 +287,22 @@ export function convertNumberToJapanese(
     else if (lastDigit === 8) reading = prefix + 'はっこ';
     else if (isMultipleOfTen) reading = prefix + 'っこ';
     else reading = getJapaneseNumberReading(n) + 'こ';
+  } else if (counterName === '권') {
+    const prefix = getPrefix(n, isMultipleOfTen);
+    if (n === 1) reading = 'いっさつ';
+    else if (lastDigit === 1) reading = prefix + 'いっさつ';
+    else if (lastDigit === 8) reading = prefix + 'はっさつ';
+    else if (isMultipleOfTen) reading = prefix + 'っさつ';
+    else reading = getJapaneseNumberReading(n) + 'さつ';
+  } else if (counterName === '본') {
+    const prefix = getPrefix(n, isMultipleOfTen);
+    if (n === 1) reading = 'いっぽん';
+    else if (lastDigit === 1) reading = prefix + 'いっぽん';
+    else if (lastDigit === 3) reading = getJapaneseNumberReading(n) + 'ぼん';
+    else if (lastDigit === 6) reading = prefix + 'ろっぽん';
+    else if (lastDigit === 8) reading = prefix + 'はっぽん';
+    else if (isMultipleOfTen) reading = prefix + 'っぽん';
+    else reading = getJapaneseNumberReading(n) + 'ほん';
   } else {
     reading = getJapaneseNumberReading(n) + counterName;
   }

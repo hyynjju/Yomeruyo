@@ -37,7 +37,8 @@ const NumberConfigView: React.FC<NumberConfigViewProps> = ({
             onChange={(e) => setCounter(e.target.value)}
             className="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 text-gray-800 outline-none focus:border-[#ff4500] appearance-none"
           >
-            {['엔', '명', '마리', '층', '개', '권', '날짜'].map((c) => (
+            {/* '본' 단위를 리스트에 추가했습니다 */}
+            {['엔', '명', '마리', '층', '개', '권', '본', '날짜'].map((c) => (
               <option key={c} value={c}>
                 {c === '날짜' ? '날짜 (연호 포함)' : c}
               </option>
