@@ -1,5 +1,5 @@
 /**
- * 일본어 숫자를 히라가나 읽기로 변환하는 함수
+ * 일본어 숫자를 히라가나 읽기로 변환하는 함수 (기본 수사)
  */
 export function getJapaneseNumberReading(n: number): string {
   const units_base = [
@@ -67,7 +67,7 @@ export function getJapaneseNumberReading(n: number): string {
 }
 
 /**
- * 히라가나 -> 한글 매핑 테이블 (요음 및 기본자)
+ * 히라가나 -> 한글 매핑 테이블
  */
 const jpToKoMap: Record<string, string> = {
   あ: '아',
@@ -177,66 +177,38 @@ const jpToKoMap: Record<string, string> = {
   っ: 'ㅅ',
 };
 
-/**
- * 한글 유니코드를 계산하여 받침(ㄴ, ㅅ)을 앞 글자와 합성하는 함수
- */
 function combineHangul(prevChar: string, batchim: string): string {
-  const GA = 44032; // '가'의 유니코드 시작점
+  const GA = 44032;
   const uniCode = prevChar.charCodeAt(0) - GA;
-
-  // 한글이 아니거나 이미 종성이 있는 경우(28로 나누어 떨어지지 않음) 합성 불가
-  if (uniCode < 0 || uniCode > 11171 || uniCode % 28 !== 0) {
+  if (uniCode < 0 || uniCode > 11171 || uniCode % 28 !== 0)
     return prevChar + batchim;
-  }
-
-  const batchimWeights: Record<string, number> = {
-    ㄴ: 4,
-    ㅅ: 19,
-  };
-
-  const weight = batchimWeights[batchim] || 0;
+  const weight = batchim === 'ㄴ' ? 4 : 19;
   return String.fromCharCode(prevChar.charCodeAt(0) + weight);
 }
 
-/**
- * 일본어 텍스트를 한글 독음으로 변환
- */
 export function toKoreanPhonetic(japanese: string): string {
   let res: string[] = [];
   let i = 0;
-
   while (i < japanese.length) {
     const char = japanese[i];
-
     if (/\s/.test(char)) {
       res.push(char);
       i++;
       continue;
     }
-
     const nextChar = japanese[i + 1];
     const twoChar = char + (nextChar || '');
-
-    // 1. 요음(きゃ, しょ 등) 우선 체크
     if (nextChar && jpToKoMap[twoChar]) {
       res.push(jpToKoMap[twoChar]);
       i += 2;
-    }
-    // 2. 일반 가나 및 받침 체크
-    else if (jpToKoMap[char]) {
+    } else if (jpToKoMap[char]) {
       const hangeul = jpToKoMap[char];
-
-      // 받침(ㄴ, ㅅ)이고 직전 글자가 받침 없는 한글인 경우 합성
       if ((hangeul === 'ㄴ' || hangeul === 'ㅅ') && res.length > 0) {
         const lastChar = res[res.length - 1];
-        if (/[가-힣]/.test(lastChar)) {
+        if (/[가-힣]/.test(lastChar))
           res[res.length - 1] = combineHangul(lastChar, hangeul);
-        } else {
-          res.push(hangeul);
-        }
-      } else {
-        res.push(hangeul);
-      }
+        else res.push(hangeul);
+      } else res.push(hangeul);
       i++;
     } else {
       res.push(char);
@@ -262,57 +234,67 @@ export function convertNumberToJapanese(
   n: number,
   counterName: string
 ): { reading: string; display: string; korean: string } {
-  if (counterName === '날짜') {
-    return convertDateToJapanese(n);
-  }
+  if (counterName === '날짜') return convertDateToJapanese(n);
 
-  let reading = getJapaneseNumberReading(n);
-  let displayCounter = counterDisplayMap[counterName] || counterName;
+  let reading = '';
+  const displayCounter = counterDisplayMap[counterName] || counterName;
+
+  const lastDigit = n % 10;
+  const isMultipleOfTen = n > 0 && lastDigit === 0;
+
+  // 정교한 음편 처리를 위한 Prefix 추출 함수
+  const getPrefix = (num: number, isTenth: boolean) => {
+    if (num < 10) return '';
+    // 마지막 10단위 앞까지의 읽기를 생성 (예: 183 -> 180)
+    const base = getJapaneseNumberReading(Math.floor(num / 10) * 10);
+    // 10의 배수 음편(っ)을 위해 'じゅう'의 마지막 'う'를 제거
+    return isTenth ? base.slice(0, -1) : base;
+  };
 
   if (counterName === '엔') {
-    if (n % 10 === 4 && Math.floor(n / 10) % 10 !== 1) {
-      reading = reading.slice(0, -2) + 'よん';
-    }
-    reading += 'えん';
+    reading = getJapaneseNumberReading(n) + 'えん';
   } else if (counterName === '명') {
     if (n === 1) reading = 'ひとり';
     else if (n === 2) reading = 'ふたり';
     else if (n === 4) reading = 'よにん';
-    else reading += 'えん';
+    else reading = getJapaneseNumberReading(n) + 'にん';
   } else if (counterName === '층') {
+    const prefix = getPrefix(n, isMultipleOfTen);
     if (n === 1) reading = 'いっかい';
-    else if (n === 3) reading = 'さんがい';
-    else if (n === 6) reading = 'ろっかい';
-    else if (n === 8) reading = 'はっかい';
-    else if (n === 10) reading = 'じゅっかい';
-    else reading += 'かい';
+    else if (lastDigit === 1) reading = prefix + 'いっかい';
+    else if (lastDigit === 3) reading = getJapaneseNumberReading(n) + 'がい';
+    else if (lastDigit === 6) reading = prefix + 'ろっかい';
+    else if (lastDigit === 8) reading = prefix + 'はっかい';
+    else if (isMultipleOfTen) reading = prefix + 'っかい';
+    else reading = getJapaneseNumberReading(n) + 'かい';
   } else if (counterName === '마리') {
+    const prefix = getPrefix(n, isMultipleOfTen);
     if (n === 1) reading = 'いっぴき';
-    else if (n === 3) reading = 'さんびき';
-    else if (n === 6) reading = 'ろっぴき';
-    else if (n === 8) reading = 'はっぴき';
-    else if (n === 10) reading = 'じゅっぴき';
-    else reading += 'ひき';
+    else if (lastDigit === 1) reading = prefix + 'いっぴき';
+    else if (lastDigit === 3) reading = getJapaneseNumberReading(n) + 'びき';
+    else if (lastDigit === 6) reading = prefix + 'ろっぴき';
+    else if (lastDigit === 8) reading = prefix + 'はっぴき';
+    else if (isMultipleOfTen) reading = prefix + 'っぴき';
+    else reading = getJapaneseNumberReading(n) + 'ひき';
   } else if (counterName === '개') {
+    const prefix = getPrefix(n, isMultipleOfTen);
     if (n === 1) reading = 'いっこ';
-    else if (n === 6) reading = 'ろっこ';
-    else if (n === 8) reading = 'はっこ';
-    else if (n === 10) reading = 'じゅっこ';
-    else reading += 'こ';
+    else if (lastDigit === 1) reading = prefix + 'いっこ';
+    else if (lastDigit === 6) reading = prefix + 'ろっこ';
+    else if (lastDigit === 8) reading = prefix + 'はっこ';
+    else if (isMultipleOfTen) reading = prefix + 'っこ';
+    else reading = getJapaneseNumberReading(n) + 'こ';
   } else {
-    reading += counterName;
+    reading = getJapaneseNumberReading(n) + counterName;
   }
 
   return {
     display: `${n.toLocaleString()}${displayCounter}`,
-    reading: reading,
+    reading,
     korean: toKoreanPhonetic(reading),
   };
 }
 
-/**
- * 날짜 데이터를 변환하는 내부 함수
- */
 function convertDateToJapanese(timestamp: number): {
   reading: string;
   display: string;
@@ -366,7 +348,6 @@ function convertDateToJapanese(timestamp: number): {
 
   const era = getEra(year);
   const isEraMode = Math.random() < 0.2;
-
   let display = '';
   let reading = '';
 
@@ -380,31 +361,21 @@ function convertDateToJapanese(timestamp: number): {
       dayReadings[day] || getJapaneseNumberReading(day) + 'にち'
     }`;
   } else {
-    display = `${year}年 ${month}月 ${day}日`;
+    display = `${year}년 ${month}월 ${day}일`;
     reading = `${getJapaneseNumberReading(year)}ねん ${monthReadings[month]} ${
       dayReadings[day] || getJapaneseNumberReading(day) + 'にち'
     }`;
   }
 
-  return {
-    display,
-    reading,
-    korean: toKoreanPhonetic(reading),
-  };
+  return { display, reading, korean: toKoreanPhonetic(reading) };
 }
 
-/**
- * 랜덤 날짜 타임스탬프 생성
- */
 export function generateRandomDate(): number {
   const start = new Date(1900, 0, 1).getTime();
   const end = new Date(2100, 11, 31).getTime();
   return Math.floor(Math.random() * (end - start + 1)) + start;
 }
 
-/**
- * 배열을 무작위로 섞는 함수 (피셔-예이츠 셔플)
- */
 export function shuffleArray<T>(array: T[]): T[] {
   const newArray = [...array];
   for (let i = newArray.length - 1; i > 0; i--) {
