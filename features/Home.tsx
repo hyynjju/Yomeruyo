@@ -25,13 +25,9 @@ const Home: React.FC<HomeProps> = ({ setView, proverb }) => {
 
   return (
     <div className="min-h-screen bg-[#f8f8f8] flex flex-col">
-      <div className="w-full aspect-square bg-[#ff4500] p-8 flex flex-col justify-between text-white relative">
+      <div className="w-full aspect-[4/3] bg-gradient-to-b from-[#ff4500] to-[#a22000] p-6 flex flex-col justify-between text-white relative">
         <header className="flex justify-between items-center w-full">
-          <Logo className="h-8 w-auto mb-3 text-white" />
-
-          <button className="w-10 h-10 flex items-center justify-end active:opacity-60 transition-opacity">
-            <i className="fas fa-bars text-2xl"></i>
-          </button>
+          <Logo className="h-7 w-auto mb-3 text-white" />
         </header>
 
         {/* 속담 */}
@@ -40,7 +36,7 @@ const Home: React.FC<HomeProps> = ({ setView, proverb }) => {
             <span className="text-white/50 text-sm font-semibold mb-1">
               추천 속담
             </span>
-            <h2 className="text-4xl font-bold leading-tight break-all whitespace-pre-wrap">
+            <h2 className="text-3xl font-bold leading-tight break-all whitespace-pre-wrap">
               {proverb.display}
             </h2>
             <p className="text-white/50 text-md font-medium break-all whitespace-pre-wrap">
@@ -58,15 +54,15 @@ const Home: React.FC<HomeProps> = ({ setView, proverb }) => {
       </div>
 
       {/* 학습 버튼 리스트 */}
-      <div className="flex-1 px-6 py-16 grid grid-cols-1 gap-5 -mt-10 bg-transparent relative z-10">
+      <div className="px-4 py-16 grid grid-cols-1 gap-4 -mt-10 bg-transparent relative z-10">
         {buttons.map((btn) => (
           <button
             key={btn.id}
             onClick={() => setView(btn.id)}
-            className="group flex items-center justify-between p-5 rounded-[2rem] bg-white shadow-[0_10px_40px_rgba(0,0,0,0.05)] transition-all active:scale-[0.97]"
+            className="group flex items-center justify-between p-4 rounded-[1.6rem] bg-white shadow-[0_10px_40px_rgba(0,0,0,0.05)] transition-all active:scale-[0.97]"
           >
             <div className="flex items-center space-x-5">
-              <div className="w-16 h-16 rounded-[1.2rem] bg-[#ff4500]/10 flex items-center justify-center transition-colors group-hover:bg-[#ff4500]/20">
+              <div className="w-14 h-14 rounded-[1rem] bg-[#ff4500]/10 flex items-center justify-center transition-colors group-hover:bg-[#ff4500]/20">
                 <i className={`fas ${btn.icon} text-[#ff4500] text-2xl`}></i>
               </div>
               <span className="text-[#222] font-bold text-xl">{btn.label}</span>
@@ -78,6 +74,9 @@ const Home: React.FC<HomeProps> = ({ setView, proverb }) => {
           </button>
         ))}
       </div>
+
+      {/* 푸터가 하단에 붙도록 남은 공간을 차지하는 빈 영역 */}
+      <div className="flex-1" />
     </div>
   );
 };
