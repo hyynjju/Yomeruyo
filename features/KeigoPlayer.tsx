@@ -131,7 +131,7 @@ const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
             Learning
           </span>
           <span className="font-bold text-gray-900 text-sm uppercase">
-            {category} Radio
+            {category}
           </span>
         </div>
         <div className="w-10 ml-auto"></div>
@@ -141,7 +141,7 @@ const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
         ref={containerRef}
         className="flex-1 overflow-y-auto no-scrollbar scroll-smooth"
       >
-        <div className="px-8 pt-[30vh] pb-[40vh] space-y-20">
+        <div className="bg-gray-100 px-8 pt-[24vh] pb-[40vh] space-y-20">
           {script.map((line, i) => (
             <div
               key={i}
@@ -153,7 +153,7 @@ const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
               }`}
             >
               <h2
-                className={`text-3xl font-extrabold mb-4 break-all whitespace-normal leading-snug tracking-tighter ${
+                className={`text-3xl font-bold mb-4 break-all whitespace-normal leading-snug tracking-tight ${
                   i === activeIndex ? 'text-black' : 'text-gray-200'
                 }`}
               >
@@ -161,7 +161,7 @@ const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
               </h2>
               {line.ko && (
                 <p
-                  className={`text-xl font-bold break-all transition-opacity duration-500 ${
+                  className={`text-xl font-semibold break-all transition-opacity duration-500 ${
                     i === activeIndex
                       ? 'text-[#ff4500] opacity-100'
                       : 'opacity-0'
@@ -175,9 +175,9 @@ const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
         </div>
       </main>
 
-      <footer className="flex-shrink-0 bg-white border-t border-gray-100 px-6 pt-4 pb-12 z-[100] shadow-[0_-10px_40px_rgba(0,0,0,0.04)]">
+      <footer className="flex-shrink-0 bg-white border-t border-gray-100 px-6 pt-4 pb-8 z-[100] shadow-[0_-10px_40px_rgba(0,0,0,0.04)]">
         <div className="max-w-md mx-auto flex flex-col items-center">
-          <div className="flex items-center gap-12 mb-8">
+          <div className="flex items-center gap-12 mb-1">
             <button
               onClick={goToPrev}
               disabled={activeIndex === 0}
@@ -188,10 +188,10 @@ const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
 
             <button
               onClick={togglePlay}
-              className={`w-16 h-16 rounded-full flex items-center justify-center active:scale-95 transition-all shadow-lg ${
+              className={`w-16 h-16 rounded-full flex items-center justify-center active:scale-95 transition-all ${
                 isFinished
-                  ? 'bg-[#ff4500] text-white shadow-[#ff450033]'
-                  : 'bg-gray-900 text-white shadow-gray-200'
+                  ? 'bg-[#ff4500] text-white'
+                  : 'bg-gray-900 text-white'
               }`}
             >
               <i
@@ -211,7 +211,7 @@ const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
           </div>
 
           <div className="w-full">
-            <div className="flex justify-between items-center mb-1 px-2">
+            <div className="flex justify-between items-center px-2">
               <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
                 Playback Speed
               </span>
