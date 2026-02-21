@@ -1,8 +1,8 @@
 import { KeigoLine } from './types';
-import places from './data/places.json';
-import names from './data/names.json';
-import keigo from './data/keigo.json';
-import proverb from './data/proverb.json';
+import places from './public/data/places.json';
+import names from './public/data/names.json';
+import keigo from './public/data/keigo.json';
+import proverb from './public/data/proverb.json';
 
 export const PREFECTURES = places.prefectures;
 export const TOKYO_STATIONS = places.tokyoStations;
