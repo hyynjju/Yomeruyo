@@ -7,7 +7,8 @@ interface NameConfigViewProps {
 }
 
 const NameConfigView: React.FC<NameConfigViewProps> = ({ onBack, onStart }) => {
-  const [type, setType] = useState<'RANKING' | 'CELEBRITY'>('RANKING');
+  const [type, setType] = useState<'CELEBRITY' | 'RANKING'>('CELEBRITY');
+
   const [showKorean, setShowKorean] = useState(true);
 
   return (
@@ -22,17 +23,6 @@ const NameConfigView: React.FC<NameConfigViewProps> = ({ onBack, onStart }) => {
       <div className="space-y-6">
         <div className="grid grid-cols-2 gap-4">
           <button
-            onClick={() => setType('RANKING')}
-            className={`p-6 rounded-2xl flex flex-col items-center space-y-2 border-2 transition-all ${
-              type === 'RANKING'
-                ? 'border-[#ff4500] bg-orange-50 text-[#ff4500]'
-                : 'border-gray-100 bg-gray-50 text-gray-400'
-            }`}
-          >
-            <i className="fas fa-list-ol text-2xl"></i>
-            <span className="font-bold">랭킹 조합</span>
-          </button>
-          <button
             onClick={() => setType('CELEBRITY')}
             className={`p-6 rounded-2xl flex flex-col items-center space-y-2 border-2 transition-all ${
               type === 'CELEBRITY'
@@ -41,7 +31,18 @@ const NameConfigView: React.FC<NameConfigViewProps> = ({ onBack, onStart }) => {
             }`}
           >
             <i className="fas fa-star text-2xl"></i>
-            <span className="font-bold">유명인</span>
+            <span className="font-bold">유명인 이름</span>
+          </button>
+          <button
+            onClick={() => setType('RANKING')}
+            className={`p-6 rounded-2xl flex flex-col items-center space-y-2 border-2 transition-all ${
+              type === 'RANKING'
+                ? 'border-[#ff4500] bg-orange-50 text-[#ff4500]'
+                : 'border-gray-100 bg-gray-50 text-gray-400'
+            }`}
+          >
+            <i className="fas fa-list-ol text-2xl"></i>
+            <span className="font-bold">많이 사용되는 이름</span>
           </button>
         </div>
 
