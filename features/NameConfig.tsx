@@ -42,7 +42,7 @@ const NameConfigView: React.FC<NameConfigViewProps> = ({ onBack, onStart }) => {
             }`}
           >
             <i className="fas fa-list-ol text-2xl"></i>
-            <span className="font-bold">많이 사용되는 이름</span>
+            <span className="font-bold">많이 쓰는 이름</span>
           </button>
         </div>
 
