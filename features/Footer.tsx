@@ -27,9 +27,20 @@ const Footer: React.FC<FooterProps> = ({ setView }) => {
         <div className="w-[1px] h-2 bg-black/10" />
         <a
           href="mailto:contact@yakk.kr"
-          className="text-[11px] text-black/40 hover:text-[#ff4500]"
+          className="text-[11px] text-black/40 hover:text-[#ff4500] transition-colors"
         >
           Email
+        </a>
+
+        <div className="w-[1px] h-2 bg-black/10" />
+
+        <a
+          href="https://github.com/hyynjju"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[11px] text-black/40 hover:text-[#ff4500] transition-colors"
+        >
+          GitHub
         </a>
       </div>
 

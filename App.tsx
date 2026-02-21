@@ -58,8 +58,10 @@ const App: React.FC = () => {
     view === 'STUDY_SESSION' ||
     view === 'KEIGO_PLAYER' ||
     view === 'FEEDBACK';
+
   const isPlayerView = view === 'STUDY_SESSION' || view === 'KEIGO_PLAYER';
-  const showFooter = view === 'HOME' || view.includes('CONFIG');
+
+  const showFooter = view === 'HOME';
 
   return (
     <div className="min-h-screen max-w-xl mx-auto relative overflow-hidden flex flex-col bg-white">
@@ -179,11 +181,11 @@ const App: React.FC = () => {
             onEnd={handleBack}
           />
         )}
+
         {view === 'KEIGO_PLAYER' && (
           <KeigoPlayer script={keigoScript} onEnd={handleBack} />
         )}
 
-        {/* 푸터 영역 */}
         {showFooter && <Footer setView={setView} />}
       </main>
     </div>
