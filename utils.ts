@@ -233,7 +233,7 @@ const counterDisplayMap: Record<string, string> = {
  */
 export function convertNumberToJapanese(
   n: number,
-  counterName: string
+  counterName: string,
 ): { reading: string; display: string; korean: string } {
   if (counterName === '날짜') return convertDateToJapanese(n);
 
