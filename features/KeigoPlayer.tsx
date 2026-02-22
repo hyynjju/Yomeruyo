@@ -158,9 +158,9 @@ const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
               }`}
             >
               <h2
-                className={`text-3xl font-bold mb-4 break-all whitespace-normal leading-snug tracking-tight ${
+                className={`font-bold mb-4 break-all whitespace-normal leading-snug tracking-tight transition-all duration-500 ${
                   i === activeIndex ? 'text-black' : 'text-gray-200'
-                }`}
+                } ${line.jp.length >= 40 ? 'text-2xl' : 'text-3xl'}`}
               >
                 {line.jp}
               </h2>
