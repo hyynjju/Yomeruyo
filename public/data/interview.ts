@@ -231,7 +231,7 @@ export const interviewScript: KeigoLine[] = [
   },
   {
     id: 'answer_store_image',
-    jp: '明るく清潔感があり、丁寧な接客を大切にしているお店だと感じています。',
+    jp: '明るくて清潔感があり、丁寧な接客を大切にしているお店だと感じました。',
     ko: '밝고 청결하며 정중한 접객을 중요시하는 매장이라고 느꼈습니다.',
     audio: '/audio/interview/answer_store_image.mp3',
   },
@@ -243,8 +243,8 @@ export const interviewScript: KeigoLine[] = [
   },
   {
     id: 'answer_nearest_station',
-    jp: '東京駅です。お店までは乗り換え1回で、交通費は片道約350円です。通勤に問題はありません。',
-    ko: '도쿄역입니다. 매장까지는 환승 1회이고 교통비는 편도 약 350엔입니다. 출퇴근에 문제 없습니다.',
+    jp: '東京駅です。お店までは乗り換え1回で、交通費は片道約350円です。',
+    ko: '도쿄역입니다. 매장까지는 환승 1회이고 교통비는 편도 약 350엔입니다.',
     audio: '/audio/interview/answer_nearest_station.mp3',
   },
 ];
