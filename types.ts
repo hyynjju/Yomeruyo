@@ -1,5 +1,11 @@
-
-export type AppView = 'HOME' | 'NUMBER_CONFIG' | 'NAME_CONFIG' | 'PLACE_CONFIG' | 'KEIGO_CONFIG' | 'STUDY_SESSION' | 'KEIGO_PLAYER';
+export type AppView =
+  | 'HOME'
+  | 'NUMBER_CONFIG'
+  | 'NAME_CONFIG'
+  | 'PLACE_CONFIG'
+  | 'KEIGO_CONFIG'
+  | 'STUDY_SESSION'
+  | 'KEIGO_PLAYER';
 
 export interface NumberConfig {
   range: [number, number];
@@ -14,7 +20,12 @@ export interface NameConfig {
 }
 
 export interface PlaceConfig {
-  category: 'PREFECTURE' | 'TOKYO_STATION' | 'TOKYO_LINE' | 'OSAKA_STATION' | 'OSAKA_LINE';
+  category:
+    | 'PREFECTURE'
+    | 'TOKYO_STATION'
+    | 'TOKYO_LINE'
+    | 'OSAKA_STATION'
+    | 'OSAKA_LINE';
   showKorean: boolean;
 }
 
@@ -30,6 +41,8 @@ export interface StudyItem {
 }
 
 export interface KeigoLine {
-  japanese: string;
-  korean?: string;
+  id: string;
+  jp: string;
+  ko: string;
+  audio: string;
 }

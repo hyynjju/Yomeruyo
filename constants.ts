@@ -1,7 +1,5 @@
-import { KeigoLine } from './types';
 import places from './public/data/places.json';
 import names from './public/data/names.json';
-import keigo from './public/data/keigo.json';
 import proverb from './public/data/proverb.json';
 
 export const PREFECTURES = places.prefectures;
@@ -13,8 +11,5 @@ export const OSAKA_LINES = places.osakaLines;
 export const SURNAMES = names.surnames;
 export const GIVEN_NAMES = names.givenNames;
 export const CELEBRITIES = names.celebrities;
-
-export const KEIGO_BASIC: KeigoLine[] = keigo.basic;
-export const KEIGO_CAFE: KeigoLine[] = keigo.cafe;
 
 export const PROVERBS = proverb.proverbs;

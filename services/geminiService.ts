@@ -1,5 +1,4 @@
-
-import { GoogleGenAI, Modality } from "@google/genai";
+import { GoogleGenAI, Modality } from '@google/genai';
 
 const API_KEY = process.env.API_KEY || '';
 
@@ -43,16 +42,16 @@ async function fetchWithRetry(fn: () => Promise<any>, maxRetries = 5) {
       return await fn();
     } catch (err: any) {
       lastError = err;
-      
+
       // Parse error details from common SDK error structures
       const errorBody = err?.error || err;
       const status = errorBody?.status;
       const code = errorBody?.code;
-      const message = err?.message || "";
+      const message = err?.message || '';
 
       // Check for quota exhaustion (429)
-      const isQuotaError = 
-        status === 'RESOURCE_EXHAUSTED' || 
+      const isQuotaError =
+        status === 'RESOURCE_EXHAUSTED' ||
         code === 429 ||
         message.includes('429') ||
         message.includes('RESOURCE_EXHAUSTED');
@@ -60,11 +59,13 @@ async function fetchWithRetry(fn: () => Promise<any>, maxRetries = 5) {
       if (isQuotaError) {
         // Longer initial wait for 429s as they usually require a cooling period
         const delay = Math.pow(2, i) * 2000 + Math.random() * 1000;
-        console.warn(`[TTS] Quota exceeded (429). Retrying in ${Math.round(delay)}ms (Attempt ${i + 1}/${maxRetries})...`);
-        await new Promise(resolve => setTimeout(resolve, delay));
+        console.warn(
+          `[TTS] Quota exceeded (429). Retrying in ${Math.round(delay)}ms (Attempt ${i + 1}/${maxRetries})...`,
+        );
+        await new Promise((resolve) => setTimeout(resolve, delay));
         continue;
       }
-      
+
       // For 400 or other non-quota errors, stop retrying immediately
       throw err;
     }
@@ -75,21 +76,21 @@ async function fetchWithRetry(fn: () => Promise<any>, maxRetries = 5) {
 export async function speakJapanese(text: string, audioContext: AudioContext) {
   const cleanText = text.trim();
   if (!API_KEY || !cleanText) return;
-  
+
   // Ensure AudioContext is active
   if (audioContext.state === 'suspended') {
     try {
       await audioContext.resume();
     } catch (e) {
-      console.warn("[TTS] Failed to resume AudioContext", e);
+      console.warn('[TTS] Failed to resume AudioContext', e);
     }
   }
 
   const ai = new GoogleGenAI({ apiKey: API_KEY });
-  
+
   const callTts = async () => {
     return await ai.models.generateContent({
-      model: "gemini-2.5-flash-preview-tts",
+      model: 'gemini-2.5-flash-preview-tts',
       contents: [{ parts: [{ text: cleanText }] }],
       config: {
         responseModalities: [Modality.AUDIO],
@@ -104,7 +105,7 @@ export async function speakJapanese(text: string, audioContext: AudioContext) {
 
   try {
     const response = await fetchWithRetry(callTts);
-    
+
     const part = response.candidates?.[0]?.content?.parts?.[0];
     const base64Audio = part?.inlineData?.data;
 
@@ -123,15 +124,20 @@ export async function speakJapanese(text: string, audioContext: AudioContext) {
         source.onended = resolve;
       });
     } else {
-      console.warn("[TTS] Model returned successfully but no audio data was found.");
+      console.warn(
+        '[TTS] Model returned successfully but no audio data was found.',
+      );
     }
   } catch (error: any) {
     // Check if the error is ultimately a quota failure after all retries
-    const isQuota = error?.error?.code === 429 || error?.message?.includes('429');
+    const isQuota =
+      error?.error?.code === 429 || error?.message?.includes('429');
     if (isQuota) {
-      console.error("[TTS] Quota completely exhausted. Please wait a few minutes before trying again.");
+      console.error(
+        '[TTS] Quota completely exhausted. Please wait a few minutes before trying again.',
+      );
     } else {
-      console.error("[TTS] Error generating/playing speech:", error);
+      console.error('[TTS] Error generating/playing speech:', error);
     }
   }
 }

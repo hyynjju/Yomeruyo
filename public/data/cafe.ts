@@ -1,0 +1,148 @@
+import { KeigoLine } from '@/types';
+
+export const cafeScript: KeigoLine[] = [
+  {
+    id: 'welcome',
+    jp: 'いらっしゃいませ。',
+    ko: '어서 오세요.',
+    audio: '/audio/cafe/welcome.mp3',
+  },
+  {
+    id: 'take_order_prompt',
+    jp: 'お決まりでしたらお伺いします。',
+    ko: '결정하셨으면 주문 도와드리겠습니다.',
+    audio: '/audio/cafe/take_order_prompt.mp3',
+  },
+  {
+    id: 'dine_in_check',
+    jp: '店内ご利用ですか。',
+    ko: '매장에서 드시고 가시나요?',
+    audio: '/audio/cafe/dine_in_check.mp3',
+  },
+  {
+    id: 'hot_ice_choice',
+    jp: 'ホットとアイスどちらになさいますか。',
+    ko: '핫과 아이스 중 어느 쪽으로 하시겠어요?',
+    audio: '/audio/cafe/hot_ice_choice.mp3',
+  },
+  {
+    id: 'size_choice',
+    jp: 'サイズはいかがなさいますか。',
+    ko: '사이즈는 어떻게 하시겠어요?',
+    audio: '/audio/cafe/size_choice.mp3',
+  },
+  {
+    id: 'order_confirmation',
+    jp: 'ご注文は以上でよろしいでしょうか。',
+    ko: '주문은 이상으로 괜찮으실까요?',
+    audio: '/audio/cafe/order_confirmation.mp3',
+  },
+  {
+    id: 'order_acknowledge',
+    jp: 'かしこまりました。',
+    ko: '알겠습니다.',
+    audio: '/audio/cafe/order_acknowledge.mp3',
+  },
+  {
+    id: 'confirm_order_details',
+    jp: 'ご注文内容を確認いたします。',
+    ko: '주문 내용을 확인해드리겠습니다.',
+    audio: '/audio/cafe/confirm_order_details.mp3',
+  },
+  {
+    id: 'confirm_size_and_item',
+    jp: 'Sサイズのブレンドコーヒーで間違いないでしょうか。',
+    ko: 'S사이즈 블렌드 커피로 맞으신가요?',
+    audio: '/audio/cafe/confirm_size_and_item.mp3',
+  },
+  {
+    id: 'sandwich_wait_time_notice',
+    jp: '申し訳ございません。ご注文のサンドイッチはお作りするのに15分ほどかかりますが、よろしいでしょうか。',
+    ko: '죄송하지만 주문하신 샌드위치는 준비에 약 15분 정도 소요되는데 괜찮으시겠습니까?',
+    audio: '/audio/cafe/sandwich_wait_time_notice.mp3',
+  },
+  {
+    id: 'point_card_check',
+    jp: 'ポイントお持ちではないでしょうか。',
+    ko: '포인트 카드 가지고 계신가요?',
+    audio: '/audio/cafe/point_card_check.mp3',
+  },
+  {
+    id: 'announce_total',
+    jp: '680円でございます。',
+    ko: '680엔입니다.',
+    audio: '/audio/cafe/announce_total.mp3',
+  },
+  {
+    id: 'announce_change',
+    jp: '320円のお返しでございます。',
+    ko: '320엔 거스름돈입니다.',
+    audio: '/audio/cafe/announce_change.mp3',
+  },
+  {
+    id: 'give_receipt',
+    jp: 'レシートでございます。',
+    ko: '영수증입니다.',
+    audio: '/audio/cafe/give_receipt.mp3',
+  },
+  {
+    id: 'receive_cash_exact',
+    jp: '800円ちょうだいいたします。',
+    ko: '800엔 받았습니다(딱 맞춰 받았을 때).',
+    audio: '/audio/cafe/receive_cash_exact.mp3',
+  },
+  {
+    id: 'wait_at_counter',
+    jp: 'こちらのレシート番号でお呼びしますので、フードカウンター前で少々お待ちくださいませ。',
+    ko: '이 영수증 번호로 불러드릴 테니 푸드 카운터 앞에서 잠시만 기다려 주세요.',
+    audio: '/audio/cafe/wait_at_counter.mp3',
+  },
+  {
+    id: 'apology_for_wait',
+    jp: 'お待たせいたしました。',
+    ko: '오래 기다리셨습니다.',
+    audio: '/audio/cafe/apology_for_wait.mp3',
+  },
+  {
+    id: 'buzzer_notice',
+    jp: 'こちらのブザーが鳴りましたら、カウンターまでお越しくださいませ。',
+    ko: '이 부저가 울리면 카운터로 와주시기 바랍니다.',
+    audio: '/audio/cafe/buzzer_notice.mp3',
+  },
+  {
+    id: 'serve_item_first',
+    jp: 'お先にカフェオレ失礼いたします。',
+    ko: '카페오레 먼저 실례하겠습니다.',
+    audio: '/audio/cafe/serve_item_first.mp3',
+  },
+  {
+    id: 'call_receipt_number',
+    jp: 'レシート番号37。ブレンドコーヒーと一緒にトーストご注文のお客様、お待たせいたしました。',
+    ko: '영수증 번호 37번. 블렌드 커피와 함께 토스트 주문하신 고객님, 오래 기다리셨습니다.',
+    audio: '/audio/cafe/call_receipt_number.mp3',
+  },
+  {
+    id: 'excuse_me',
+    jp: '恐れ入ります。',
+    ko: '실례합니다 / 감사합니다.',
+    audio: '/audio/cafe/excuse_me.mp3',
+  },
+  {
+    id: 'thank_you_goodbye',
+    jp: 'ありがとうございます。またお待ちしております。',
+    ko: '감사합니다. 또 오세요.',
+    audio: '/audio/cafe/thank_you_goodbye.mp3',
+  },
+  {
+    id: 'passing_behind',
+    jp: '後ろ通ります。',
+    ko: '뒤쪽 지나갑니다.',
+    audio: '/audio/cafe/passing_behind.mp3',
+  },
+  {
+    id: 'dishwashing_request',
+    jp: '洗浄お願いします。',
+    ko: '설거지 부탁드립니다.',
+    audio: '/audio/cafe/dishwashing_request.mp3',
+  },
+];

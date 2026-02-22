@@ -17,6 +17,7 @@ const KeigoConfigView: React.FC<KeigoConfigViewProps> = ({
   const categories = [
     { id: 'INTERVIEW', label: '면접', icon: 'fa-briefcase' },
     { id: 'CAFE', label: '카페', icon: 'fa-coffee' },
+    { id: 'BAITO', label: '아르바이트', icon: 'fa-store' },
   ];
 
   return (

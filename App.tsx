@@ -18,8 +18,6 @@ import {
   SURNAMES,
   GIVEN_NAMES,
   CELEBRITIES,
-  KEIGO_BASIC,
-  KEIGO_CAFE,
   PROVERBS,
 } from './constants';
 import {

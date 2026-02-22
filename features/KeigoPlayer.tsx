@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { KeigoLine } from '../types';
+import { KEIGO_CAFE, KEIGO_INTERVIEW, KEIGO_BAITO } from '../public/data/index';
 
 interface KeigoPlayerProps {
-  category: 'CAFE' | 'INTERVIEW';
+  category: 'CAFE' | 'INTERVIEW' | 'BAITO';
   onEnd: () => void;
 }
 
@@ -42,33 +43,37 @@ const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
   }, [script.length, playbackRate]);
 
   useEffect(() => {
-    const loadScript = async () => {
-      try {
-        const fileName =
-          category === 'CAFE' ? '/data/cafe.json' : '/data/interview.json';
-        const res = await fetch(fileName);
-        const data = await res.json();
-        setScript(data);
-        setActiveIndex(0);
-        setIsPlaying(true);
-        setIsFinished(false);
-      } catch (err) {
-        console.error('데이터 로딩 오류:', err);
-      }
-    };
-    loadScript();
+    let selectedData: KeigoLine[];
+
+    switch (category) {
+      case 'CAFE':
+        selectedData = KEIGO_CAFE;
+        break;
+      case 'INTERVIEW':
+        selectedData = KEIGO_INTERVIEW;
+        break;
+      case 'BAITO':
+        selectedData = KEIGO_BAITO;
+        break;
+      default:
+        selectedData = [];
+    }
+
+    setScript(selectedData);
+    setActiveIndex(0);
+    setIsPlaying(true);
+    setIsFinished(false);
   }, [category]);
 
   useEffect(() => {
     if (!script.length || !script[activeIndex]) return;
 
     const audio = audioRef.current;
-    const rawAudioPath = script[activeIndex].audio;
-    const correctedAudioPath = rawAudioPath.replace('/audio/', '/audio/keigo/');
+    const audioPath = script[activeIndex].audio;
 
     if (isPlaying) {
-      if (audio.src !== window.location.origin + correctedAudioPath) {
-        audio.src = correctedAudioPath;
+      if (audio.src !== window.location.origin + audioPath) {
+        audio.src = audioPath;
       }
       audio.playbackRate = playbackRate;
       audio.play().catch(() => {});
@@ -144,7 +149,7 @@ const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
         <div className="bg-gray-100 px-8 pt-[24vh] pb-[40vh] space-y-20">
           {script.map((line, i) => (
             <div
-              key={i}
+              key={line.id}
               data-index={i}
               className={`transition-all duration-500 w-full ${
                 i === activeIndex
