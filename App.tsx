@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { AppView, StudyItem, KeigoLine } from './types';
 import Home from './features/Home';
 import NumberConfigView from './features/NumberConfig';
@@ -11,6 +11,8 @@ import FeedbackView from './features/FeedbackView';
 import Footer from './features/Footer';
 import { Analytics } from '@vercel/analytics/react';
 
+import { useNavigate, useLocation } from 'react-router-dom';
+
 import {
   PREFECTURES,
   TOKYO_STATIONS,
@@ -22,6 +24,7 @@ import {
   CELEBRITIES,
   PROVERBS,
 } from './constants';
+
 import {
   convertNumberToJapanese,
   generateRandomDate,
@@ -30,13 +33,76 @@ import {
 } from './utils';
 
 const App: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [view, setView] = useState<AppView>('HOME');
   const [studyItems, setStudyItems] = useState<StudyItem[]>([]);
-  // 경어 카테고리를 저장하기 위한 상태 추가
   const [keigoCategory, setKeigoCategory] = useState<'CAFE' | 'INTERVIEW'>(
     'CAFE',
   );
   const [globalShowKorean, setGlobalShowKorean] = useState(true);
+
+  useEffect(() => {
+    switch (location.pathname) {
+      case '/':
+        setView('HOME');
+        break;
+      case '/number':
+        setView('NUMBER_CONFIG');
+        break;
+      case '/name':
+        setView('NAME_CONFIG');
+        break;
+      case '/place':
+        setView('PLACE_CONFIG');
+        break;
+      case '/keigo':
+        setView('KEIGO_CONFIG');
+        break;
+      case '/study':
+        setView('STUDY_SESSION');
+        break;
+      case '/keigo-player':
+        setView('KEIGO_PLAYER');
+        break;
+      case '/feedback':
+        setView('FEEDBACK');
+        break;
+      default:
+        setView('HOME');
+    }
+  }, [location.pathname]);
+
+  // ✅ view → URL 동기화
+  useEffect(() => {
+    switch (view) {
+      case 'HOME':
+        navigate('/');
+        break;
+      case 'NUMBER_CONFIG':
+        navigate('/number');
+        break;
+      case 'NAME_CONFIG':
+        navigate('/name');
+        break;
+      case 'PLACE_CONFIG':
+        navigate('/place');
+        break;
+      case 'KEIGO_CONFIG':
+        navigate('/keigo');
+        break;
+      case 'STUDY_SESSION':
+        navigate('/study');
+        break;
+      case 'KEIGO_PLAYER':
+        navigate('/keigo-player');
+        break;
+      case 'FEEDBACK':
+        navigate('/feedback');
+        break;
+    }
+  }, [view]);
 
   const dailyProverb = useMemo(() => {
     return PROVERBS[Math.floor(Math.random() * PROVERBS.length)];
@@ -175,7 +241,6 @@ const App: React.FC = () => {
             <KeigoConfigView
               onBack={handleBack}
               onStart={(config) => {
-                // 선택된 카테고리를 저장하고 화면 전환
                 setKeigoCategory(config.category);
                 setView('KEIGO_PLAYER');
               }}
