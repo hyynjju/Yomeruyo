@@ -9,7 +9,8 @@ import StudySession from './features/StudySession';
 import KeigoPlayer from './features/KeigoPlayer';
 import FeedbackView from './features/FeedbackView';
 import Footer from './features/Footer';
-import { Analytics } from '@vercel/analytics/next';
+import { Analytics } from '@vercel/analytics/react';
+
 import {
   PREFECTURES,
   TOKYO_STATIONS,
