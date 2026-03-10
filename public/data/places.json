@@ -475,7 +475,7 @@
     { "display": "埼京선", "reading": "さいきょうせん", "korean": "사이쿄선" },
     {
       "display": "湘南新宿ライン",
-      "reading": "しょうなん신주쿠らいん",
+      "reading": "しょうなんしんじゅくらいん",
       "korean": "쇼난신주쿠라인"
     },
     {
@@ -517,7 +517,7 @@
     },
     { "display": "銀座線", "reading": "ぎんざせん", "korean": "긴자선" },
     {
-      "display": "丸ノ内선",
+      "display": "丸ノ内線",
       "reading": "まるのうちせん",
       "korean": "마루노우치선"
     },
@@ -538,12 +538,12 @@
     {
       "display": "副都心線",
       "reading": "ふくとしんせん",
-      "korean": "후쿠토심선"
+      "korean": "후쿠토신선"
     },
     { "display": "浅草線", "reading": "あさくさせん", "korean": "아사쿠사선" },
     { "display": "三田線", "reading": "みたせん", "korean": "미타선" },
     { "display": "新宿線", "reading": "しんじゅくせん", "korean": "신주쿠선" },
-    { "display": "大江戸線", "reading": "おおえ도せん", "korean": "오에도선" },
+    { "display": "大江戸線", "reading": "おおえどせん", "korean": "오에도선" },
     { "display": "京王線", "reading": "けいおうせん", "korean": "게이오선" },
     {
       "display": "京王新線",
@@ -692,12 +692,12 @@
     },
     {
       "display": "京成本線",
-      "reading": "け이せいほんせん",
+      "reading": "けいせいほんせん",
       "korean": "게이세이 본선"
     },
     {
       "display": "京成押上線",
-      "reading": "けいせいお시아げせん",
+      "reading": "けいせいおしあげせん",
       "korean": "게이세이 오시아게선"
     },
     {
@@ -885,7 +885,7 @@
       "korean": "한신 난바선"
     },
     {
-      "display": "京阪본선",
+      "display": "京阪本線",
       "reading": "けいはんほんせん",
       "korean": "게이한 본선"
     },
