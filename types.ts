@@ -30,8 +30,7 @@ export interface PlaceConfig {
 }
 
 export interface KeigoConfig {
-  category: 'BASIC' | 'CAFE' | 'CUSTOM';
-  customScript?: string;
+  category: 'CAFE' | 'INTERVIEW' | 'BAITO';
 }
 
 export interface StudyItem {
