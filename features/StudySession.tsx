@@ -79,7 +79,7 @@ const StudySession: React.FC<StudySessionProps> = ({
                 isRevealed ? 'text-white' : 'text-white/30'
               }`}
             >
-              {isRevealed ? currentItem.reading : '읽는 방법을 생각해보세요'}
+              {isRevealed ? currentItem.reading : '읽는 방법을 맞춰봐요'}
             </div>
 
             {isRevealed && showKorean && currentItem.korean && (
