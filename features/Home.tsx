@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { AppView } from '../types';
 import Footer from './Footer';
 
@@ -13,16 +13,112 @@ interface HomeProps {
 
 const Home: React.FC<HomeProps> = ({ setView }) => {
   const [activeCard, setActiveCard] = useState(0);
+  const [isSwiping, setIsSwiping] = useState(false);
+
+  // 터치 및 드래그 제어를 위한 ref
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
+  const isDragging = useRef(false);
+  const hasMoved = useRef(false); // 순수 클릭과 드래그 구분용 Flag
 
   const cardCount = 4;
 
+  // 4초 자동 슬라이드 (터치/스와이프 중일 때는 일시 정지)
   useEffect(() => {
+    if (isSwiping) return;
+
     const timer = setInterval(() => {
       setActiveCard((prev) => (prev + 1) % cardCount);
     }, 4000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [isSwiping, cardCount]);
+
+  // 스와이프 처리 함수
+  const handleSwipe = () => {
+    if (touchStartX.current === null || touchEndX.current === null) return;
+
+    const distance = touchStartX.current - touchEndX.current;
+    const minSwipeDistance = 20; // 💡 감도 향상: 최소 감지 거리를 50px -> 20px로 완화
+
+    if (distance > minSwipeDistance) {
+      // 오른쪽 -> 왼쪽 (다음 카드)
+      setActiveCard((prev) => (prev + 1) % cardCount);
+    } else if (distance < -minSwipeDistance) {
+      // 왼쪽 -> 오른쪽 (이전 카드)
+      setActiveCard((prev) => (prev - 1 + cardCount) % cardCount);
+    }
+
+    // 초기화
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
+
+  // 터치 이벤트 핸들러
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setIsSwiping(true);
+    hasMoved.current = false;
+    touchStartX.current = e.targetTouches[0].clientX;
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+    if (
+      touchStartX.current !== null &&
+      Math.abs(touchStartX.current - touchEndX.current) > 10
+    ) {
+      hasMoved.current = true;
+    }
+  };
+
+  const handleTouchEnd = () => {
+    handleSwipe();
+    setIsSwiping(false);
+  };
+
+  // 마우스 드래그 핸들러 (데스크톱 호환)
+  const handleMouseDown = (e: React.MouseEvent) => {
+    isDragging.current = true;
+    hasMoved.current = false;
+    setIsSwiping(true);
+    touchStartX.current = e.clientX;
+    touchEndX.current = e.clientX;
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging.current) return;
+    touchEndX.current = e.clientX;
+    if (
+      touchStartX.current !== null &&
+      Math.abs(touchStartX.current - touchEndX.current) > 10
+    ) {
+      hasMoved.current = true;
+    }
+  };
+
+  const handleMouseUp = (e: React.MouseEvent) => {
+    if (!isDragging.current) return;
+    touchEndX.current = e.clientX;
+    isDragging.current = false;
+    handleSwipe();
+    setIsSwiping(false);
+  };
+
+  const handleMouseLeave = (e: React.MouseEvent) => {
+    if (isDragging.current) {
+      touchEndX.current = e.clientX;
+      isDragging.current = false;
+      handleSwipe();
+      setIsSwiping(false);
+    }
+  };
+
+  // 드래그 후 클릭 이벤트가 잘못 실행되는 것 방지
+  const handleCardClick = (view: AppView) => {
+    if (hasMoved.current) return; // 드래그 중이었다면 클릭 이동 방지
+    setView(view);
+  };
 
   const buttons = [
     {
@@ -72,11 +168,20 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
             {/* Main Visual */}
             <section className="w-full mt-8">
               <div className="w-full px-4">
-                {/* 전체 카드 영역 */}
-                <div className="w-full h-[361px] rounded-[32px] overflow-hidden">
+                {/* 전체 카드 영역 - 터치 및 마우스 제어 이벤트 바인딩 */}
+                <div
+                  className="w-full h-[361px] rounded-[32px] overflow-hidden select-none cursor-grab active:cursor-grabbing touch-pan-y"
+                  onTouchStart={handleTouchStart}
+                  onTouchMove={handleTouchMove}
+                  onTouchEnd={handleTouchEnd}
+                  onMouseDown={handleMouseDown}
+                  onMouseMove={handleMouseMove}
+                  onMouseUp={handleMouseUp}
+                  onMouseLeave={handleMouseLeave}
+                >
                   {/* 슬라이드 */}
                   <div
-                    className="flex h-full transition-transform duration-700 ease-out"
+                    className="flex h-full transition-transform duration-500 ease-out"
                     style={{
                       transform: `translateX(-${activeCard * 100}%)`,
                     }}
@@ -84,7 +189,7 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
                     {/* 숫자 읽기 */}
                     <button
                       type="button"
-                      onClick={() => setView('NUMBER_CONFIG')}
+                      onClick={() => handleCardClick('NUMBER_CONFIG')}
                       className="
                         shrink-0
                         w-full
@@ -133,7 +238,7 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
                     {/* 인명 읽기 */}
                     <button
                       type="button"
-                      onClick={() => setView('NAME_CONFIG')}
+                      onClick={() => handleCardClick('NAME_CONFIG')}
                       className="
                         shrink-0
                         w-full
@@ -218,7 +323,7 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
                     {/* 지명 읽기 */}
                     <button
                       type="button"
-                      onClick={() => setView('PLACE_CONFIG')}
+                      onClick={() => handleCardClick('PLACE_CONFIG')}
                       className="
                         shrink-0
                         w-full
@@ -293,7 +398,7 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
                     {/* 경어 */}
                     <button
                       type="button"
-                      onClick={() => setView('KEIGO_CONFIG')}
+                      onClick={() => handleCardClick('KEIGO_CONFIG')}
                       className="
                         shrink-0
                         w-full
