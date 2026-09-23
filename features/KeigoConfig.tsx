@@ -37,7 +37,7 @@ const KeigoConfigView: React.FC<KeigoConfigViewProps> = ({
       <div className="relative w-full max-w-xl h-full mx-auto bg-gradient-to-b from-pink-950 to-stone-900 overflow-hidden">
         {/* Content */}
         <main className="absolute left-0 right-0 top-0 bottom-0 overflow-y-auto overflow-x-hidden overscroll-contain">
-          <div className="w-full px-4 pt-32 pb-40">
+          <div className="w-full px-4 pt-24 pb-40">
             <div className="w-full flex flex-col gap-6">
               {/* 상황 선택 */}
               <div className="w-full h-7 text-white text-xl font-bold leading-8">
@@ -45,7 +45,7 @@ const KeigoConfigView: React.FC<KeigoConfigViewProps> = ({
               </div>
 
               {/* 카테고리 (2열 Grid로 일괄 처리) */}
-              <div className="w-full grid grid-cols-2 gap-5">
+              <div className="w-full grid grid-cols-2 gap-3">
                 {categories.map((cat) => (
                   <GradientOptionButton
                     key={cat.id}

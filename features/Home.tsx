@@ -166,7 +166,7 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
             </header>
 
             {/* Main Visual */}
-            <section className="w-full mt-8">
+            <section className="w-full mt-2">
               <div className="w-full px-4">
                 {/* 전체 카드 영역 - 터치 및 마우스 제어 이벤트 바인딩 */}
                 <div
@@ -208,8 +208,8 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
 
                       <div className="absolute w-[454px] h-64 left-[-27px] top-[179px] rotate-[9.54deg] rounded-full bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,rgba(255,255,255,0)_66%,rgba(255,255,255,0.20)_100%)] blur" />
 
-                      <div className="absolute left-0 top-8 w-full text-center">
-                        <div className="text-white text-2xl font-bold leading-9">
+                      <div className="absolute left-0 top-6 w-full text-center">
+                        <div className="text-white text-2xl font-bold leading-8">
                           1초만에
                         </div>
 
@@ -219,7 +219,7 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
                       </div>
 
                       {/* 숫자 */}
-                      <div className="absolute w-64 h-32 left-1/2 -translate-x-1/2 top-[143px] -rotate-3 bg-white rounded-2xl flex items-center justify-center">
+                      <div className="absolute w-64 h-32 left-1/2 -translate-x-1/2 top-[124px] -rotate-3 bg-white rounded-2xl flex items-center justify-center">
                         <div className="text-center text-red-700 text-5xl font-bold leading-[60px]">
                           1,900円
                         </div>
@@ -255,8 +255,8 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
 
                       <div className="absolute w-[454px] h-64 left-[-27px] top-[179px] rotate-[9.54deg] rounded-full bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,rgba(255,255,255,0)_66%,rgba(255,255,255,0.20)_100%)] blur" />
 
-                      <div className="absolute left-0 top-8 w-full text-center">
-                        <div className="text-white text-2xl font-bold leading-9">
+                      <div className="absolute left-0 top-6 w-full text-center">
+                        <div className="text-white text-2xl font-bold leading-8">
                           1초만에
                         </div>
 
@@ -266,7 +266,7 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
                       </div>
 
                       {/* 이름 예시 */}
-                      <div className="absolute w-64 left-1/2 -translate-x-1/2 top-[136px] -rotate-3 bg-gradient-to-b from-white to-gray-200 rounded-3xl overflow-hidden">
+                      <div className="absolute w-64 left-1/2 -translate-x-1/2 top-[124px] -rotate-3 bg-gradient-to-b from-white to-gray-200 rounded-3xl overflow-hidden">
                         <div className="flex border-b-2 border-black">
                           <div className="flex-1 px-2 pt-2.5 pb-2 border-r border-neutral-200 flex justify-center">
                             <span className="text-black/50 text-sm font-medium">
@@ -340,8 +340,8 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
 
                       <div className="absolute w-[454px] h-64 left-[-27px] top-[179px] rotate-[9.54deg] rounded-full bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,rgba(255,255,255,0)_66%,rgba(255,255,255,0.20)_100%)] blur" />
 
-                      <div className="absolute left-0 top-8 w-full text-center">
-                        <div className="text-white text-2xl font-bold leading-9">
+                      <div className="absolute left-0 top-6 w-full text-center">
+                        <div className="text-white text-2xl font-bold leading-8">
                           1초만에
                         </div>
 
@@ -351,7 +351,7 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
                       </div>
 
                       {/* 역명 예시 */}
-                      <div className="absolute w-72 left-1/2 -translate-x-1/2 top-[139px] -rotate-3 bg-gradient-to-b from-white to-gray-200 rounded-3xl overflow-hidden">
+                      <div className="absolute w-72 left-1/2 -translate-x-1/2 top-[110px] -rotate-3 bg-gradient-to-b from-white to-gray-200 rounded-3xl overflow-hidden">
                         <div className="pt-3.5 pb-2.5">
                           <div className="flex items-center justify-center">
                             <div className="w-6 h-6 rounded border-4 border-lime-400 bg-white" />
@@ -415,8 +415,8 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
 
                       <div className="absolute w-[454px] h-64 left-[-27px] top-[179px] rotate-[9.54deg] rounded-full bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,rgba(255,255,255,0)_66%,rgba(255,255,255,0.20)_100%)] blur" />
 
-                      <div className="absolute left-0 top-8 w-full text-center">
-                        <div className="text-white text-2xl font-bold leading-9">
+                      <div className="absolute left-0 top-6 w-full text-center">
+                        <div className="text-white text-2xl font-bold leading-8">
                           1초만에
                         </div>
 
@@ -426,18 +426,16 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
                       </div>
 
                       {/* 면접 질문 */}
-                      <div className="absolute w-72 h-44 left-1/2 -translate-x-1/2 top-[118px] bg-white rounded-full border-4 border-gray-200" />
+                      <div className="absolute w-72 h-36 left-1/2 -translate-x-1/2 top-[118px] -rotate-3 bg-white rounded-full border-4 border-gray-200" />
 
-                      <div className="absolute w-full px-5 top-[143px] text-center">
-                        <div className="text-teal-700 text-xl font-bold leading-8">
-                          学生時代に一番
+                      <div className="absolute w-full px-5 top-[143px] -rotate-3 text-center">
+                        <div className="text-teal-700 text-xl font-bold leading-7">
+                          学生時代に一番力を
                           <br />
-                          力を入れたことは
-                          <br />
-                          なんですか？
+                          入れたことはなんですか？
                         </div>
 
-                        <div className="mt-1 text-black/50 text-xs font-semibold leading-4">
+                        <div className="mt-2 text-black/50 text-xs font-semibold leading-4">
                           학생 때 가장 열심히 했던 활동은
                           <br />
                           무엇인가요?
