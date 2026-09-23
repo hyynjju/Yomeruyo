@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { PlaceConfig } from '../types';
 import GradientOptionButton from './GradientOptionButton';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface PlaceConfigViewProps {
   onBack: () => void;
@@ -11,34 +12,37 @@ const PlaceConfigView: React.FC<PlaceConfigViewProps> = ({
   onBack,
   onStart,
 }) => {
+  const { t } = useLanguage();
+
   const [category, setCategory] =
     useState<PlaceConfig['category']>('TOKYO_STATION');
+
   const [showKorean, setShowKorean] = useState(true);
 
   const categories = [
     {
       id: 'TOKYO_STATION',
-      label: '도쿄 역명',
+      label: t.placeConfig.tokyoStation,
       gradient: 'bg-gradient-to-br from-red-700 via-pink-500 to-red-500',
     },
     {
       id: 'TOKYO_LINE',
-      label: '도쿄 선로명',
+      label: t.placeConfig.tokyoLine,
       gradient: 'bg-gradient-to-br from-red-700 via-pink-500 to-red-500',
     },
     {
       id: 'OSAKA_STATION',
-      label: '오사카 역명',
+      label: t.placeConfig.osakaStation,
       gradient: 'bg-gradient-to-br from-blue-950 to-teal-400',
     },
     {
       id: 'OSAKA_LINE',
-      label: '오사카 선로명',
+      label: t.placeConfig.osakaLine,
       gradient: 'bg-gradient-to-br from-blue-950 to-teal-400',
     },
     {
       id: 'PREFECTURE',
-      label: '도도부현',
+      label: t.placeConfig.prefecture,
       gradient: 'bg-gradient-to-br from-amber-600 to-yellow-500',
     },
   ] as const;
@@ -52,11 +56,11 @@ const PlaceConfigView: React.FC<PlaceConfigViewProps> = ({
             <div className="w-full flex flex-col gap-6">
               {/* 상황 선택 */}
               <div className="w-full h-7 text-white text-xl font-bold leading-8">
-                상황 선택
+                {t.placeConfig.title}
               </div>
 
               <div className="w-full flex flex-col gap-12">
-                {/* 지역 선택 (2열 Grid로 일괄 처리) */}
+                {/* 지역 선택 */}
                 <div className="w-full grid grid-cols-2 gap-3">
                   {categories.map((cat) => (
                     <GradientOptionButton
@@ -75,11 +79,11 @@ const PlaceConfigView: React.FC<PlaceConfigViewProps> = ({
                 <div className="w-full flex items-center">
                   <div className="min-w-0 flex-1 flex flex-col gap-0.5 pr-4">
                     <div className="text-white text-lg font-bold leading-7 break-keep">
-                      한국어로 읽는법 표시하기
+                      {t.placeConfig.koreanReading}
                     </div>
 
                     <div className="text-white/50 text-xs font-normal leading-4 break-keep">
-                      예) 御徒町 → 오카치마치
+                      {t.placeConfig.koreanReadingExample}
                     </div>
                   </div>
 
@@ -127,7 +131,7 @@ const PlaceConfigView: React.FC<PlaceConfigViewProps> = ({
           </button>
 
           <div className="text-center text-white text-base font-semibold leading-6">
-            지명 읽기 학습 설정
+            {t.placeConfig.header}
           </div>
 
           <div className="w-10 h-10 opacity-0" />
@@ -158,7 +162,7 @@ const PlaceConfigView: React.FC<PlaceConfigViewProps> = ({
                 transition-transform
               "
             >
-              이전
+              {t.common.back}
             </button>
 
             <button
@@ -187,7 +191,7 @@ const PlaceConfigView: React.FC<PlaceConfigViewProps> = ({
                 transition-transform
               "
             >
-              학습 시작하기
+              {t.common.start}
             </button>
           </div>
         </div>

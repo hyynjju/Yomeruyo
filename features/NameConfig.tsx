@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { NameConfig } from '../types';
 import GradientOptionButton from './GradientOptionButton';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface NameConfigViewProps {
   onBack: () => void;
@@ -8,18 +9,21 @@ interface NameConfigViewProps {
 }
 
 const NameConfigView: React.FC<NameConfigViewProps> = ({ onBack, onStart }) => {
+  const { t } = useLanguage();
+
   const [type, setType] = useState<'CELEBRITY' | 'RANKING'>('CELEBRITY');
+
   const [showKorean, setShowKorean] = useState(true);
 
   const options = [
     {
       id: 'CELEBRITY' as const,
-      label: '유명인 이름',
+      label: t.nameConfig.celebrity,
       gradient: 'bg-gradient-to-br from-red-700 via-pink-500 to-red-500',
     },
     {
       id: 'RANKING' as const,
-      label: '많이 쓰는 이름',
+      label: t.nameConfig.ranking,
       gradient: 'bg-gradient-to-br from-blue-950 to-teal-400',
     },
   ];
@@ -34,7 +38,7 @@ const NameConfigView: React.FC<NameConfigViewProps> = ({ onBack, onStart }) => {
               {/* 상황 선택 */}
               <div className="w-full flex flex-col gap-6">
                 <div className="w-full h-7 text-white text-xl font-bold leading-8">
-                  상황 선택
+                  {t.nameConfig.title}
                 </div>
 
                 {/* 2열 Grid 적용 */}
@@ -55,11 +59,11 @@ const NameConfigView: React.FC<NameConfigViewProps> = ({ onBack, onStart }) => {
               <div className="w-full flex items-center">
                 <div className="min-w-0 flex-1 flex flex-col gap-0.5 pr-4">
                   <div className="text-white text-lg font-bold leading-7 break-keep">
-                    한국어로 읽는법 표시하기
+                    {t.nameConfig.koreanReading}
                   </div>
 
                   <div className="text-white/50 text-xs font-normal leading-4 break-keep">
-                    예) 山田太郎 → 야마다 타로
+                    {t.nameConfig.koreanReadingExample}
                   </div>
                 </div>
 
@@ -106,7 +110,7 @@ const NameConfigView: React.FC<NameConfigViewProps> = ({ onBack, onStart }) => {
           </button>
 
           <div className="text-center text-white text-base font-semibold leading-6">
-            인명 읽기 학습 설정
+            {t.nameConfig.header}
           </div>
 
           <div className="w-10 h-10 opacity-0" />
@@ -137,7 +141,7 @@ const NameConfigView: React.FC<NameConfigViewProps> = ({ onBack, onStart }) => {
                 transition-transform
               "
             >
-              이전
+              {t.common.back}
             </button>
 
             <button
@@ -166,7 +170,7 @@ const NameConfigView: React.FC<NameConfigViewProps> = ({ onBack, onStart }) => {
                 transition-transform
               "
             >
-              학습 시작하기
+              {t.common.start}
             </button>
           </div>
         </div>

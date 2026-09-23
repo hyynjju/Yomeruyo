@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { KeigoConfig } from '../types';
 import GradientOptionButton from './GradientOptionButton';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface KeigoConfigViewProps {
   onBack: () => void;
@@ -11,23 +12,25 @@ const KeigoConfigView: React.FC<KeigoConfigViewProps> = ({
   onBack,
   onStart,
 }) => {
+  const { t } = useLanguage();
+
   const [category, setCategory] =
     useState<KeigoConfig['category']>('INTERVIEW');
 
   const categories = [
     {
       id: 'INTERVIEW',
-      label: '면접',
+      label: t.keigoConfig.interview,
       gradient: 'bg-gradient-to-br from-red-700 via-pink-500 to-red-500',
     },
     {
       id: 'CAFE',
-      label: '카페',
+      label: t.keigoConfig.cafe,
       gradient: 'bg-gradient-to-br from-teal-700 to-lime-500',
     },
     {
       id: 'BAITO',
-      label: '아르바이트',
+      label: t.keigoConfig.baito,
       gradient: 'bg-gradient-to-br from-amber-600 to-yellow-500',
     },
   ] as const;
@@ -41,10 +44,10 @@ const KeigoConfigView: React.FC<KeigoConfigViewProps> = ({
             <div className="w-full flex flex-col gap-6">
               {/* 상황 선택 */}
               <div className="w-full h-7 text-white text-xl font-bold leading-8">
-                상황 선택
+                {t.keigoConfig.title}
               </div>
 
-              {/* 카테고리 (2열 Grid로 일괄 처리) */}
+              {/* 카테고리 */}
               <div className="w-full grid grid-cols-2 gap-3">
                 {categories.map((cat) => (
                   <GradientOptionButton
@@ -73,7 +76,7 @@ const KeigoConfigView: React.FC<KeigoConfigViewProps> = ({
           </button>
 
           <div className="text-center text-white text-base font-semibold leading-6">
-            경어 듣기 학습 설정
+            {t.keigoConfig.header}
           </div>
 
           <div className="w-10 h-10 opacity-0" />
@@ -104,7 +107,7 @@ const KeigoConfigView: React.FC<KeigoConfigViewProps> = ({
                 transition-transform
               "
             >
-              이전
+              {t.common.back}
             </button>
 
             <button
@@ -133,7 +136,7 @@ const KeigoConfigView: React.FC<KeigoConfigViewProps> = ({
                 transition-transform
               "
             >
-              학습 시작하기
+              {t.common.start}
             </button>
           </div>
         </div>

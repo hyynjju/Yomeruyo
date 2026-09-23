@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { KeigoLine } from '../types';
 import { KEIGO_CAFE, KEIGO_INTERVIEW, KEIGO_BAITO } from '../public/data/index';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface KeigoPlayerProps {
   category: 'CAFE' | 'INTERVIEW' | 'BAITO';
@@ -11,6 +12,8 @@ interface KeigoPlayerProps {
 const BASE_SPEED = 1.25;
 
 const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
+  const { t } = useLanguage();
+
   const [script, setScript] = useState<KeigoLine[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
@@ -25,7 +28,7 @@ const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
   // 재생속도 배율 로테이션
   const playbackRates = [1.0, 1.25, 1.5, 1.75, 2.0, 0.5, 0.75];
 
-  // 실제 오디오에 적용되는 최종 속도 (기준 속도 * 사용자 선택 배율)
+  // 실제 오디오에 적용되는 최종 속도
   const effectiveSpeed = BASE_SPEED * playbackRate;
 
   const handlePlaybackRate = () => {
@@ -48,7 +51,6 @@ const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
     const handleEnded = () => {
       setActiveIndex((prev) => {
         if (prev < script.length - 1) {
-          // 문장 간 대기 시간도 변경된 실제 속도(effectiveSpeed)에 맞춰 조정
           setTimeout(
             () => setActiveIndex((current) => current + 1),
             1200 / effectiveSpeed,
@@ -118,7 +120,6 @@ const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
         audio.src = audioPath;
       }
 
-      // 실제 오디오 속도로 설정 (1.25 * playbackRate)
       audio.playbackRate = effectiveSpeed;
       audio.play().catch(() => {});
     } else {
@@ -192,6 +193,13 @@ const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
     }
   };
 
+  const categoryLabel =
+    category === 'INTERVIEW'
+      ? t.keigoConfig.interview
+      : category === 'CAFE'
+        ? t.keigoConfig.cafe
+        : t.keigoConfig.baito;
+
   return (
     <div className="fixed inset-0 bg-stone-900 overflow-hidden">
       <div className="relative w-full max-w-xl h-full mx-auto bg-gradient-to-b from-pink-950 to-stone-900 overflow-hidden">
@@ -242,17 +250,14 @@ const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
           <button
             type="button"
             onClick={onEnd}
+            aria-label={t.common.back}
             className="w-10 h-10 p-2.5 flex justify-center items-center text-white active:scale-90 transition-transform"
           >
             <i className="fas fa-chevron-left text-xl" />
           </button>
 
           <div className="text-center text-white text-base font-semibold leading-6">
-            {category === 'INTERVIEW'
-              ? '면접'
-              : category === 'CAFE'
-                ? '카페'
-                : '아르바이트'}
+            {categoryLabel}
           </div>
 
           <div className="w-10 h-10 opacity-0" />
@@ -283,6 +288,7 @@ const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
                   type="button"
                   onClick={goToPrev}
                   disabled={activeIndex === 0}
+                  aria-label={t.keigoPlayer.previous}
                   className={`p-5 bg-white/5 rounded-full flex justify-center items-center transition-all active:scale-90 ${
                     activeIndex === 0 ? 'opacity-30' : 'opacity-100'
                   }`}
@@ -294,6 +300,13 @@ const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
                 <button
                   type="button"
                   onClick={togglePlay}
+                  aria-label={
+                    isFinished
+                      ? t.keigoPlayer.replay
+                      : isPlaying
+                        ? t.keigoPlayer.pause
+                        : t.keigoPlayer.play
+                  }
                   className={`px-10 py-7 bg-white/5 rounded-full flex justify-center items-center transition-all active:scale-95 ${
                     isFinished ? 'bg-rose-500/20' : ''
                   }`}
@@ -316,6 +329,7 @@ const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
                   type="button"
                   onClick={goToNext}
                   disabled={activeIndex === script.length - 1}
+                  aria-label={t.keigoPlayer.next}
                   className={`p-5 bg-white/5 rounded-full flex justify-center items-center transition-all active:scale-90 ${
                     activeIndex === script.length - 1
                       ? 'opacity-30'
@@ -330,6 +344,7 @@ const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
               <button
                 type="button"
                 onClick={handlePlaybackRate}
+                aria-label={t.keigoPlayer.playbackSpeed}
                 className="px-5 py-4 flex justify-center items-center gap-2.5 active:scale-90 transition-transform"
               >
                 <span className="text-white text-base font-semibold leading-6">

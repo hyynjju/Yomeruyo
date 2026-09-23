@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { NumberConfig } from '../types';
 import GradientOptionButton from './GradientOptionButton';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface NumberConfigViewProps {
   onBack: () => void;
@@ -11,6 +12,8 @@ const NumberConfigView: React.FC<NumberConfigViewProps> = ({
   onBack,
   onStart,
 }) => {
+  const { t } = useLanguage();
+
   const [min, setMin] = useState(1);
   const [max, setMax] = useState(1000);
   const [unit, setUnit] = useState<1 | 10 | 100 | 1000 | 10000>(1);
@@ -23,27 +26,60 @@ const NumberConfigView: React.FC<NumberConfigViewProps> = ({
   const presets = [
     {
       id: 'CAFE',
-      label: '카페·식당',
+      label: t.numberConfig.cafe,
       gradient: 'bg-gradient-to-br from-red-700 via-pink-500 to-red-500',
     },
     {
       id: 'SHOPPING',
-      label: '쇼핑',
+      label: t.numberConfig.shopping,
       gradient: 'bg-gradient-to-br from-amber-600 to-yellow-500',
     },
     {
       id: 'TRANSPORT',
-      label: '교통',
+      label: t.numberConfig.transport,
       gradient: 'bg-gradient-to-br from-teal-700 to-lime-500',
     },
     {
       id: 'LARGE',
-      label: '큰 숫자',
+      label: t.numberConfig.large,
       gradient: 'bg-gradient-to-br from-blue-950 to-teal-400',
     },
   ] as const;
 
-  const counters = ['엔', '명', '마리', '층', '개', '권', '본', '날짜'];
+  const counters = [
+    {
+      value: '엔',
+      label: t.numberConfig.counters.yen,
+    },
+    {
+      value: '명',
+      label: t.numberConfig.counters.people,
+    },
+    {
+      value: '마리',
+      label: t.numberConfig.counters.animals,
+    },
+    {
+      value: '층',
+      label: t.numberConfig.counters.floors,
+    },
+    {
+      value: '개',
+      label: t.numberConfig.counters.things,
+    },
+    {
+      value: '권',
+      label: t.numberConfig.counters.books,
+    },
+    {
+      value: '본',
+      label: t.numberConfig.counters.longObjects,
+    },
+    {
+      value: '날짜',
+      label: t.numberConfig.counters.date,
+    },
+  ];
   const units = [1, 10, 100, 1000, 10000] as const;
 
   const unitIndex = units.indexOf(unit);
@@ -66,7 +102,7 @@ const NumberConfigView: React.FC<NumberConfigViewProps> = ({
           </button>
 
           <div className="text-center text-white text-base font-semibold leading-6">
-            숫자 읽기 학습 설정
+            {t.numberConfig.header}
           </div>
 
           <div className="w-10 h-10" />
@@ -78,53 +114,53 @@ const NumberConfigView: React.FC<NumberConfigViewProps> = ({
             {/* 추천 옵션 */}
             <section className="w-full mb-12">
               <h2 className="h-7 text-white text-xl font-bold leading-8">
-                추천 옵션
+                {t.numberConfig.recommended}
               </h2>
+
               <p className="mt-0.5 mb-6 text-white/50 text-xs font-normal leading-4 break-keep">
-                일본 생활에서 자주 접하는 숫자를 골라 바로 연습해보세요.
+                {t.numberConfig.recommendedDescription}
               </p>
 
               <div
                 className="
-                w-[calc(100vw-16px)]
-                overflow-x-auto
-                overflow-y-hidden
-                flex
-                flex-nowrap
-                gap-3
-                pr-4
-                pb-1
-                scrollbar-hide
-                touch-pan-x
-              "
+    w-full
+    overflow-x-auto
+    overflow-y-hidden
+    scrollbar-hide
+    -mx-0
+    pb-1
+  "
               >
-                {presets.map((p) => (
-                  <div key={p.id} className="shrink-0 w-40">
-                    <GradientOptionButton
-                      label={p.label}
-                      gradient={p.gradient}
-                      selected={preset === p.id}
-                      onClick={() => setPreset(p.id)}
-                    />
-                  </div>
-                ))}
+                <div className="flex flex-nowrap gap-3 w-max pr-4">
+                  {presets.map((p) => (
+                    <div key={p.id} className="shrink-0 w-40">
+                      <GradientOptionButton
+                        label={p.label}
+                        gradient={p.gradient}
+                        selected={preset === p.id}
+                        onClick={() => setPreset(p.id)}
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
             </section>
 
             {/* 커스텀 학습 */}
             <section className="w-full">
               <h2 className="h-7 text-white text-xl font-bold leading-8">
-                커스텀 학습
+                {t.numberConfig.custom}
               </h2>
+
               <p className="mt-0.5 mb-8 text-white/50 text-xs font-normal leading-4 break-keep">
-                연습할 숫자의 범위와 단위를 직접 설정해보세요.
+                {t.numberConfig.customDescription}
               </p>
 
               <div className="w-full flex flex-col gap-12">
                 {/* 세는 단위 */}
                 <div className="w-full">
                   <div className="mb-2 text-white text-base font-medium leading-6">
-                    세는 단위
+                    {t.numberConfig.counter}
                   </div>
 
                   <div className="relative w-full h-16">
@@ -132,34 +168,34 @@ const NumberConfigView: React.FC<NumberConfigViewProps> = ({
                       value={counter}
                       onChange={(e) => setCounter(e.target.value)}
                       className="
-                      appearance-none
-                      w-full
-                      h-16
-                      px-5
-                      pr-12
-                      rounded-[20px]
-                      border-0
-                      outline
-                      outline-[1.5px]
-                      outline-offset-[-1.5px]
-                      outline-white/5
-                      bg-gradient-to-b
-                      from-white/10
-                      to-white/5
-                      bg-transparent
-                      text-white
-                      text-base
-                      font-medium
-                      leading-6
-                    "
+    appearance-none
+    w-full
+    h-16
+    px-5
+    pr-12
+    rounded-[20px]
+    border-0
+    outline
+    outline-[1.5px]
+    outline-offset-[-1.5px]
+    outline-white/5
+    bg-gradient-to-b
+    from-white/10
+    to-white/5
+    bg-transparent
+    text-white
+    text-base
+    font-medium
+    leading-6
+  "
                     >
-                      {counters.map((c) => (
+                      {counters.map((counterOption) => (
                         <option
-                          key={c}
-                          value={c}
+                          key={counterOption.value}
+                          value={counterOption.value}
                           className="bg-stone-900 text-white"
                         >
-                          {c === '날짜' ? '날짜 (연호 포함)' : c}
+                          {counterOption.label}
                         </option>
                       ))}
                     </select>
@@ -175,7 +211,7 @@ const NumberConfigView: React.FC<NumberConfigViewProps> = ({
                     {/* 숫자 범위 */}
                     <div className="w-full">
                       <div className="mb-2 text-white text-base font-medium leading-6">
-                        숫자 범위
+                        {t.numberConfig.range}
                       </div>
 
                       <div className="w-full flex items-center gap-2">
@@ -184,27 +220,27 @@ const NumberConfigView: React.FC<NumberConfigViewProps> = ({
                           value={min}
                           onChange={(e) => setMin(Number(e.target.value))}
                           className="
-                          appearance-none
-                          min-w-0
-                          flex-1
-                          w-0
-                          h-16
-                          px-5
-                          rounded-[20px]
-                          border-0
-                          outline
-                          outline-[1.5px]
-                          outline-offset-[-1.5px]
-                          outline-white/5
-                          bg-gradient-to-b
-                          from-white/10
-                          to-white/5
-                          bg-transparent
-                          text-white
-                          text-base
-                          font-medium
-                          leading-6
-                        "
+                            appearance-none
+                            min-w-0
+                            flex-1
+                            w-0
+                            h-16
+                            px-5
+                            rounded-[20px]
+                            border-0
+                            outline
+                            outline-[1.5px]
+                            outline-offset-[-1.5px]
+                            outline-white/5
+                            bg-gradient-to-b
+                            from-white/10
+                            to-white/5
+                            bg-transparent
+                            text-white
+                            text-base
+                            font-medium
+                            leading-6
+                          "
                         />
 
                         <span className="shrink-0 text-white text-lg font-bold leading-7">
@@ -216,27 +252,27 @@ const NumberConfigView: React.FC<NumberConfigViewProps> = ({
                           value={max}
                           onChange={(e) => setMax(Number(e.target.value))}
                           className="
-                          appearance-none
-                          min-w-0
-                          flex-1
-                          w-0
-                          h-16
-                          px-5
-                          rounded-[20px]
-                          border-0
-                          outline
-                          outline-[1.5px]
-                          outline-offset-[-1.5px]
-                          outline-white/5
-                          bg-gradient-to-b
-                          from-white/10
-                          to-white/5
-                          bg-transparent
-                          text-white
-                          text-base
-                          font-medium
-                          leading-6
-                        "
+                            appearance-none
+                            min-w-0
+                            flex-1
+                            w-0
+                            h-16
+                            px-5
+                            rounded-[20px]
+                            border-0
+                            outline
+                            outline-[1.5px]
+                            outline-offset-[-1.5px]
+                            outline-white/5
+                            bg-gradient-to-b
+                            from-white/10
+                            to-white/5
+                            bg-transparent
+                            text-white
+                            text-base
+                            font-medium
+                            leading-6
+                          "
                         />
                       </div>
                     </div>
@@ -244,7 +280,7 @@ const NumberConfigView: React.FC<NumberConfigViewProps> = ({
                     {/* 단위 */}
                     <div className="w-full">
                       <div className="mb-2 text-white text-base font-medium leading-6">
-                        단위
+                        {t.numberConfig.unit}
                       </div>
 
                       <div className="relative w-full h-12">
@@ -262,16 +298,16 @@ const NumberConfigView: React.FC<NumberConfigViewProps> = ({
                             handleUnitChange(Number(e.target.value))
                           }
                           className="
-                          absolute
-                          left-0
-                          top-0
-                          z-20
-                          w-full
-                          h-4
-                          opacity-0
-                          cursor-pointer
-                          appearance-none
-                        "
+                            absolute
+                            left-0
+                            top-0
+                            z-20
+                            w-full
+                            h-4
+                            opacity-0
+                            cursor-pointer
+                            appearance-none
+                          "
                         />
 
                         {/* 핸들 */}
@@ -305,15 +341,18 @@ const NumberConfigView: React.FC<NumberConfigViewProps> = ({
                               <div
                                 key={u}
                                 className={`
-                                flex-1
-                                text-center
-                                text-sm
-                                font-medium
-                                leading-5
-                                ${selected ? 'text-rose-300' : 'text-white/30'}
-                              `}
+                                  flex-1
+                                  text-center
+                                  text-sm
+                                  font-medium
+                                  leading-5
+                                  ${
+                                    selected ? 'text-rose-300' : 'text-white/30'
+                                  }
+                                `}
                               >
-                                {u}단위
+                                {u}
+                                {t.numberConfig.unitSuffix}
                               </div>
                             );
                           })}
@@ -327,11 +366,11 @@ const NumberConfigView: React.FC<NumberConfigViewProps> = ({
                 <div className="w-full flex items-center">
                   <div className="min-w-0 flex-1 pr-4">
                     <div className="text-white text-lg font-bold leading-7 break-keep">
-                      한국어로 읽는법 표시하기
+                      {t.numberConfig.koreanReading}
                     </div>
 
                     <div className="mt-0.5 text-white/50 text-xs font-normal leading-4 break-keep">
-                      예) 3,800円 → 산젠핫퍄쿠엔
+                      {t.numberConfig.koreanReadingExample}
                     </div>
                   </div>
 
@@ -340,24 +379,24 @@ const NumberConfigView: React.FC<NumberConfigViewProps> = ({
                     aria-pressed={showKorean}
                     onClick={() => setShowKorean((prev) => !prev)}
                     className={`
-                    relative
-                    shrink-0
-                    w-14
-                    h-8
-                    rounded-full
-                    ${showKorean ? 'bg-rose-300' : 'bg-white/20'}
-                  `}
+                      relative
+                      shrink-0
+                      w-14
+                      h-8
+                      rounded-full
+                      ${showKorean ? 'bg-rose-300' : 'bg-white/20'}
+                    `}
                   >
                     <span
                       className={`
-                      absolute
-                      top-1
-                      w-6
-                      h-6
-                      rounded-full
-                      bg-white
-                      ${showKorean ? 'right-1' : 'left-1'}
-                    `}
+                        absolute
+                        top-1
+                        w-6
+                        h-6
+                        rounded-full
+                        bg-white
+                        ${showKorean ? 'right-1' : 'left-1'}
+                      `}
                     />
                   </button>
                 </div>
@@ -375,23 +414,23 @@ const NumberConfigView: React.FC<NumberConfigViewProps> = ({
               type="button"
               onClick={onBack}
               className="
-              flex-[2]
-              min-w-0
-              h-14
-              rounded-full
-              bg-white/10
-              flex
-              items-center
-              justify-center
-              text-white
-              text-lg
-              font-bold
-              leading-6
-              active:scale-95
-              transition-transform
-            "
+                flex-[2]
+                min-w-0
+                h-14
+                rounded-full
+                bg-white/10
+                flex
+                items-center
+                justify-center
+                text-white
+                text-lg
+                font-bold
+                leading-6
+                active:scale-95
+                transition-transform
+              "
             >
-              이전
+              {t.common.back}
             </button>
 
             <button
@@ -405,29 +444,29 @@ const NumberConfigView: React.FC<NumberConfigViewProps> = ({
                 })
               }
               className="
-              flex-[3]
-              min-w-0
-              h-14
-              rounded-full
-              bg-gradient-to-b
-              from-white
-              to-white/70
-              outline
-              outline-[3px]
-              outline-offset-[-3px]
-              outline-white/40
-              flex
-              items-center
-              justify-center
-              text-rose-900
-              text-lg
-              font-bold
-              leading-6
-              active:scale-95
-              transition-transform
-            "
+                flex-[3]
+                min-w-0
+                h-14
+                rounded-full
+                bg-gradient-to-b
+                from-white
+                to-white/70
+                outline
+                outline-[3px]
+                outline-offset-[-3px]
+                outline-white/40
+                flex
+                items-center
+                justify-center
+                text-rose-900
+                text-lg
+                font-bold
+                leading-6
+                active:scale-95
+                transition-transform
+              "
             >
-              학습 시작하기
+              {t.common.start}
             </button>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { AppView } from '../types';
 import Footer from './Footer';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface HomeProps {
   setView: (view: AppView) => void;
@@ -12,18 +13,21 @@ interface HomeProps {
 }
 
 const Home: React.FC<HomeProps> = ({ setView }) => {
+  const { language, setLanguage, t } = useLanguage();
+
   const [activeCard, setActiveCard] = useState(0);
   const [isSwiping, setIsSwiping] = useState(false);
+  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
 
-  // 터치 및 드래그 제어를 위한 ref
+  const languageMenuRef = useRef<HTMLDivElement>(null);
+
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
   const isDragging = useRef(false);
-  const hasMoved = useRef(false); // 순수 클릭과 드래그 구분용 Flag
+  const hasMoved = useRef(false);
 
   const cardCount = 4;
 
-  // 4초 자동 슬라이드 (터치/스와이프 중일 때는 일시 정지)
   useEffect(() => {
     if (isSwiping) return;
 
@@ -34,36 +38,56 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
     return () => clearInterval(timer);
   }, [isSwiping, cardCount]);
 
-  // 스와이프 처리 함수
+  // 언어 메뉴 바깥을 클릭하면 닫기
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        languageMenuRef.current &&
+        !languageMenuRef.current.contains(event.target as Node)
+      ) {
+        setIsLanguageMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const handleLanguageChange = (nextLanguage: 'ko' | 'ja') => {
+    setLanguage(nextLanguage);
+    setIsLanguageMenuOpen(false);
+  };
+
   const handleSwipe = () => {
     if (touchStartX.current === null || touchEndX.current === null) return;
 
     const distance = touchStartX.current - touchEndX.current;
-    const minSwipeDistance = 20; // 💡 감도 향상: 최소 감지 거리를 50px -> 20px로 완화
+    const minSwipeDistance = 20;
 
     if (distance > minSwipeDistance) {
-      // 오른쪽 -> 왼쪽 (다음 카드)
       setActiveCard((prev) => (prev + 1) % cardCount);
     } else if (distance < -minSwipeDistance) {
-      // 왼쪽 -> 오른쪽 (이전 카드)
       setActiveCard((prev) => (prev - 1 + cardCount) % cardCount);
     }
 
-    // 초기화
     touchStartX.current = null;
     touchEndX.current = null;
   };
 
-  // 터치 이벤트 핸들러
   const handleTouchStart = (e: React.TouchEvent) => {
     setIsSwiping(true);
     hasMoved.current = false;
+
     touchStartX.current = e.targetTouches[0].clientX;
     touchEndX.current = e.targetTouches[0].clientX;
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
     touchEndX.current = e.targetTouches[0].clientX;
+
     if (
       touchStartX.current !== null &&
       Math.abs(touchStartX.current - touchEndX.current) > 10
@@ -77,18 +101,20 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
     setIsSwiping(false);
   };
 
-  // 마우스 드래그 핸들러 (데스크톱 호환)
   const handleMouseDown = (e: React.MouseEvent) => {
     isDragging.current = true;
     hasMoved.current = false;
     setIsSwiping(true);
+
     touchStartX.current = e.clientX;
     touchEndX.current = e.clientX;
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!isDragging.current) return;
+
     touchEndX.current = e.clientX;
+
     if (
       touchStartX.current !== null &&
       Math.abs(touchStartX.current - touchEndX.current) > 10
@@ -99,8 +125,10 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
 
   const handleMouseUp = (e: React.MouseEvent) => {
     if (!isDragging.current) return;
+
     touchEndX.current = e.clientX;
     isDragging.current = false;
+
     handleSwipe();
     setIsSwiping(false);
   };
@@ -109,36 +137,37 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
     if (isDragging.current) {
       touchEndX.current = e.clientX;
       isDragging.current = false;
+
       handleSwipe();
       setIsSwiping(false);
     }
   };
 
-  // 드래그 후 클릭 이벤트가 잘못 실행되는 것 방지
   const handleCardClick = (view: AppView) => {
-    if (hasMoved.current) return; // 드래그 중이었다면 클릭 이동 방지
+    if (hasMoved.current) return;
+
     setView(view);
   };
 
   const buttons = [
     {
       id: 'NUMBER_CONFIG' as AppView,
-      label: '숫자 읽기',
+      label: t.home.number,
       icon: 'fa-hashtag',
     },
     {
       id: 'KEIGO_CONFIG' as AppView,
-      label: '경어 듣기',
+      label: t.home.keigo,
       icon: 'fa-comments',
     },
     {
       id: 'NAME_CONFIG' as AppView,
-      label: '인명 읽기',
+      label: t.home.name,
       icon: 'fa-address-card',
     },
     {
       id: 'PLACE_CONFIG' as AppView,
-      label: '지명 읽기',
+      label: t.home.place,
       icon: 'fa-map',
     },
   ];
@@ -150,27 +179,124 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
         <main className="absolute inset-0 overflow-y-auto overflow-x-hidden overscroll-contain">
           <div className="w-full pb-0">
             {/* Header */}
-            <header className="w-full px-2 pt-3 pb-2 flex items-center justify-between">
+            <header className="relative w-full px-2 pt-3 pb-2 flex items-center justify-between">
               <div className="w-10 h-10 opacity-0" />
 
               <div className="text-center text-white/40 text-lg font-bold tracking-wider">
                 yomeruyo
               </div>
 
-              <button
-                type="button"
-                className="w-10 h-10 p-2.5 flex items-center justify-center text-white/50"
-              >
-                <i className="fas fa-globe text-lg" />
-              </button>
+              {/* Language Button */}
+              <div ref={languageMenuRef} className="relative">
+                <button
+                  type="button"
+                  onClick={() => setIsLanguageMenuOpen((prev) => !prev)}
+                  aria-label={t.home.language}
+                  aria-expanded={isLanguageMenuOpen}
+                  className="
+                    w-10
+                    h-10
+                    p-2.5
+                    flex
+                    items-center
+                    justify-center
+                    text-white/50
+                    active:scale-90
+                    transition-transform
+                  "
+                >
+                  <i className="fas fa-globe text-md" />
+                </button>
+
+                {/* Language Dropdown */}
+                {isLanguageMenuOpen && (
+                  <div
+                    className="
+                      absolute
+                      right-0
+                      top-11
+                      z-[100]
+                      w-32
+                      overflow-hidden
+                      rounded-xl
+                      border
+                      border-white/10
+                      bg-stone-900/95
+                      shadow-xl
+                      backdrop-blur-md
+                    "
+                  >
+                    <button
+                      type="button"
+                      onClick={() => handleLanguageChange('ko')}
+                      className={`
+                        w-full
+                        px-4
+                        py-3
+                        flex
+                        items-center
+                        justify-between
+                        text-sm
+                        transition-colors
+                        ${
+                          language === 'ko'
+                            ? 'bg-white/10 text-white'
+                            : 'text-white/60 hover:bg-white/5'
+                        }
+                      `}
+                    >
+                      <span>🇰🇷 한국어</span>
+
+                      {language === 'ko' && (
+                        <i className="fas fa-check text-xs text-rose-400" />
+                      )}
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => handleLanguageChange('ja')}
+                      className={`
+                        w-full
+                        px-4
+                        py-3
+                        flex
+                        items-center
+                        justify-between
+                        text-sm
+                        transition-colors
+                        ${
+                          language === 'ja'
+                            ? 'bg-white/10 text-white'
+                            : 'text-white/60 hover:bg-white/5'
+                        }
+                      `}
+                    >
+                      <span>🇯🇵 日本語</span>
+
+                      {language === 'ja' && (
+                        <i className="fas fa-check text-xs text-rose-400" />
+                      )}
+                    </button>
+                  </div>
+                )}
+              </div>
             </header>
 
             {/* Main Visual */}
             <section className="w-full mt-2">
               <div className="w-full px-4">
-                {/* 전체 카드 영역 - 터치 및 마우스 제어 이벤트 바인딩 */}
+                {/* Card Area */}
                 <div
-                  className="w-full h-[361px] rounded-[32px] overflow-hidden select-none cursor-grab active:cursor-grabbing touch-pan-y"
+                  className="
+                    w-full
+                    h-[361px]
+                    rounded-[32px]
+                    overflow-hidden
+                    select-none
+                    cursor-grab
+                    active:cursor-grabbing
+                    touch-pan-y
+                  "
                   onTouchStart={handleTouchStart}
                   onTouchMove={handleTouchMove}
                   onTouchEnd={handleTouchEnd}
@@ -179,7 +305,6 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
                   onMouseUp={handleMouseUp}
                   onMouseLeave={handleMouseLeave}
                 >
-                  {/* 슬라이드 */}
                   <div
                     className="flex h-full transition-transform duration-500 ease-out"
                     style={{
@@ -203,33 +328,30 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
                         text-left
                       "
                     >
-                      {/* 배경 효과 */}
                       <div className="absolute w-[656px] h-96 left-[-117px] top-[107px] rotate-[9.54deg] rounded-full bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,rgba(255,255,255,0)_66%,rgba(255,255,255,0.20)_100%)] blur" />
 
                       <div className="absolute w-[454px] h-64 left-[-27px] top-[179px] rotate-[9.54deg] rounded-full bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,rgba(255,255,255,0)_66%,rgba(255,255,255,0.20)_100%)] blur" />
 
                       <div className="absolute left-0 top-6 w-full text-center">
                         <div className="text-white text-2xl font-bold leading-8">
-                          1초만에
+                          {t.home.canReadInOneSecond}
                         </div>
 
                         <div className="text-white/60 text-2xl font-bold leading-9">
-                          읽을 수 있나요?
+                          {t.home.canRead}
                         </div>
                       </div>
 
-                      {/* 숫자 */}
                       <div className="absolute w-64 h-32 left-1/2 -translate-x-1/2 top-[124px] -rotate-3 bg-white rounded-2xl flex items-center justify-center">
                         <div className="text-center text-red-700 text-5xl font-bold leading-[60px]">
                           1,900円
                         </div>
                       </div>
 
-                      {/* CTA */}
                       <div className="absolute left-0 bottom-5 w-full px-4">
                         <div className="w-full h-14 bg-black/30 rounded-full flex items-center justify-center">
                           <span className="text-white text-lg font-bold leading-6">
-                            숫자 읽기 학습하러 가기
+                            {t.home.goToNumber}
                           </span>
                         </div>
                       </div>
@@ -257,26 +379,25 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
 
                       <div className="absolute left-0 top-6 w-full text-center">
                         <div className="text-white text-2xl font-bold leading-8">
-                          1초만에
+                          {t.home.canReadInOneSecond}
                         </div>
 
                         <div className="text-white/60 text-2xl font-bold leading-9">
-                          읽을 수 있나요?
+                          {t.home.canRead}
                         </div>
                       </div>
 
-                      {/* 이름 예시 */}
                       <div className="absolute w-64 left-1/2 -translate-x-1/2 top-[124px] -rotate-3 bg-gradient-to-b from-white to-gray-200 rounded-3xl overflow-hidden">
                         <div className="flex border-b-2 border-black">
                           <div className="flex-1 px-2 pt-2.5 pb-2 border-r border-neutral-200 flex justify-center">
                             <span className="text-black/50 text-sm font-medium">
-                              お名前
+                              {t.home.nameExample.name}
                             </span>
                           </div>
 
                           <div className="flex-1 px-2 pt-2.5 pb-2 flex justify-center">
                             <span className="text-black/50 text-sm font-medium">
-                              人数
+                              {t.home.nameExample.count}
                             </span>
                           </div>
                         </div>
@@ -310,11 +431,10 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
                         </div>
                       </div>
 
-                      {/* CTA */}
                       <div className="absolute left-0 bottom-5 w-full px-4">
                         <div className="w-full h-14 bg-black/30 rounded-full flex items-center justify-center">
                           <span className="text-white text-lg font-bold leading-6">
-                            인명 읽기 학습하러 가기
+                            {t.home.goToName}
                           </span>
                         </div>
                       </div>
@@ -342,15 +462,14 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
 
                       <div className="absolute left-0 top-6 w-full text-center">
                         <div className="text-white text-2xl font-bold leading-8">
-                          1초만에
+                          {t.home.canReadInOneSecond}
                         </div>
 
                         <div className="text-white/60 text-2xl font-bold leading-9">
-                          읽을 수 있나요?
+                          {t.home.canRead}
                         </div>
                       </div>
 
-                      {/* 역명 예시 */}
                       <div className="absolute w-72 left-1/2 -translate-x-1/2 top-[110px] -rotate-3 bg-gradient-to-b from-white to-gray-200 rounded-3xl overflow-hidden">
                         <div className="pt-3.5 pb-2.5">
                           <div className="flex items-center justify-center">
@@ -364,7 +483,7 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
                           </div>
 
                           <div className="text-center text-black/50 text-xs font-semibold">
-                            ???
+                            {t.home.placeExample.unknown}
                           </div>
                         </div>
 
@@ -381,15 +500,14 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
                         </div>
 
                         <div className="py-2 text-center text-black/50 text-xs font-semibold">
-                          ???
+                          {t.home.placeExample.unknown}
                         </div>
                       </div>
 
-                      {/* CTA */}
                       <div className="absolute left-0 bottom-5 w-full px-4">
                         <div className="w-full h-14 bg-black/30 rounded-full flex items-center justify-center">
                           <span className="text-white text-lg font-bold leading-6">
-                            지명 읽기 학습하러 가기
+                            {t.home.goToPlace}
                           </span>
                         </div>
                       </div>
@@ -417,15 +535,14 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
 
                       <div className="absolute left-0 top-6 w-full text-center">
                         <div className="text-white text-2xl font-bold leading-8">
-                          1초만에
+                          {t.home.canReadInOneSecond}
                         </div>
 
                         <div className="text-white/60 text-2xl font-bold leading-9">
-                          대답할 수 있나요?
+                          {t.home.canAnswer}
                         </div>
                       </div>
 
-                      {/* 면접 질문 */}
                       <div className="absolute w-72 h-36 left-1/2 -translate-x-1/2 top-[118px] -rotate-3 bg-white rounded-full border-4 border-gray-200" />
 
                       <div className="absolute w-full px-5 top-[143px] -rotate-3 text-center">
@@ -442,11 +559,10 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
                         </div>
                       </div>
 
-                      {/* CTA */}
                       <div className="absolute left-0 bottom-5 w-full px-4">
                         <div className="w-full h-14 bg-black/30 rounded-full flex items-center justify-center">
                           <span className="text-white text-lg font-bold leading-6">
-                            경어 학습 하러 가기
+                            {t.home.goToKeigo}
                           </span>
                         </div>
                       </div>
@@ -454,7 +570,7 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
                   </div>
                 </div>
 
-                {/* 인디케이터 */}
+                {/* Indicator */}
                 <div className="flex justify-center items-center gap-1.5 mt-3">
                   {Array.from({ length: cardCount }).map((_, index) => (
                     <button
@@ -476,7 +592,7 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
             {/* 학습하기 */}
             <section className="w-full px-4 mt-8">
               <div className="w-full h-7 mb-5 text-white text-xl font-bold leading-8">
-                학습하기
+                {t.home.study}
               </div>
 
               <div className="w-full flex flex-col gap-2">
