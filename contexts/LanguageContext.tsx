@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
 import { ko } from '../i18n/ko';
 import { ja } from '../i18n/ja';
@@ -39,10 +39,6 @@ export const LanguageProvider: React.FC<{
     setLanguageState(nextLanguage);
     localStorage.setItem('yomeruyo-language', nextLanguage);
   };
-
-  useEffect(() => {
-    document.documentElement.lang = language;
-  }, [language]);
 
   return (
     <LanguageContext.Provider

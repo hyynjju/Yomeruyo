@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { AppView } from '../types';
 import Footer from './Footer';
+import Logo from '../assets/yomeruyo.svg?react';
+import { Globe } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 interface HomeProps {
@@ -182,9 +184,7 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
             <header className="relative w-full px-2 pt-3 pb-2 flex items-center justify-between">
               <div className="w-10 h-10 opacity-0" />
 
-              <div className="text-center text-white/40 text-lg font-bold tracking-wider">
-                yomeruyo
-              </div>
+              <Logo className="w-auto h-3.5 opacity-40" />
 
               {/* Language Button */}
               <div ref={languageMenuRef} className="relative">
@@ -200,12 +200,12 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
                     flex
                     items-center
                     justify-center
-                    text-white/50
+                    text-[#915b6c]
                     active:scale-90
                     transition-transform
                   "
                 >
-                  <i className="fas fa-globe text-md" />
+                  <Globe size={18} strokeWidth={2} />
                 </button>
 
                 {/* Language Dropdown */}
