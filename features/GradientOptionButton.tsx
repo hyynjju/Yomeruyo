@@ -22,7 +22,7 @@ const GradientOptionButton: React.FC<GradientOptionButtonProps> = ({
         min-w-0
         h-48
         relative
-        rounded-3xl
+        rounded-2xl
         overflow-hidden
         transition-all
         ${gradient}

@@ -74,7 +74,7 @@ const NumberConfigView: React.FC<NumberConfigViewProps> = ({
 
         {/* Scroll Area */}
         <main className="absolute left-0 right-0 top-0 bottom-0 overflow-y-auto overflow-x-hidden overscroll-contain">
-          <div className="w-full px-4 pt-32 pb-40">
+          <div className="w-full px-4 pt-24 pb-40">
             {/* 추천 옵션 */}
             <section className="w-full mb-12">
               <h2 className="h-7 text-white text-xl font-bold leading-8">
@@ -91,7 +91,7 @@ const NumberConfigView: React.FC<NumberConfigViewProps> = ({
                 overflow-y-hidden
                 flex
                 flex-nowrap
-                gap-4
+                gap-3
                 pr-4
                 pb-1
                 scrollbar-hide
