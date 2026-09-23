@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { KeigoConfig } from '../types';
+import GradientOptionButton from './GradientOptionButton';
 
 interface KeigoConfigViewProps {
   onBack: () => void;
@@ -10,57 +11,132 @@ const KeigoConfigView: React.FC<KeigoConfigViewProps> = ({
   onBack,
   onStart,
 }) => {
-  // 기본 학습 카테고리를 'CAFE'로 설정
   const [category, setCategory] =
     useState<KeigoConfig['category']>('INTERVIEW');
 
   const categories = [
-    { id: 'INTERVIEW', label: '면접', icon: 'fa-briefcase' },
-    { id: 'CAFE', label: '카페', icon: 'fa-coffee' },
-    { id: 'BAITO', label: '아르바이트', icon: 'fa-store' },
-  ];
+    {
+      id: 'INTERVIEW',
+      label: '면접',
+      gradient: 'bg-gradient-to-br from-red-700 via-pink-500 to-red-500',
+    },
+    {
+      id: 'CAFE',
+      label: '카페',
+      gradient: 'bg-gradient-to-br from-teal-700 to-lime-500',
+    },
+    {
+      id: 'BAITO',
+      label: '아르바이트',
+      gradient: 'bg-gradient-to-br from-amber-600 to-yellow-500',
+    },
+  ] as const;
 
   return (
-    <div className="flex flex-col h-full space-y-8 overflow-y-auto pb-32">
-      {/* 상단 헤더 및 뒤로가기 버튼 */}
-      <div className="flex items-center space-x-4">
-        <button onClick={onBack} className="p-2 text-[#ff4500]">
-          <i className="fas fa-arrow-left text-xl"></i>
-        </button>
-        <h2 className="text-2xl font-bold text-gray-800">경어 학습 설정</h2>
-      </div>
+    <div className="fixed inset-0 bg-stone-900 overflow-hidden">
+      <div className="relative w-full max-w-xl h-full mx-auto bg-gradient-to-b from-pink-950 to-stone-900 overflow-hidden">
+        {/* Content */}
+        <main className="absolute left-0 right-0 top-0 bottom-0 overflow-y-auto overflow-x-hidden overscroll-contain">
+          <div className="w-full px-4 pt-32 pb-40">
+            <div className="w-full flex flex-col gap-6">
+              {/* 상황 선택 */}
+              <div className="w-full h-7 text-white text-xl font-bold leading-8">
+                상황 선택
+              </div>
 
-      {/* 카테고리 선택 영역 (리스트 스타일 버튼) */}
-      <div className="space-y-4">
-        {categories.map((cat) => (
-          <button
-            key={cat.id}
-            onClick={() => setCategory(cat.id as any)}
-            className={`w-full p-5 rounded-xl text-left font-bold transition-all border flex items-center justify-between ${
-              category === cat.id
-                ? 'bg-[#ff4500] border-transparent text-white w-lg'
-                : 'bg-gray-50 border-gray-200 text-gray-500'
-            }`}
-          >
-            <div className="flex items-center space-x-4">
-              <i className={`fas ${cat.icon} text-xl`}></i>
-              <span className="text-lg">{cat.label}</span>
+              {/* 카테고리 (2열 Grid로 일괄 처리) */}
+              <div className="w-full grid grid-cols-2 gap-5">
+                {categories.map((cat) => (
+                  <GradientOptionButton
+                    key={cat.id}
+                    label={cat.label}
+                    gradient={cat.gradient}
+                    selected={category === cat.id}
+                    onClick={() =>
+                      setCategory(cat.id as KeigoConfig['category'])
+                    }
+                  />
+                ))}
+              </div>
             </div>
-            {category === cat.id && (
-              <i className="fas fa-check-circle text-white"></i>
-            )}
-          </button>
-        ))}
-      </div>
+          </div>
+        </main>
 
-      {/* 시작 버튼 (고정 하단) */}
-      <div className="fixed bottom-0 left-0 right-0 max-w-xl mx-auto p-6 bg-white z-[9999] border-t border-gray-50">
-        <button
-          onClick={() => onStart({ category })}
-          className="w-full py-5 rounded-2xl bg-[#ff4500] text-white font-bold text-xl active:scale-95 transition-all"
-        >
-          학습 시작
-        </button>
+        {/* Header */}
+        <div className="absolute left-0 top-0 z-50 w-full h-16 px-2 pt-4 pb-2 border-b border-white/10 flex items-center justify-between">
+          <button
+            type="button"
+            onClick={onBack}
+            className="w-10 h-10 p-2.5 flex items-center justify-center text-white active:scale-90 transition-transform"
+          >
+            <i className="fas fa-chevron-left text-xl" />
+          </button>
+
+          <div className="text-center text-white text-base font-semibold leading-6">
+            경어 듣기 학습 설정
+          </div>
+
+          <div className="w-10 h-10 opacity-0" />
+        </div>
+
+        {/* Bottom */}
+        <div className="absolute left-0 bottom-0 z-50 w-full">
+          <div className="w-full h-12 bg-gradient-to-b from-stone-900/0 to-stone-900" />
+
+          <div className="w-full px-5 pt-2 pb-8 bg-stone-900 flex items-center gap-2">
+            <button
+              type="button"
+              onClick={onBack}
+              className="
+                flex-[2]
+                min-w-0
+                h-14
+                bg-white/10
+                rounded-full
+                flex
+                justify-center
+                items-center
+                text-white
+                text-lg
+                font-bold
+                leading-6
+                active:scale-95
+                transition-transform
+              "
+            >
+              이전
+            </button>
+
+            <button
+              type="button"
+              onClick={() => onStart({ category })}
+              className="
+                flex-[3]
+                min-w-0
+                h-14
+                rounded-full
+                bg-gradient-to-b
+                from-white
+                to-white/70
+                outline
+                outline-[3px]
+                outline-offset-[-3px]
+                outline-white/40
+                flex
+                justify-center
+                items-center
+                text-rose-900
+                text-lg
+                font-bold
+                leading-6
+                active:scale-95
+                transition-transform
+              "
+            >
+              학습 시작하기
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

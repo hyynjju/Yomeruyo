@@ -7,40 +7,75 @@ interface KeigoPlayerProps {
   onEnd: () => void;
 }
 
+// 기준(기본) 속도
+const BASE_SPEED = 1.25;
+
 const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
   const [script, setScript] = useState<KeigoLine[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isFinished, setIsFinished] = useState(false);
 
-  const [playbackRate, setPlaybackRate] = useState(1.15);
+  // 배율 선택 (UI에 표시되는 값: 1.0, 1.25, 1.5 등)
+  const [playbackRate, setPlaybackRate] = useState(1.0);
 
   const audioRef = useRef<HTMLAudioElement>(new Audio());
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // --- 오디오 제어 및 완료 로직 ---
+  // 재생속도 배율 로테이션
+  const playbackRates = [1.0, 1.25, 1.5, 1.75, 2.0, 0.5, 0.75];
+
+  // 실제 오디오에 적용되는 최종 속도 (기준 속도 * 사용자 선택 배율)
+  const effectiveSpeed = BASE_SPEED * playbackRate;
+
+  const handlePlaybackRate = () => {
+    setPlaybackRate((current) => {
+      const currentIndex = playbackRates.indexOf(current);
+      const nextIndex =
+        currentIndex === -1 ? 0 : (currentIndex + 1) % playbackRates.length;
+
+      return playbackRates[nextIndex];
+    });
+  };
+
+  // ========================================
+  // 오디오 완료 처리
+  // ========================================
+
   useEffect(() => {
     const audio = audioRef.current;
+
     const handleEnded = () => {
       setActiveIndex((prev) => {
         if (prev < script.length - 1) {
-          setTimeout(() => setActiveIndex(prev + 1), 1200 / playbackRate);
-          return prev;
-        } else {
-          setIsPlaying(false);
-          setIsFinished(true);
+          // 문장 간 대기 시간도 변경된 실제 속도(effectiveSpeed)에 맞춰 조정
+          setTimeout(
+            () => setActiveIndex((current) => current + 1),
+            1200 / effectiveSpeed,
+          );
+
           return prev;
         }
+
+        setIsPlaying(false);
+        setIsFinished(true);
+
+        return prev;
       });
     };
 
     audio.addEventListener('ended', handleEnded);
+
     return () => {
       audio.removeEventListener('ended', handleEnded);
       audio.pause();
       audio.src = '';
     };
-  }, [script.length, playbackRate]);
+  }, [script.length, effectiveSpeed]);
+
+  // ========================================
+  // 카테고리 변경
+  // ========================================
 
   useEffect(() => {
     let selectedData: KeigoLine[];
@@ -49,12 +84,15 @@ const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
       case 'CAFE':
         selectedData = KEIGO_CAFE;
         break;
+
       case 'INTERVIEW':
         selectedData = KEIGO_INTERVIEW;
         break;
+
       case 'BAITO':
         selectedData = KEIGO_BAITO;
         break;
+
       default:
         selectedData = [];
     }
@@ -64,6 +102,10 @@ const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
     setIsPlaying(true);
     setIsFinished(false);
   }, [category]);
+
+  // ========================================
+  // 오디오 재생
+  // ========================================
 
   useEffect(() => {
     if (!script.length || !script[activeIndex]) return;
@@ -75,30 +117,50 @@ const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
       if (audio.src !== window.location.origin + audioPath) {
         audio.src = audioPath;
       }
-      audio.playbackRate = playbackRate;
+
+      // 실제 오디오 속도로 설정 (1.25 * playbackRate)
+      audio.playbackRate = effectiveSpeed;
       audio.play().catch(() => {});
     } else {
       audio.pause();
     }
-  }, [activeIndex, isPlaying, script, playbackRate]);
+  }, [activeIndex, isPlaying, script, effectiveSpeed]);
+
+  // ========================================
+  // 현재 문장을 화면 중앙으로 이동
+  // ========================================
 
   useEffect(() => {
     if (!containerRef.current) return;
+
     const activeEl = containerRef.current.querySelector(
       `[data-index="${activeIndex}"]`,
     );
+
     if (activeEl) {
-      activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      activeEl.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      });
     }
   }, [activeIndex]);
+
+  // ========================================
+  // 재생 / 일시정지
+  // ========================================
 
   const togglePlay = () => {
     if (isFinished) {
       handleReset();
-    } else {
-      setIsPlaying(!isPlaying);
+      return;
     }
+
+    setIsPlaying((prev) => !prev);
   };
+
+  // ========================================
+  // 처음부터 다시 재생
+  // ========================================
 
   const handleReset = () => {
     setActiveIndex(0);
@@ -106,136 +168,178 @@ const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
     setIsFinished(false);
   };
 
+  // ========================================
+  // 이전 문장
+  // ========================================
+
   const goToPrev = () => {
     if (activeIndex > 0) {
-      setActiveIndex(activeIndex - 1);
+      setActiveIndex((prev) => prev - 1);
       setIsPlaying(true);
       setIsFinished(false);
     }
   };
 
+  // ========================================
+  // 다음 문장
+  // ========================================
+
   const goToNext = () => {
     if (activeIndex < script.length - 1) {
-      setActiveIndex(activeIndex + 1);
+      setActiveIndex((prev) => prev + 1);
       setIsPlaying(true);
       setIsFinished(false);
     }
   };
 
   return (
-    <div className="fixed inset-0 flex flex-col bg-white overflow-hidden">
-      <header className="flex-shrink-0 h-16 bg-white border-b border-gray-100 flex items-center px-4 z-[100]">
-        <button
-          onClick={onEnd}
-          className="text-gray-400 p-2 active:scale-90 mr-auto"
-        >
-          <i className="fas fa-chevron-down text-lg"></i>
-        </button>
-        <div className="flex flex-col items-center absolute left-1/2 -translate-x-1/2">
-          <span className="font-bold text-[#ff4500] text-[10px] tracking-[0.2em] uppercase leading-none mb-1">
-            Learning
-          </span>
-          <span className="font-bold text-gray-900 text-sm uppercase">
-            {category}
-          </span>
-        </div>
-        <div className="w-10 ml-auto"></div>
-      </header>
+    <div className="fixed inset-0 bg-stone-900 overflow-hidden">
+      <div className="relative w-full max-w-xl h-full mx-auto bg-gradient-to-b from-pink-950 to-stone-900 overflow-hidden">
+        {/* ========================================
+            문장 영역
+        ======================================== */}
 
-      <main
-        ref={containerRef}
-        className="flex-1 overflow-y-auto no-scrollbar scroll-smooth"
-      >
-        <div className="bg-gray-100 px-8 pt-[24vh] pb-[40vh] space-y-20">
-          {script.map((line, i) => (
-            <div
-              key={line.id}
-              data-index={i}
-              className={`transition-all duration-500 w-full ${
-                i === activeIndex
-                  ? 'opacity-100 scale-100'
-                  : 'opacity-10 scale-95'
-              }`}
-            >
-              <h2
-                className={`font-bold mb-4 break-all whitespace-normal leading-snug tracking-tight transition-all duration-500 ${
-                  i === activeIndex ? 'text-black' : 'text-gray-200'
-                } ${line.jp.length >= 40 ? 'text-2xl' : 'text-3xl'}`}
-              >
-                {line.jp}
-              </h2>
-              {line.ko && (
-                <p
-                  className={`text-xl font-semibold break-all transition-opacity duration-500 ${
-                    i === activeIndex
-                      ? 'text-[#ff4500] opacity-100'
-                      : 'opacity-0'
+        <main
+          ref={containerRef}
+          className="absolute inset-0 overflow-y-auto overflow-x-hidden no-scrollbar scroll-smooth"
+        >
+          <div className="pointer-events-none absolute left-0 top-28 w-full h-[568px] bg-gradient-to-b from-zinc-300/0 via-zinc-300/10 to-zinc-300/0 z-10" />
+
+          <div className="min-h-full px-8 pt-[29vh] pb-[30vh] flex flex-col justify-center gap-12">
+            {script.map((line, i) => {
+              const isActive = i === activeIndex;
+
+              return (
+                <div
+                  key={line.id}
+                  data-index={i}
+                  className={`w-full flex flex-col gap-2 origin-center transition-all duration-500 ${
+                    isActive
+                      ? 'opacity-100 scale-100'
+                      : 'opacity-30 scale-[0.9]'
                   }`}
                 >
-                  {line.ko}
-                </p>
-              )}
-            </div>
-          ))}
-        </div>
-      </main>
+                  <h2 className="font-bold break-all whitespace-normal text-xl leading-8 tracking-tight text-white w-full">
+                    {line.jp}
+                  </h2>
 
-      <footer className="flex-shrink-0 bg-white border-t border-gray-100 px-6 pt-4 pb-8 z-[100] shadow-[0_-10px_40px_rgba(0,0,0,0.04)]">
-        <div className="max-w-md mx-auto flex flex-col items-center">
-          <div className="flex items-center gap-12 mb-1">
-            <button
-              onClick={goToPrev}
-              disabled={activeIndex === 0}
-              className={`p-2 transition-colors ${activeIndex === 0 ? 'text-gray-100' : 'text-gray-400 active:text-gray-900'}`}
-            >
-              <i className="fas fa-step-backward text-2xl"></i>
-            </button>
+                  {line.ko && (
+                    <p className="font-medium break-all text-sm leading-6 text-rose-400 w-full">
+                      {line.ko}
+                    </p>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </main>
 
-            <button
-              onClick={togglePlay}
-              className={`w-16 h-16 rounded-full flex items-center justify-center active:scale-95 transition-all ${
-                isFinished
-                  ? 'bg-[#ff4500] text-white'
-                  : 'bg-gray-900 text-white'
-              }`}
-            >
-              <i
-                className={`fas ${
-                  isFinished ? 'fa-redo' : isPlaying ? 'fa-pause' : 'fa-play'
-                } text-2xl ${!isPlaying && !isFinished && 'ml-1'}`}
-              ></i>
-            </button>
+        {/* ========================================
+            Header
+        ======================================== */}
 
-            <button
-              onClick={goToNext}
-              disabled={activeIndex === script.length - 1}
-              className={`p-2 transition-colors ${activeIndex === script.length - 1 ? 'text-gray-100' : 'text-gray-400 active:text-gray-900'}`}
-            >
-              <i className="fas fa-step-forward text-2xl"></i>
-            </button>
+        <header className="absolute left-0 top-0 z-50 w-full h-16 px-2 pt-4 pb-2 border-b border-white/10 flex justify-between items-center">
+          <button
+            type="button"
+            onClick={onEnd}
+            className="w-10 h-10 p-2.5 flex justify-center items-center text-white active:scale-90 transition-transform"
+          >
+            <i className="fas fa-chevron-left text-xl" />
+          </button>
+
+          <div className="text-center text-white text-base font-semibold leading-6">
+            {category === 'INTERVIEW'
+              ? '면접'
+              : category === 'CAFE'
+                ? '카페'
+                : '아르바이트'}
           </div>
 
-          <div className="w-full">
-            <div className="flex justify-between items-center px-2">
-              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-                Playback Speed
-              </span>
-              <span className="text-sm font-black text-[#ff4500]">
-                {(playbackRate - 0.1).toFixed(1)}x
-              </span>
+          <div className="w-10 h-10 opacity-0" />
+        </header>
+
+        {/* ========================================
+            하단 플레이어
+        ======================================== */}
+
+        <footer className="absolute left-0 bottom-0 z-50 w-full">
+          <div className="w-full flex flex-col justify-center items-start">
+            {/* 상단 페이드 */}
+            <div className="w-full h-12 bg-gradient-to-b from-stone-900/0 to-stone-900" />
+
+            {/* 컨트롤 영역 */}
+            <div className="w-full px-5 pt-2 pb-8 bg-stone-900 flex justify-between items-center gap-2">
+              {/* 왼쪽 속도 표시 (여백용) */}
+              <div className="px-5 py-4 opacity-0 flex justify-center items-center gap-2.5">
+                <span className="text-white text-base font-semibold leading-6">
+                  1.0x
+                </span>
+              </div>
+
+              {/* 재생 컨트롤 */}
+              <div className="flex items-center gap-1.5">
+                {/* 이전 */}
+                <button
+                  type="button"
+                  onClick={goToPrev}
+                  disabled={activeIndex === 0}
+                  className={`p-5 bg-white/5 rounded-full flex justify-center items-center transition-all active:scale-90 ${
+                    activeIndex === 0 ? 'opacity-30' : 'opacity-100'
+                  }`}
+                >
+                  <i className="fas fa-step-backward text-white text-base" />
+                </button>
+
+                {/* 재생 / 일시정지 */}
+                <button
+                  type="button"
+                  onClick={togglePlay}
+                  className={`px-10 py-7 bg-white/5 rounded-full flex justify-center items-center transition-all active:scale-95 ${
+                    isFinished ? 'bg-rose-500/20' : ''
+                  }`}
+                >
+                  <i
+                    className={`fas ${
+                      isFinished
+                        ? 'fa-redo'
+                        : isPlaying
+                          ? 'fa-pause'
+                          : 'fa-play'
+                    } text-white text-2xl ${
+                      !isPlaying && !isFinished ? 'ml-1' : ''
+                    }`}
+                  />
+                </button>
+
+                {/* 다음 */}
+                <button
+                  type="button"
+                  onClick={goToNext}
+                  disabled={activeIndex === script.length - 1}
+                  className={`p-5 bg-white/5 rounded-full flex justify-center items-center transition-all active:scale-90 ${
+                    activeIndex === script.length - 1
+                      ? 'opacity-30'
+                      : 'opacity-100'
+                  }`}
+                >
+                  <i className="fas fa-step-forward text-white text-base" />
+                </button>
+              </div>
+
+              {/* 오른쪽 재생속도 버튼 */}
+              <button
+                type="button"
+                onClick={handlePlaybackRate}
+                className="px-5 py-4 flex justify-center items-center gap-2.5 active:scale-90 transition-transform"
+              >
+                <span className="text-white text-base font-semibold leading-6">
+                  {playbackRate.toFixed(2).replace(/0$/, '')}x
+                </span>
+              </button>
             </div>
-            <input
-              type="range"
-              min="0.6"
-              max="2.1"
-              step="0.1"
-              value={playbackRate}
-              onChange={(e) => setPlaybackRate(parseFloat(e.target.value))}
-              className="w-full h-1.5 bg-gray-100 rounded-lg appearance-none cursor-pointer accent-[#ff4500]"
-            />
           </div>
-        </div>
-      </footer>
+        </footer>
+      </div>
     </div>
   );
 };

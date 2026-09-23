@@ -38,7 +38,9 @@ const App: React.FC = () => {
 
   const [view, setView] = useState<AppView>('HOME');
   const [studyItems, setStudyItems] = useState<StudyItem[]>([]);
-  const [keigoCategory, setKeigoCategory] = useState<'CAFE' | 'INTERVIEW'>(
+  const [keigoCategory, setKeigoCategory] = useState<
+    'CAFE' | 'INTERVIEW' | 'BAITO'
+  >(
     'CAFE',
   );
   const [globalShowKorean, setGlobalShowKorean] = useState(true);
