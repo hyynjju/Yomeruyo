@@ -8,44 +8,49 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = ({ setView }) => {
   return (
-    <footer className="w-full px-8 pt-10 pb-16 flex flex-col items-start">
-      <Logo className="h-6 w-auto mb-3 text-black/30" />
+    <footer className="w-full px-4 pt-8 pb-28 bg-white/5 flex flex-col items-start gap-5">
+      <Logo className="w-5 h-5 text-white/50" />
 
-      <p className="text-[11px] text-black/30 leading-relaxed">
-        실전 일본어 학습 서비스
-        <br />
-        <b>yomeruyo</b>
-      </p>
+      <div className="flex flex-col items-start gap-1">
+        <p className="w-full text-white/50 text-xs font-normal">
+          실전 일본어 학습 서비스
+        </p>
 
-      <div className="flex items-center gap-3 mt-4">
+        <p className="w-full text-white text-xs font-bold">yomeruyo</p>
+      </div>
+
+      <div className="flex items-center gap-3">
         <button
+          type="button"
           onClick={() => setView('FEEDBACK' as AppView)}
-          className="text-[11px] text-black/40 underline underline-offset-2 hover:text-[#ff4500] transition-colors"
+          className="text-white/50 text-xs font-normal underline underline-offset-2 hover:text-white transition-colors"
         >
-          문의하기 / 피드백
+          문의하기/피드백
         </button>
-        <div className="w-[1px] h-2 bg-black/10" />
+
+        <div className="w-px h-2.5 bg-white/10" />
+
         <a
           href="mailto:contact@yakk.kr"
-          className="text-[11px] text-black/40 hover:text-[#ff4500] transition-colors"
+          className="text-white/50 text-xs font-normal hover:text-white transition-colors"
         >
           Email
         </a>
 
-        <div className="w-[1px] h-2 bg-black/10" />
+        <div className="w-px h-2.5 bg-white/10" />
 
         <a
           href="https://github.com/hyynjju"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[11px] text-black/40 hover:text-[#ff4500] transition-colors"
+          className="text-white/50 text-xs font-normal hover:text-white transition-colors"
         >
           GitHub
         </a>
       </div>
 
-      <p className="text-[10px] text-black/20 mt-6 font-medium">
-        © 2026 yomeruyo Project. All rights reserved.
+      <p className="w-full text-white/50 text-xs font-normal">
+        © 2026 yomeruyo Project. All right reserved.
       </p>
     </footer>
   );
