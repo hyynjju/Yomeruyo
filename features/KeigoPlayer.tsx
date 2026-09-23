@@ -7,20 +7,26 @@ interface KeigoPlayerProps {
   onEnd: () => void;
 }
 
+// 기준(기본) 속도
+const BASE_SPEED = 1.25;
+
 const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
   const [script, setScript] = useState<KeigoLine[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isFinished, setIsFinished] = useState(false);
 
-  // 기본 재생속도
+  // 배율 선택 (UI에 표시되는 값: 1.0, 1.25, 1.5 등)
   const [playbackRate, setPlaybackRate] = useState(1.0);
 
   const audioRef = useRef<HTMLAudioElement>(new Audio());
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // 재생속도 로테이션
+  // 재생속도 배율 로테이션
   const playbackRates = [1.0, 1.25, 1.5, 1.75, 2.0, 0.5, 0.75];
+
+  // 실제 오디오에 적용되는 최종 속도 (기준 속도 * 사용자 선택 배율)
+  const effectiveSpeed = BASE_SPEED * playbackRate;
 
   const handlePlaybackRate = () => {
     setPlaybackRate((current) => {
@@ -42,9 +48,10 @@ const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
     const handleEnded = () => {
       setActiveIndex((prev) => {
         if (prev < script.length - 1) {
+          // 문장 간 대기 시간도 변경된 실제 속도(effectiveSpeed)에 맞춰 조정
           setTimeout(
             () => setActiveIndex((current) => current + 1),
-            1200 / playbackRate,
+            1200 / effectiveSpeed,
           );
 
           return prev;
@@ -64,7 +71,7 @@ const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
       audio.pause();
       audio.src = '';
     };
-  }, [script.length, playbackRate]);
+  }, [script.length, effectiveSpeed]);
 
   // ========================================
   // 카테고리 변경
@@ -111,12 +118,13 @@ const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
         audio.src = audioPath;
       }
 
-      audio.playbackRate = playbackRate;
+      // 실제 오디오 속도로 설정 (1.25 * playbackRate)
+      audio.playbackRate = effectiveSpeed;
       audio.play().catch(() => {});
     } else {
       audio.pause();
     }
-  }, [activeIndex, isPlaying, script, playbackRate]);
+  }, [activeIndex, isPlaying, script, effectiveSpeed]);
 
   // ========================================
   // 현재 문장을 화면 중앙으로 이동
@@ -261,7 +269,7 @@ const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
 
             {/* 컨트롤 영역 */}
             <div className="w-full px-5 pt-2 pb-8 bg-stone-900 flex justify-between items-center gap-2">
-              {/* 왼쪽 속도 표시 */}
+              {/* 왼쪽 속도 표시 (여백용) */}
               <div className="px-5 py-4 opacity-0 flex justify-center items-center gap-2.5">
                 <span className="text-white text-base font-semibold leading-6">
                   1.0x
