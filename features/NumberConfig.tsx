@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { NumberConfig } from '../types';
+import GradientOptionButton from './GradientOptionButton';
 
 interface NumberConfigViewProps {
   onBack: () => void;
@@ -15,8 +16,32 @@ const NumberConfigView: React.FC<NumberConfigViewProps> = ({
   const [unit, setUnit] = useState<1 | 10 | 100 | 1000 | 10000>(1);
   const [counter, setCounter] = useState('엔');
   const [showKorean, setShowKorean] = useState(true);
+  const [preset, setPreset] = useState<string>('CELEBRITY');
 
   const isDateMode = counter === '날짜';
+
+  const presets = [
+    {
+      id: 'CAFE',
+      label: '카페·식당',
+      gradient: 'bg-gradient-to-br from-red-700 via-pink-500 to-red-500',
+    },
+    {
+      id: 'SHOPPING',
+      label: '쇼핑',
+      gradient: 'bg-gradient-to-br from-amber-600 to-yellow-500',
+    },
+    {
+      id: 'TRANSPORT',
+      label: '교통',
+      gradient: 'bg-gradient-to-br from-teal-700 to-lime-500',
+    },
+    {
+      id: 'LARGE',
+      label: '큰 숫자',
+      gradient: 'bg-gradient-to-br from-blue-950 to-teal-400',
+    },
+  ] as const;
 
   const counters = ['엔', '명', '마리', '층', '개', '권', '본', '날짜'];
   const units = [1, 10, 100, 1000, 10000] as const;
@@ -52,9 +77,12 @@ const NumberConfigView: React.FC<NumberConfigViewProps> = ({
           <div className="w-full px-4 pt-32 pb-40">
             {/* 추천 옵션 */}
             <section className="w-full mb-12">
-              <h2 className="h-7 mb-6 text-white text-xl font-bold leading-8">
+              <h2 className="h-7 text-white text-xl font-bold leading-8">
                 추천 옵션
               </h2>
+              <p className="mt-0.5 mb-6 text-white/50 text-xs font-normal leading-4 break-keep">
+                일본 생활에서 자주 접하는 숫자를 골라 바로 연습해보세요.
+              </p>
 
               <div
                 className="
@@ -70,49 +98,27 @@ const NumberConfigView: React.FC<NumberConfigViewProps> = ({
                 touch-pan-x
               "
               >
-                <button
-                  type="button"
-                  className="shrink-0 w-40 h-48 relative bg-gradient-to-br from-red-700 via-pink-500 to-red-500 rounded-3xl overflow-hidden"
-                >
-                  <div className="absolute left-[-5px] bottom-5 w-44 text-center text-white text-lg font-bold leading-7">
-                    유명인 이름
+                {presets.map((p) => (
+                  <div key={p.id} className="shrink-0 w-40">
+                    <GradientOptionButton
+                      label={p.label}
+                      gradient={p.gradient}
+                      selected={preset === p.id}
+                      onClick={() => setPreset(p.id)}
+                    />
                   </div>
-                </button>
-
-                <button
-                  type="button"
-                  className="shrink-0 w-40 h-48 relative opacity-30 bg-gradient-to-br from-amber-600 to-yellow-500 rounded-3xl overflow-hidden"
-                >
-                  <div className="absolute left-[-5px] bottom-5 w-44 text-center text-white text-lg font-bold leading-7">
-                    일상 숫자
-                  </div>
-                </button>
-
-                <button
-                  type="button"
-                  className="shrink-0 w-40 h-48 relative opacity-30 bg-gradient-to-br from-teal-700 to-lime-500 rounded-3xl overflow-hidden"
-                >
-                  <div className="absolute left-[-5px] bottom-5 w-44 text-center text-white text-lg font-bold leading-7">
-                    여행 숫자
-                  </div>
-                </button>
-
-                <button
-                  type="button"
-                  className="shrink-0 w-40 h-48 relative opacity-30 bg-gradient-to-br from-blue-950 to-teal-400 rounded-3xl overflow-hidden"
-                >
-                  <div className="absolute left-[-5px] bottom-5 w-44 text-center text-white text-lg font-bold leading-7">
-                    큰 숫자
-                  </div>
-                </button>
+                ))}
               </div>
             </section>
 
             {/* 커스텀 학습 */}
             <section className="w-full">
-              <h2 className="h-7 mb-12 text-white text-xl font-bold leading-8">
+              <h2 className="h-7 text-white text-xl font-bold leading-8">
                 커스텀 학습
               </h2>
+              <p className="mt-0.5 mb-8 text-white/50 text-xs font-normal leading-4 break-keep">
+                연습할 숫자의 범위와 단위를 직접 설정해보세요.
+              </p>
 
               <div className="w-full flex flex-col gap-12">
                 {/* 세는 단위 */}

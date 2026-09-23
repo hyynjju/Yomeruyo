@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { NameConfig } from '../types';
+import GradientOptionButton from './GradientOptionButton';
 
 interface NameConfigViewProps {
   onBack: () => void;
@@ -10,112 +11,89 @@ const NameConfigView: React.FC<NameConfigViewProps> = ({ onBack, onStart }) => {
   const [type, setType] = useState<'CELEBRITY' | 'RANKING'>('CELEBRITY');
   const [showKorean, setShowKorean] = useState(true);
 
+  const options = [
+    {
+      id: 'CELEBRITY' as const,
+      label: '유명인 이름',
+      gradient: 'bg-gradient-to-br from-red-700 via-pink-500 to-red-500',
+    },
+    {
+      id: 'RANKING' as const,
+      label: '많이 쓰는 이름',
+      gradient: 'bg-gradient-to-br from-blue-950 to-teal-400',
+    },
+  ];
+
   return (
     <div className="fixed inset-0 bg-stone-900 overflow-hidden">
       <div className="relative w-full max-w-xl h-full mx-auto bg-gradient-to-b from-pink-950 to-stone-900 overflow-hidden">
         {/* Content */}
-        <div className="absolute left-0 top-0 w-full px-4 pt-32">
-          <div className="w-full flex flex-col gap-12">
-            {/* 상황 선택 */}
-            <div className="w-full flex flex-col gap-6">
-              <div className="w-full h-7 text-white text-xl font-bold leading-8">
-                상황 선택
-              </div>
-
-              <div className="w-full flex items-center gap-5">
-                {/* 유명인 이름 */}
-                <button
-                  type="button"
-                  onClick={() => setType('CELEBRITY')}
-                  className={`
-                    flex-1
-                    min-w-0
-                    h-48
-                    relative
-                    rounded-3xl
-                    overflow-hidden
-                    transition-all
-                    ${
-                      type === 'CELEBRITY'
-                        ? 'bg-gradient-to-br from-red-700 via-pink-500 to-red-500'
-                        : 'bg-gradient-to-br from-red-700 via-pink-500 to-red-500 opacity-30'
-                    }
-                  `}
-                >
-                  <div className="absolute left-0 top-[158px] w-full text-center text-white text-lg font-bold leading-7">
-                    유명인 이름
-                  </div>
-                </button>
-
-                {/* 많이 쓰는 이름 */}
-                <button
-                  type="button"
-                  onClick={() => setType('RANKING')}
-                  className={`
-                    flex-1
-                    min-w-0
-                    h-48
-                    relative
-                    rounded-3xl
-                    overflow-hidden
-                    transition-all
-                    ${
-                      type === 'RANKING'
-                        ? 'bg-gradient-to-br from-blue-950 to-teal-400'
-                        : 'bg-gradient-to-br from-blue-950 to-teal-400 opacity-30'
-                    }
-                  `}
-                >
-                  <div className="absolute left-0 top-[158px] w-full text-center text-white text-lg font-bold leading-7">
-                    많이 쓰는 이름
-                  </div>
-                </button>
-              </div>
-            </div>
-
-            {/* 한국어 독음 */}
-            <div className="w-full flex items-center">
-              <div className="min-w-0 flex-1 flex flex-col gap-0.5">
-                <div className="text-white text-lg font-bold leading-7 break-keep">
-                  한국어로 읽는법 표시하기
+        <main className="absolute left-0 right-0 top-0 bottom-0 overflow-y-auto overflow-x-hidden overscroll-contain">
+          <div className="w-full px-4 pt-32 pb-40">
+            <div className="w-full flex flex-col gap-12">
+              {/* 상황 선택 */}
+              <div className="w-full flex flex-col gap-6">
+                <div className="w-full h-7 text-white text-xl font-bold leading-8">
+                  상황 선택
                 </div>
 
-                <div className="text-white/50 text-xs font-normal leading-4 break-keep">
-                  예) 3,800円 → 산젠핫퍄쿠엔
+                {/* 2열 Grid 적용 */}
+                <div className="w-full grid grid-cols-2 gap-5">
+                  {options.map((opt) => (
+                    <GradientOptionButton
+                      key={opt.id}
+                      label={opt.label}
+                      gradient={opt.gradient}
+                      selected={type === opt.id}
+                      onClick={() => setType(opt.id)}
+                    />
+                  ))}
                 </div>
               </div>
 
-              <button
-                type="button"
-                aria-pressed={showKorean}
-                onClick={() => setShowKorean((prev) => !prev)}
-                className={`
-                  shrink-0
-                  ml-4
-                  w-14
-                  h-8
-                  relative
-                  rounded-[999px]
-                  transition-all
-                  ${showKorean ? 'bg-rose-300' : 'bg-white/20'}
-                `}
-              >
-                <div
+              {/* 한국어 독음 */}
+              <div className="w-full flex items-center">
+                <div className="min-w-0 flex-1 flex flex-col gap-0.5 pr-4">
+                  <div className="text-white text-lg font-bold leading-7 break-keep">
+                    한국어로 읽는법 표시하기
+                  </div>
+
+                  <div className="text-white/50 text-xs font-normal leading-4 break-keep">
+                    예) 3,800円 → 산젠핫퍄쿠엔
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  aria-pressed={showKorean}
+                  onClick={() => setShowKorean((prev) => !prev)}
                   className={`
-                    absolute
-                    top-1
-                    w-6
-                    h-6
-                    bg-white
-                    rounded-[999px]
+                    shrink-0
+                    w-14
+                    h-8
+                    relative
+                    rounded-full
                     transition-all
-                    ${showKorean ? 'right-1' : 'left-1'}
+                    ${showKorean ? 'bg-rose-300' : 'bg-white/20'}
                   `}
-                />
-              </button>
+                >
+                  <div
+                    className={`
+                      absolute
+                      top-1
+                      w-6
+                      h-6
+                      bg-white
+                      rounded-full
+                      transition-all
+                      ${showKorean ? 'right-1' : 'left-1'}
+                    `}
+                  />
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        </main>
 
         {/* Header */}
         <div className="absolute left-0 top-0 z-50 w-full h-16 px-2 pt-4 pb-2 border-b border-white/10 flex items-center justify-between">

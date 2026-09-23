@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { PlaceConfig } from '../types';
+import GradientOptionButton from './GradientOptionButton';
 
 interface PlaceConfigViewProps {
   onBack: () => void;
@@ -18,52 +19,29 @@ const PlaceConfigView: React.FC<PlaceConfigViewProps> = ({
     {
       id: 'TOKYO_STATION',
       label: '도쿄 역명',
-      color: 'pink',
+      gradient: 'bg-gradient-to-br from-red-700 via-pink-500 to-red-500',
     },
     {
       id: 'TOKYO_LINE',
       label: '도쿄 선로명',
-      color: 'pink',
+      gradient: 'bg-gradient-to-br from-red-700 via-pink-500 to-red-500',
     },
     {
       id: 'OSAKA_STATION',
       label: '오사카 역명',
-      color: 'blue',
+      gradient: 'bg-gradient-to-br from-blue-950 to-teal-400',
     },
     {
       id: 'OSAKA_LINE',
       label: '오사카 선로명',
-      color: 'blue',
+      gradient: 'bg-gradient-to-br from-blue-950 to-teal-400',
     },
     {
       id: 'PREFECTURE',
       label: '도도부현',
-      color: 'yellow',
+      gradient: 'bg-gradient-to-br from-amber-600 to-yellow-500',
     },
   ] as const;
-
-  const getCardClass = (
-    color: 'pink' | 'blue' | 'yellow',
-    selected: boolean,
-  ) => {
-    const gradients = {
-      pink: 'bg-gradient-to-br from-red-700 via-pink-500 to-red-500',
-      blue: 'bg-gradient-to-br from-blue-950 to-teal-400',
-      yellow: 'bg-gradient-to-br from-amber-600 to-yellow-500',
-    };
-
-    return `
-      flex-1
-      min-w-0
-      h-48
-      relative
-      rounded-3xl
-      overflow-hidden
-      transition-all
-      ${gradients[color]}
-      ${selected ? '' : 'opacity-30'}
-    `;
-  };
 
   return (
     <div className="fixed inset-0 bg-stone-900 overflow-hidden">
@@ -78,68 +56,24 @@ const PlaceConfigView: React.FC<PlaceConfigViewProps> = ({
               </div>
 
               <div className="w-full flex flex-col gap-12">
-                {/* 지역 선택 */}
-                <div className="w-full flex flex-col gap-4">
-                  {/* 도쿄 */}
-                  <div className="w-full flex items-center gap-5">
-                    {categories.slice(0, 2).map((cat) => (
-                      <button
-                        key={cat.id}
-                        type="button"
-                        onClick={() =>
-                          setCategory(cat.id as PlaceConfig['category'])
-                        }
-                        className={getCardClass(cat.color, category === cat.id)}
-                      >
-                        <div className="absolute left-0 top-[158px] w-full text-center text-white text-lg font-bold leading-7">
-                          {cat.label}
-                        </div>
-                      </button>
-                    ))}
-                  </div>
-
-                  {/* 오사카 */}
-                  <div className="w-full flex items-center gap-5">
-                    {categories.slice(2, 4).map((cat) => (
-                      <button
-                        key={cat.id}
-                        type="button"
-                        onClick={() =>
-                          setCategory(cat.id as PlaceConfig['category'])
-                        }
-                        className={getCardClass(cat.color, category === cat.id)}
-                      >
-                        <div className="absolute left-0 top-[158px] w-full text-center text-white text-lg font-bold leading-7">
-                          {cat.label}
-                        </div>
-                      </button>
-                    ))}
-                  </div>
-
-                  {/* 도도부현 */}
-                  <div className="w-full flex items-center gap-5">
-                    {categories.slice(4, 5).map((cat) => (
-                      <button
-                        key={cat.id}
-                        type="button"
-                        onClick={() =>
-                          setCategory(cat.id as PlaceConfig['category'])
-                        }
-                        className={getCardClass(cat.color, category === cat.id)}
-                      >
-                        <div className="absolute left-0 top-[158px] w-full text-center text-white text-lg font-bold leading-7">
-                          {cat.label}
-                        </div>
-                      </button>
-                    ))}
-
-                    <div className="flex-1 min-w-0 h-48" />
-                  </div>
+                {/* 지역 선택 (2열 Grid로 일괄 처리) */}
+                <div className="w-full grid grid-cols-2 gap-5">
+                  {categories.map((cat) => (
+                    <GradientOptionButton
+                      key={cat.id}
+                      label={cat.label}
+                      gradient={cat.gradient}
+                      selected={category === cat.id}
+                      onClick={() =>
+                        setCategory(cat.id as PlaceConfig['category'])
+                      }
+                    />
+                  ))}
                 </div>
 
                 {/* 한국어 독음 */}
                 <div className="w-full flex items-center">
-                  <div className="min-w-0 flex-1 flex flex-col gap-0.5">
+                  <div className="min-w-0 flex-1 flex flex-col gap-0.5 pr-4">
                     <div className="text-white text-lg font-bold leading-7 break-keep">
                       한국어로 읽는법 표시하기
                     </div>
@@ -154,25 +88,26 @@ const PlaceConfigView: React.FC<PlaceConfigViewProps> = ({
                     aria-pressed={showKorean}
                     onClick={() => setShowKorean((prev) => !prev)}
                     className={`
-              shrink-0
-              ml-4
-              w-14
-              h-8
-              relative
-              rounded-[999px]
-              ${showKorean ? 'bg-rose-300' : 'bg-white/20'}
-            `}
+                      shrink-0
+                      w-14
+                      h-8
+                      relative
+                      rounded-full
+                      transition-all
+                      ${showKorean ? 'bg-rose-300' : 'bg-white/20'}
+                    `}
                   >
                     <div
                       className={`
-                absolute
-                top-1
-                w-6
-                h-6
-                bg-white
-                rounded-[999px]
-                ${showKorean ? 'right-1' : 'left-1'}
-              `}
+                        absolute
+                        top-1
+                        w-6
+                        h-6
+                        bg-white
+                        rounded-full
+                        transition-all
+                        ${showKorean ? 'right-1' : 'left-1'}
+                      `}
                     />
                   </button>
                 </div>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { KeigoConfig } from '../types';
+import GradientOptionButton from './GradientOptionButton';
 
 interface KeigoConfigViewProps {
   onBack: () => void;
@@ -17,42 +18,19 @@ const KeigoConfigView: React.FC<KeigoConfigViewProps> = ({
     {
       id: 'INTERVIEW',
       label: '면접',
-      color: 'pink',
+      gradient: 'bg-gradient-to-br from-red-700 via-pink-500 to-red-500',
     },
     {
       id: 'CAFE',
       label: '카페',
-      color: 'green',
+      gradient: 'bg-gradient-to-br from-teal-700 to-lime-500',
     },
     {
       id: 'BAITO',
       label: '아르바이트',
-      color: 'yellow',
+      gradient: 'bg-gradient-to-br from-amber-600 to-yellow-500',
     },
   ] as const;
-
-  const getCardClass = (
-    color: 'pink' | 'green' | 'yellow',
-    selected: boolean,
-  ) => {
-    const gradients = {
-      pink: 'bg-gradient-to-br from-red-700 via-pink-500 to-red-500',
-      green: 'bg-gradient-to-br from-teal-700 to-lime-500',
-      yellow: 'bg-gradient-to-br from-amber-600 to-yellow-500',
-    };
-
-    return `
-      flex-1
-      min-w-0
-      h-48
-      relative
-      rounded-3xl
-      overflow-hidden
-      transition-all
-      ${gradients[color]}
-      ${selected ? '' : 'opacity-30'}
-    `;
-  };
 
   return (
     <div className="fixed inset-0 bg-stone-900 overflow-hidden">
@@ -66,45 +44,19 @@ const KeigoConfigView: React.FC<KeigoConfigViewProps> = ({
                 상황 선택
               </div>
 
-              {/* 카테고리 */}
-              <div className="w-full flex flex-col gap-4">
-                {/* 면접 / 카페 */}
-                <div className="w-full flex items-center gap-5">
-                  {categories.slice(0, 2).map((cat) => (
-                    <button
-                      key={cat.id}
-                      type="button"
-                      onClick={() =>
-                        setCategory(cat.id as KeigoConfig['category'])
-                      }
-                      className={getCardClass(cat.color, category === cat.id)}
-                    >
-                      <div className="absolute left-0 top-[158px] w-full text-center text-white text-lg font-bold leading-7">
-                        {cat.label}
-                      </div>
-                    </button>
-                  ))}
-                </div>
-
-                {/* 접객업 / 빈 공간 */}
-                <div className="w-full flex items-center gap-5">
-                  {categories.slice(2, 3).map((cat) => (
-                    <button
-                      key={cat.id}
-                      type="button"
-                      onClick={() =>
-                        setCategory(cat.id as KeigoConfig['category'])
-                      }
-                      className={getCardClass(cat.color, category === cat.id)}
-                    >
-                      <div className="absolute left-0 top-[158px] w-full text-center text-white text-lg font-bold leading-7">
-                        {cat.label}
-                      </div>
-                    </button>
-                  ))}
-
-                  <div className="flex-1 min-w-0 h-48" />
-                </div>
+              {/* 카테고리 (2열 Grid로 일괄 처리) */}
+              <div className="w-full grid grid-cols-2 gap-5">
+                {categories.map((cat) => (
+                  <GradientOptionButton
+                    key={cat.id}
+                    label={cat.label}
+                    gradient={cat.gradient}
+                    selected={category === cat.id}
+                    onClick={() =>
+                      setCategory(cat.id as KeigoConfig['category'])
+                    }
+                  />
+                ))}
               </div>
             </div>
           </div>
