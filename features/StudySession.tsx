@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { StudyItem } from '../types';
 import { speakJapanese } from '../services/geminiService';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface StudySessionProps {
   items: StudyItem[];
@@ -13,6 +14,8 @@ const StudySession: React.FC<StudySessionProps> = ({
   showKorean,
   onEnd,
 }) => {
+  const { t } = useLanguage();
+
   const [index, setIndex] = useState(0);
   const [isRevealed, setIsRevealed] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
@@ -36,8 +39,10 @@ const StudySession: React.FC<StudySessionProps> = ({
 
   const handleReveal = async () => {
     const elapsed = (performance.now() - startTimeRef.current) / 1000;
+
     setElapsedTime(elapsed);
     setIsRevealed(true);
+
     await speakJapanese(currentItem.reading, audioCtx);
   };
 
@@ -55,24 +60,29 @@ const StudySession: React.FC<StudySessionProps> = ({
   return (
     <div className="fixed inset-0 bg-stone-900 overflow-hidden">
       <div className="relative w-full max-w-xl h-full mx-auto bg-gradient-to-b from-pink-950 to-stone-900 overflow-hidden">
+        {/* Header */}
         <div className="w-full h-16 px-2 pt-4 pb-2 absolute left-0 top-0 border-b border-white/10 flex justify-between items-center z-[9999]">
           <div className="w-10 h-10" />
 
           <button
+            type="button"
             onClick={onEnd}
+            aria-label={t.studySession.close}
             className="w-10 h-10 p-2.5 flex justify-center items-center text-white/70 hover:text-white transition-colors active:scale-90"
           >
-            <i className="fas fa-times text-xl"></i>
+            <i className="fas fa-times text-xl" />
           </button>
         </div>
 
         <div className="w-full h-full px-4 pt-20 pb-8 absolute left-0 top-0 flex flex-col justify-start items-start gap-2.5">
+          {/* Question */}
           <div className="self-stretch flex-1 min-h-0 px-6 py-5 bg-gradient-to-br from-red-700 via-pink-500 to-red-500 rounded-xl flex flex-col justify-center items-center gap-2.5 overflow-hidden">
             <div className="text-center text-white text-5xl sm:text-6xl font-bold tracking-tight leading-tight break-keep">
               {currentItem.display}
             </div>
           </div>
 
+          {/* Answer */}
           <div className="self-stretch flex-1 min-h-0 px-6 py-5 bg-gradient-to-b from-white/10 to-white/5 rounded-xl outline outline-2 outline-offset-[-2px] outline-white/5 flex flex-col justify-center items-center gap-2.5 overflow-hidden relative">
             <div className="w-full h-full flex flex-col justify-center items-center">
               <div
@@ -80,7 +90,7 @@ const StudySession: React.FC<StudySessionProps> = ({
                   isRevealed ? 'text-white' : 'text-white/30'
                 }`}
               >
-                {isRevealed ? currentItem.reading : '읽는 방법을 맞춰보세요'}
+                {isRevealed ? currentItem.reading : t.studySession.guessReading}
               </div>
 
               {isRevealed && showKorean && currentItem.korean && (
@@ -90,6 +100,7 @@ const StudySession: React.FC<StudySessionProps> = ({
               )}
             </div>
 
+            {/* Timer */}
             <div className="absolute bottom-5 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-white/10 rounded-[999px] inline-flex justify-center items-center gap-2.5">
               <div className="text-center text-white/70 text-base font-medium leading-6 tabular-nums">
                 {elapsedTime.toFixed(2)}s
@@ -97,28 +108,32 @@ const StudySession: React.FC<StudySessionProps> = ({
             </div>
           </div>
 
+          {/* Bottom */}
           <div className="self-stretch inline-flex justify-start items-center gap-2">
             <button
+              type="button"
               onClick={onEnd}
               className="flex-[2] h-14 bg-white/10 rounded-full flex justify-center items-center text-center text-white text-lg font-bold leading-6 active:scale-95 transition-all"
             >
-              이전
+              {t.common.back}
             </button>
 
             {!isRevealed ? (
               <button
+                type="button"
                 onClick={handleReveal}
                 className="flex-[3] h-14 bg-gradient-to-b from-white to-white/70 rounded-full outline outline-[3px] outline-offset-[-3px] outline-white/40 flex justify-center items-center text-center text-rose-900 text-lg font-bold leading-6 active:scale-95 transition-all"
               >
-                정답 확인
+                {t.studySession.reveal}
               </button>
             ) : (
               <button
+                type="button"
                 onClick={handleNext}
                 className="flex-[3] h-14 bg-gradient-to-b from-white to-white/70 rounded-full outline outline-[3px] outline-offset-[-3px] outline-white/40 flex justify-center items-center text-center text-rose-900 text-lg font-bold leading-6 active:scale-95 transition-all"
               >
-                다음
-                <i className="fas fa-chevron-right ml-2 text-sm"></i>
+                {t.studySession.next}
+                <i className="fas fa-chevron-right ml-2 text-sm" />
               </button>
             )}
           </div>

@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { sendFeedback } from '../utils/googleFormSubmit';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface FeedbackViewProps {
   onBack: () => void;
 }
 
 const FeedbackView: React.FC<FeedbackViewProps> = ({ onBack }) => {
+  const { t } = useLanguage();
+
   const [status, setStatus] = useState<'IDLE' | 'SENDING' | 'SUCCESS'>('IDLE');
+
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -23,7 +27,7 @@ const FeedbackView: React.FC<FeedbackViewProps> = ({ onBack }) => {
     if (success) {
       setStatus('SUCCESS');
     } else {
-      alert('전송에 실패했습니다. 다시 시도해주세요.');
+      alert(t.feedback.sendFailed);
       setStatus('IDLE');
     }
   };
@@ -41,11 +45,11 @@ const FeedbackView: React.FC<FeedbackViewProps> = ({ onBack }) => {
             </div>
 
             <h2 className="text-white text-2xl font-bold leading-8">
-              소중한 의견 감사합니다!
+              {t.feedback.successTitle}
             </h2>
 
             <p className="mt-2 text-white/50 text-sm font-normal leading-5 break-keep">
-              보내주신 내용은 서비스 개선에 적극 반영하겠습니다.
+              {t.feedback.successDescription}
             </p>
 
             <button
@@ -76,7 +80,7 @@ const FeedbackView: React.FC<FeedbackViewProps> = ({ onBack }) => {
                 transition-transform
               "
             >
-              홈으로 돌아가기
+              {t.feedback.goHome}
             </button>
           </main>
         </div>
@@ -108,7 +112,7 @@ const FeedbackView: React.FC<FeedbackViewProps> = ({ onBack }) => {
           </button>
 
           <div className="text-center text-white text-base font-semibold leading-6">
-            문의하기 / 피드백
+            {t.feedback.title}
           </div>
 
           <div className="w-10 h-10" />
@@ -122,11 +126,11 @@ const FeedbackView: React.FC<FeedbackViewProps> = ({ onBack }) => {
                 {/* 안내 */}
                 <div>
                   <h2 className="text-white text-xl font-bold leading-8">
-                    의견을 보내주세요
+                    {t.feedback.heading}
                   </h2>
 
                   <p className="mt-0.5 text-white/50 text-xs font-normal leading-4 break-keep">
-                    기능 제안이나 불편했던 점 등 자유롭게 알려주세요.
+                    {t.feedback.description}
                   </p>
                 </div>
 
@@ -136,14 +140,14 @@ const FeedbackView: React.FC<FeedbackViewProps> = ({ onBack }) => {
                     htmlFor="feedback-name"
                     className="block mb-2 text-white text-base font-medium leading-6"
                   >
-                    성함
+                    {t.feedback.name}
                   </label>
 
                   <input
                     id="feedback-name"
                     required
                     type="text"
-                    placeholder="성함을 입력해주세요"
+                    placeholder={t.feedback.namePlaceholder}
                     value={form.name}
                     onChange={(e) =>
                       setForm({
@@ -182,14 +186,14 @@ const FeedbackView: React.FC<FeedbackViewProps> = ({ onBack }) => {
                     htmlFor="feedback-email"
                     className="block mb-2 text-white text-base font-medium leading-6"
                   >
-                    이메일 주소
+                    {t.feedback.email}
                   </label>
 
                   <input
                     id="feedback-email"
                     required
                     type="email"
-                    placeholder="답변받으실 이메일을 입력해주세요"
+                    placeholder={t.feedback.emailPlaceholder}
                     value={form.email}
                     onChange={(e) =>
                       setForm({
@@ -228,14 +232,14 @@ const FeedbackView: React.FC<FeedbackViewProps> = ({ onBack }) => {
                     htmlFor="feedback-message"
                     className="block mb-2 text-white text-base font-medium leading-6"
                   >
-                    문의 내용
+                    {t.feedback.message}
                   </label>
 
                   <textarea
                     id="feedback-message"
                     required
                     rows={6}
-                    placeholder="기능 제안, 버그 제보 등 자유롭게 작성해주세요"
+                    placeholder={t.feedback.messagePlaceholder}
                     value={form.message}
                     onChange={(e) =>
                       setForm({
@@ -313,7 +317,7 @@ const FeedbackView: React.FC<FeedbackViewProps> = ({ onBack }) => {
                 disabled:active:scale-100
               "
             >
-              {status === 'SENDING' ? '전송 중...' : '의견 보내기'}
+              {status === 'SENDING' ? t.feedback.sending : t.feedback.submit}
             </button>
           </div>
         </div>

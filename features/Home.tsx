@@ -553,7 +553,9 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
                         </div>
 
                         <div className="mt-2 text-black/50 text-xs font-semibold leading-4">
-                          {t.home.keigoExample.korean}
+                          학생 때 가장 열심히 했던 활동은
+                          <br />
+                          무엇인가요?
                         </div>
                       </div>
 
