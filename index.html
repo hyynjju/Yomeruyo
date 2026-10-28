@@ -2,7 +2,8 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#1c1917" />
     <title>yomeruyo - 실전 일본어 학습</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://t.contentsquare.net/uxa/705c249e5e660.js"></script>
@@ -39,9 +40,27 @@
     />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400&family=Yuji+Syuku&display=swap" />
     <style>
+      html, body, #root {
+        margin: 0;
+        min-height: 100%;
+        background-color: #1c1917;
+      }
+      html {
+        color-scheme: dark;
+      }
+      #root {
+        min-height: 100dvh;
+      }
+      .app-screen {
+        padding-top: env(safe-area-inset-top, 0px);
+        padding-left: env(safe-area-inset-left, 0px);
+        padding-right: env(safe-area-inset-right, 0px);
+      }
+      .safe-bottom {
+        padding-bottom: max(2rem, env(safe-area-inset-bottom, 0px));
+      }
       body {
-        background-color: #ffffff;
-        color: #1a1a1a;
+        color: #ffffff;
         font-family:
           'Inter',
           system-ui,

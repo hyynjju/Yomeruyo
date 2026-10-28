@@ -37,7 +37,7 @@ const FeedbackView: React.FC<FeedbackViewProps> = ({ onBack }) => {
   ================================= */
   if (status === 'SUCCESS') {
     return (
-      <div className="fixed inset-0 bg-stone-900 overflow-hidden">
+      <div className="app-screen fixed inset-0 bg-stone-900 overflow-hidden">
         <div className="relative w-full max-w-xl h-full mx-auto bg-gradient-to-b from-pink-950 to-stone-900 overflow-hidden">
           <main className="absolute inset-0 flex flex-col items-center justify-center px-5 text-center">
             <div className="w-20 h-20 mb-6 rounded-full bg-rose-300/20 flex items-center justify-center">
@@ -89,7 +89,7 @@ const FeedbackView: React.FC<FeedbackViewProps> = ({ onBack }) => {
   }
 
   return (
-    <div className="fixed inset-0 bg-stone-900 overflow-hidden">
+    <div className="app-screen fixed inset-0 bg-stone-900 overflow-hidden">
       <div className="relative w-full max-w-xl h-full mx-auto bg-gradient-to-b from-pink-950 to-stone-900 overflow-hidden">
         {/* Header */}
         <header className="absolute left-0 top-0 z-50 w-full h-16 px-2 pt-4 pb-2 border-b border-white/10 flex items-center justify-between">
@@ -282,7 +282,7 @@ const FeedbackView: React.FC<FeedbackViewProps> = ({ onBack }) => {
         <div className="absolute left-0 right-0 bottom-0 z-50 pointer-events-none">
           <div className="h-12 bg-gradient-to-b from-stone-900/0 to-stone-900" />
 
-          <div className="w-full px-5 pt-2 pb-8 bg-stone-900 pointer-events-auto">
+          <div className="w-full px-5 pt-2 safe-bottom bg-stone-900 pointer-events-auto">
             <button
               type="button"
               disabled={status === 'SENDING'}

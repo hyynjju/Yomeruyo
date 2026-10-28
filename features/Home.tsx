@@ -304,7 +304,7 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
   ];
 
   return (
-    <div className="fixed inset-0 bg-gradient-to-b from-pink-950 to-stone-900 overflow-hidden">
+    <div className="app-screen fixed inset-0 bg-gradient-to-b from-pink-950 to-stone-900 overflow-hidden">
       <div className="relative w-full h-full mx-auto overflow-hidden">
         {/* Scroll Area */}
         <main className="absolute inset-0 overflow-y-auto overflow-x-hidden overscroll-contain">

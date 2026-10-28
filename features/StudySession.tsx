@@ -84,7 +84,7 @@ const StudySession: React.FC<StudySessionProps> = ({
   };
 
   if (!currentItem) return (
-    <div className="fixed inset-0 bg-stone-900 flex items-center justify-center">
+    <div className="app-screen fixed inset-0 bg-stone-900 flex items-center justify-center">
       <button onClick={onEnd} className="rounded-full bg-rose-100 px-8 py-4 text-rose-900">{t.studySession.home}</button>
     </div>
   );
@@ -99,7 +99,7 @@ const StudySession: React.FC<StudySessionProps> = ({
       { view: 'MENU_CONFIG' as AppView, label: t.home.menu, icon: 'fa-utensils' },
     ].filter(item => item.view !== source && !completedStudies.includes(item.view));
     return (
-      <div className="fixed inset-0 bg-gradient-to-b from-pink-950 to-stone-900 overflow-y-auto">
+      <div className="app-screen fixed inset-0 bg-gradient-to-b from-pink-950 to-stone-900 overflow-y-auto">
         <div className="relative max-w-[873px] mx-auto min-h-full px-4 md:px-6 pt-6 pb-44">
           <header className="flex items-center justify-between text-white border-b border-white/10 pb-4">
             <button onClick={onEnd} aria-label={t.studySession.home} className="w-10 h-10"><i className="fas fa-chevron-left" /></button>
@@ -125,7 +125,7 @@ const StudySession: React.FC<StudySessionProps> = ({
         <canvas ref={confettiCanvasRef} aria-hidden="true" className="fixed inset-0 w-full h-full pointer-events-none z-[100]" />
         <div className="fixed bottom-0 inset-x-0 z-50 mx-auto w-full max-w-[873px]">
           <div className="h-12 bg-gradient-to-b from-stone-900/0 to-stone-900 pointer-events-none" />
-          <div className="px-5 md:px-6 pt-2 pb-8 bg-stone-900">
+          <div className="px-5 md:px-6 pt-2 safe-bottom bg-stone-900">
             <button onClick={onEnd} className="w-full h-14 rounded-full bg-gradient-to-b from-white to-white/70 text-rose-900 text-lg font-bold active:scale-95 transition-transform">{t.studySession.home}</button>
           </div>
         </div>
@@ -134,7 +134,7 @@ const StudySession: React.FC<StudySessionProps> = ({
   }
 
   return (
-    <div className="fixed inset-0 bg-gradient-to-b from-pink-950 to-stone-900 overflow-hidden">
+    <div className="app-screen fixed inset-0 bg-gradient-to-b from-pink-950 to-stone-900 overflow-hidden">
       <div className="relative w-full max-w-[873px] h-full mx-auto overflow-hidden">
         {/* Header */}
         <div className="w-full h-16 px-2 md:px-4 pt-4 pb-2 absolute left-0 top-0 border-b border-white/10 flex justify-between items-center z-[9999]">
@@ -152,7 +152,7 @@ const StudySession: React.FC<StudySessionProps> = ({
           </button>
         </div>
 
-        <div className="w-full h-full px-4 md:px-6 pt-20 pb-8 absolute left-0 top-0 flex flex-col justify-start items-start gap-2.5">
+        <div className="w-full h-full px-4 md:px-6 pt-20 safe-bottom absolute left-0 top-0 flex flex-col justify-start items-start gap-2.5">
           {/* Question */}
           <div className="self-stretch flex-1 min-h-0 px-6 py-5 bg-gradient-to-br from-red-700 via-pink-500 to-red-500 rounded-xl flex flex-col justify-center items-center gap-2.5 overflow-hidden">
             <div lang="ja" style={currentItem.questionFont ? {

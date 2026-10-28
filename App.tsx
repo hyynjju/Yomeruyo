@@ -141,7 +141,7 @@ const App: React.FC = () => {
 
   return (
     <>
-      <div className={`min-h-screen mx-auto relative overflow-hidden flex flex-col bg-white ${view === 'HOME' || isPlayerView ? 'w-full' : 'max-w-xl'}`}>
+      <div className={`min-h-[100dvh] mx-auto relative overflow-hidden flex flex-col bg-stone-900 ${view === 'HOME' || isPlayerView ? 'w-full' : 'max-w-xl'}`}>
         <main
           className={`flex-1 flex flex-col ${isNoPaddingView ? 'p-0' : 'p-6'} ${
             isPlayerView ? 'overflow-hidden' : 'overflow-y-auto'

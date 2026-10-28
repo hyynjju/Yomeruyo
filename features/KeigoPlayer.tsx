@@ -201,7 +201,7 @@ const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
         : t.keigoConfig.baito;
 
   return (
-    <div className="fixed inset-0 bg-gradient-to-b from-pink-950 to-stone-900 overflow-hidden">
+    <div className="app-screen fixed inset-0 bg-gradient-to-b from-pink-950 to-stone-900 overflow-hidden">
       <div className="relative w-full max-w-[873px] h-full mx-auto overflow-hidden">
         {/* ========================================
             문장 영역
@@ -275,7 +275,7 @@ const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
             <div className="w-full h-12 bg-gradient-to-b from-stone-900/0 to-stone-900" />
 
             {/* 컨트롤 영역 */}
-            <div className="w-full px-5 md:px-6 pt-2 pb-8 bg-stone-900 flex justify-between items-center gap-2">
+            <div className="w-full px-5 md:px-6 pt-2 safe-bottom bg-stone-900 flex justify-between items-center gap-2">
               {/* 왼쪽 속도 표시 (여백용) */}
               <div className="px-5 py-4 opacity-0 flex justify-center items-center gap-2.5">
                 <span className="text-white text-base font-semibold leading-6">

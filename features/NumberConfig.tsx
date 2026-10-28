@@ -78,7 +78,7 @@ const NumberConfigView: React.FC<NumberConfigViewProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 bg-gradient-to-b from-pink-950 to-stone-900 overflow-hidden">
+    <div className="app-screen fixed inset-0 bg-gradient-to-b from-pink-950 to-stone-900 overflow-hidden">
       <div className="relative w-full max-w-[873px] h-full mx-auto overflow-hidden">
         {/* Header */}
         <header style={{
@@ -407,7 +407,7 @@ const NumberConfigView: React.FC<NumberConfigViewProps> = ({
         <div className="absolute left-0 right-0 bottom-0 z-50 pointer-events-none">
           <div className="h-12 bg-gradient-to-b from-stone-900/0 to-stone-900" />
 
-          <div className="w-full px-5 md:px-6 pt-2 pb-8 bg-stone-900 flex items-center gap-2 md:gap-3 pointer-events-auto">
+          <div className="w-full px-5 md:px-6 pt-2 safe-bottom bg-stone-900 flex items-center gap-2 md:gap-3 pointer-events-auto">
             <button
               type="button"
               onClick={onBack}
