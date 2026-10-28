@@ -221,7 +221,7 @@ const App: React.FC = () => {
               let questionFont: StudyItem['questionFont'];
               try {
                 // Load every glyph used in this session, including later questions.
-                const fonts = await document.fonts.load(`400 48px "${family}"`, pool.map(item => item.display).join(''));
+                const fonts = await document.fonts.load(`${handwritten ? 400 : 600} 48px "${family}"`, pool.map(item => item.display).join(''));
                 if (fonts.length > 0) questionFont = handwritten ? 'handwriting' : 'mincho';
               } catch {
                 // Keep the default font for the whole session if loading fails.

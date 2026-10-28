@@ -310,7 +310,7 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
         <main className="absolute inset-0 overflow-y-auto overflow-x-hidden overscroll-contain">
           <div className="w-full max-w-[873px] mx-auto pb-0 md:px-2">
             {/* Header */}
-            <header className="relative w-full px-2 pt-3 pb-2 flex items-center justify-between">
+            <header className="relative w-full px-2 pt-1 md:pt-3 pb-2 flex items-center justify-between">
               <div className="w-10 h-10 opacity-0" />
 
               <Logo className="w-auto h-3.5 opacity-40" />

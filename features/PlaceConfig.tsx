@@ -125,7 +125,7 @@ const PlaceConfigView: React.FC<PlaceConfigViewProps> = ({
           backgroundImage: 'linear-gradient(to bottom, #500724, #1c1917)',
           backgroundSize: '100% 100dvh',
           backgroundRepeat: 'no-repeat',
-        }} className="absolute left-0 top-0 z-50 w-full h-16 px-2 md:px-4 pt-4 pb-2 border-b border-white/10 flex items-center justify-between">
+        }} className="absolute left-0 top-0 z-50 w-full h-14 md:h-16 px-2 md:px-4 pt-2 md:pt-4 pb-2 border-b border-white/10 flex items-center justify-between">
           <button
             type="button"
             onClick={onBack}

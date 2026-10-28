@@ -92,7 +92,7 @@ const FeedbackView: React.FC<FeedbackViewProps> = ({ onBack }) => {
     <div className="app-screen fixed inset-0 bg-stone-900 overflow-hidden">
       <div className="relative w-full max-w-xl h-full mx-auto bg-gradient-to-b from-pink-950 to-stone-900 overflow-hidden">
         {/* Header */}
-        <header className="absolute left-0 top-0 z-50 w-full h-16 px-2 pt-4 pb-2 border-b border-white/10 flex items-center justify-between">
+        <header className="absolute left-0 top-0 z-50 w-full h-14 md:h-16 px-2 pt-2 md:pt-4 pb-2 border-b border-white/10 flex items-center justify-between">
           <button
             type="button"
             onClick={onBack}

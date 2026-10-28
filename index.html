@@ -38,7 +38,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400&family=Yuji+Syuku&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600&family=Yuji+Syuku&display=swap" />
     <style>
       html, body, #root {
         margin: 0;
@@ -57,7 +57,10 @@
         padding-right: env(safe-area-inset-right, 0px);
       }
       .safe-bottom {
-        padding-bottom: max(2rem, env(safe-area-inset-bottom, 0px));
+        padding-bottom: max(0.75rem, calc(env(safe-area-inset-bottom, 0px) - 8px));
+      }
+      @media (min-width: 768px) {
+        .safe-bottom { padding-bottom: max(2rem, env(safe-area-inset-bottom, 0px)); }
       }
       body {
         color: #ffffff;

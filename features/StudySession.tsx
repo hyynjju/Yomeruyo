@@ -99,12 +99,17 @@ const StudySession: React.FC<StudySessionProps> = ({
       { view: 'MENU_CONFIG' as AppView, label: t.home.menu, icon: 'fa-utensils' },
     ].filter(item => item.view !== source && !completedStudies.includes(item.view));
     return (
-      <div className="app-screen fixed inset-0 bg-gradient-to-b from-pink-950 to-stone-900 overflow-y-auto">
-        <div className="relative max-w-[873px] mx-auto min-h-full px-4 md:px-6 pt-6 pb-44">
-          <header className="flex items-center justify-between text-white border-b border-white/10 pb-4">
-            <button onClick={onEnd} aria-label={t.studySession.home} className="w-10 h-10"><i className="fas fa-chevron-left" /></button>
-            <h1 className="font-semibold">{t.studySession.complete}</h1><span className="w-10" />
+      <div className="app-screen fixed inset-0 bg-gradient-to-b from-pink-950 to-stone-900 overflow-hidden">
+        <div className="relative w-full max-w-[873px] h-full mx-auto overflow-hidden">
+          <header style={{
+            backgroundImage: 'linear-gradient(to bottom, #500724, #1c1917)',
+            backgroundSize: '100% 100dvh',
+            backgroundRepeat: 'no-repeat',
+          }} className="absolute left-0 top-0 z-50 w-full h-14 md:h-16 px-2 md:px-4 pt-2 md:pt-4 pb-2 border-b border-white/10 flex items-center justify-between">
+            <button type="button" onClick={onEnd} aria-label={t.studySession.home} className="w-10 h-10 p-2.5 flex items-center justify-center text-white active:scale-90 transition-transform"><i className="fas fa-chevron-left text-xl" /></button>
+            <h1 className="text-center text-white text-base font-semibold leading-6">{t.studySession.complete}</h1><span className="w-10 h-10" />
           </header>
+          <main className="absolute inset-0 overflow-y-auto overflow-x-hidden overscroll-contain px-4 md:px-6 pt-20 md:pt-24 pb-44">
           <section className="relative py-16 md:py-20">
             <div className="relative mx-auto w-full max-w-xs min-h-52 rounded-[20px] bg-gradient-to-br from-red-700 via-pink-500 to-red-500 flex flex-col items-center justify-center p-6 gap-3">
               <p className="text-white/70 font-medium">{t.studySession.averageSpeed}</p>
@@ -121,6 +126,7 @@ const StudySession: React.FC<StudySessionProps> = ({
               </button>)}
             </div>
           </section>}
+          </main>
         </div>
         <canvas ref={confettiCanvasRef} aria-hidden="true" className="fixed inset-0 w-full h-full pointer-events-none z-[100]" />
         <div className="fixed bottom-0 inset-x-0 z-50 mx-auto w-full max-w-[873px]">
@@ -137,7 +143,7 @@ const StudySession: React.FC<StudySessionProps> = ({
     <div className="app-screen fixed inset-0 bg-gradient-to-b from-pink-950 to-stone-900 overflow-hidden">
       <div className="relative w-full max-w-[873px] h-full mx-auto overflow-hidden">
         {/* Header */}
-        <div className="w-full h-16 px-2 md:px-4 pt-4 pb-2 absolute left-0 top-0 border-b border-white/10 flex justify-between items-center z-[9999]">
+        <div className="w-full h-14 md:h-16 px-2 md:px-4 pt-2 md:pt-4 pb-2 absolute left-0 top-0 border-b border-white/10 flex justify-between items-center z-[9999]">
           <div aria-label={t.studySession.progress} className="ml-2 rounded-full bg-rose-300/15 px-4 py-1.5 text-rose-300 text-sm font-semibold tabular-nums">
             {index + 1}/{items.length}
           </div>
@@ -158,7 +164,7 @@ const StudySession: React.FC<StudySessionProps> = ({
             <div lang="ja" style={currentItem.questionFont ? {
               fontFamily: currentItem.questionFont === 'handwriting'
                 ? '"Yuji Syuku", "Yu Mincho", serif' : '"Noto Serif JP", "Yu Mincho", serif',
-              fontWeight: 400,
+              fontWeight: currentItem.questionFont === 'handwriting' ? 400 : 600,
               fontSize: 'clamp(1.75rem, 7vw, 3.75rem)',
               overflowWrap: 'anywhere',
             } : undefined} className="text-center text-white text-5xl sm:text-6xl font-bold tracking-tight leading-tight break-keep">
