@@ -15,36 +15,25 @@ const NumberConfigView: React.FC<NumberConfigViewProps> = ({
   const { t } = useLanguage();
 
   const [min, setMin] = useState(1);
-  const [max, setMax] = useState(1000);
+  const [max, setMax] = useState(10000);
   const [unit, setUnit] = useState<1 | 10 | 100 | 1000 | 10000>(1);
   const [counter, setCounter] = useState('엔');
   const [showKorean, setShowKorean] = useState(true);
-  const [preset, setPreset] = useState<string>('CELEBRITY');
 
   const isDateMode = counter === '날짜';
 
   const presets = [
-    {
-      id: 'CAFE',
-      label: t.numberConfig.cafe,
-      gradient: 'bg-gradient-to-br from-red-700 via-pink-500 to-red-500',
-    },
-    {
-      id: 'SHOPPING',
-      label: t.numberConfig.shopping,
-      gradient: 'bg-gradient-to-br from-amber-600 to-yellow-500',
-    },
-    {
-      id: 'TRANSPORT',
-      label: t.numberConfig.transport,
-      gradient: 'bg-gradient-to-br from-teal-700 to-lime-500',
-    },
-    {
-      id: 'LARGE',
-      label: t.numberConfig.large,
-      gradient: 'bg-gradient-to-br from-blue-950 to-teal-400',
-    },
+    { id: 'REGISTER', label: t.numberConfig.register, counter: '엔', max: 10000, gradient: 'bg-gradient-to-br from-red-700 via-pink-500 to-red-500' },
+    { id: 'DATE', label: t.numberConfig.dateReading, counter: '날짜', max: 31, gradient: 'bg-gradient-to-br from-amber-600 to-yellow-500' },
+    { id: 'PEOPLE', label: t.numberConfig.peopleReading, counter: '명', max: 100, gradient: 'bg-gradient-to-br from-teal-700 to-lime-500' },
+    { id: 'ANIMALS', label: t.numberConfig.animalsReading, counter: '마리', max: 100, gradient: 'bg-gradient-to-br from-blue-950 to-teal-400' },
+    { id: 'FLOORS', label: t.numberConfig.floorsReading, counter: '층', max: 30, gradient: 'bg-gradient-to-br from-purple-900 to-violet-500' },
+    { id: 'THINGS', label: t.numberConfig.thingsReading, counter: '개', max: 100, gradient: 'bg-gradient-to-br from-red-700 via-pink-500 to-red-500' },
+    { id: 'BOOKS', label: t.numberConfig.booksReading, counter: '권', max: 100, gradient: 'bg-gradient-to-br from-amber-600 to-yellow-500' },
+    { id: 'LONG', label: t.numberConfig.longReading, counter: '본', max: 100, gradient: 'bg-gradient-to-br from-teal-700 to-lime-500' },
   ] as const;
+  const selectedPreset = presets.find(option => option.counter === counter &&
+    (counter === '날짜' || (min === 1 && max === option.max && unit === 1)));
 
   const counters = [
     {
@@ -89,10 +78,14 @@ const NumberConfigView: React.FC<NumberConfigViewProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 bg-stone-900 overflow-hidden">
-      <div className="relative w-full max-w-xl h-full mx-auto bg-gradient-to-b from-pink-950 to-stone-900 overflow-hidden">
+    <div className="fixed inset-0 bg-gradient-to-b from-pink-950 to-stone-900 overflow-hidden">
+      <div className="relative w-full max-w-[873px] h-full mx-auto overflow-hidden">
         {/* Header */}
-        <header className="absolute left-0 top-0 z-50 w-full h-16 px-2 pt-4 pb-2 border-b border-white/10 flex items-center justify-between">
+        <header style={{
+          backgroundImage: 'linear-gradient(to bottom, #500724, #1c1917)',
+          backgroundSize: '100% 100dvh',
+          backgroundRepeat: 'no-repeat',
+        }} className="absolute left-0 top-0 z-50 w-full h-16 px-2 md:px-4 pt-4 pb-2 border-b border-white/10 flex items-center justify-between">
           <button
             type="button"
             onClick={onBack}
@@ -110,7 +103,7 @@ const NumberConfigView: React.FC<NumberConfigViewProps> = ({
 
         {/* Scroll Area */}
         <main className="absolute left-0 right-0 top-0 bottom-0 overflow-y-auto overflow-x-hidden overscroll-contain">
-          <div className="w-full px-4 pt-24 pb-40">
+          <div className="w-full px-4 md:px-6 pt-24 md:pt-28 pb-40 md:pb-48">
             {/* 추천 옵션 */}
             <section className="w-full mb-12">
               <h2 className="h-7 text-white text-xl font-bold leading-8">
@@ -131,14 +124,19 @@ const NumberConfigView: React.FC<NumberConfigViewProps> = ({
     pb-1
   "
               >
-                <div className="flex flex-nowrap gap-3 w-max pr-4">
+                <div className="flex flex-nowrap gap-3 w-max pr-4 md:grid md:grid-cols-4 md:w-full md:pr-0">
                   {presets.map((p) => (
-                    <div key={p.id} className="shrink-0 w-40">
+                    <div key={p.id} className="shrink-0 w-40 md:w-auto">
                       <GradientOptionButton
                         label={p.label}
                         gradient={p.gradient}
-                        selected={preset === p.id}
-                        onClick={() => setPreset(p.id)}
+                        selected={selectedPreset?.id === p.id}
+                        onClick={() => {
+                          setCounter(p.counter);
+                          setMin(1);
+                          setMax(p.max);
+                          setUnit(1);
+                        }}
                       />
                     </div>
                   ))}
@@ -409,7 +407,7 @@ const NumberConfigView: React.FC<NumberConfigViewProps> = ({
         <div className="absolute left-0 right-0 bottom-0 z-50 pointer-events-none">
           <div className="h-12 bg-gradient-to-b from-stone-900/0 to-stone-900" />
 
-          <div className="w-full px-5 pt-2 pb-8 bg-stone-900 flex items-center gap-2 pointer-events-auto">
+          <div className="w-full px-5 md:px-6 pt-2 pb-8 bg-stone-900 flex items-center gap-2 md:gap-3 pointer-events-auto">
             <button
               type="button"
               onClick={onBack}

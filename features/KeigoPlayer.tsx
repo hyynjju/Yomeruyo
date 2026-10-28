@@ -201,8 +201,8 @@ const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
         : t.keigoConfig.baito;
 
   return (
-    <div className="fixed inset-0 bg-stone-900 overflow-hidden">
-      <div className="relative w-full max-w-xl h-full mx-auto bg-gradient-to-b from-pink-950 to-stone-900 overflow-hidden">
+    <div className="fixed inset-0 bg-gradient-to-b from-pink-950 to-stone-900 overflow-hidden">
+      <div className="relative w-full max-w-[873px] h-full mx-auto overflow-hidden">
         {/* ========================================
             문장 영역
         ======================================== */}
@@ -211,8 +211,6 @@ const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
           ref={containerRef}
           className="absolute inset-0 overflow-y-auto overflow-x-hidden no-scrollbar scroll-smooth"
         >
-          <div className="pointer-events-none absolute left-0 top-28 w-full h-[568px] bg-gradient-to-b from-zinc-300/0 via-zinc-300/10 to-zinc-300/0 z-10" />
-
           <div className="min-h-full px-8 pt-[29vh] pb-[30vh] flex flex-col justify-center gap-12">
             {script.map((line, i) => {
               const isActive = i === activeIndex;
@@ -246,7 +244,11 @@ const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
             Header
         ======================================== */}
 
-        <header className="absolute left-0 top-0 z-50 w-full h-16 px-2 pt-4 pb-2 border-b border-white/10 flex justify-between items-center">
+        <header style={{
+          backgroundImage: 'linear-gradient(to bottom, #500724, #1c1917)',
+          backgroundSize: '100% 100dvh',
+          backgroundRepeat: 'no-repeat',
+        }} className="absolute left-0 top-0 z-50 w-full h-16 px-2 md:px-4 pt-4 pb-2 border-b border-white/10 flex justify-between items-center">
           <button
             type="button"
             onClick={onEnd}
@@ -273,7 +275,7 @@ const KeigoPlayer: React.FC<KeigoPlayerProps> = ({ category, onEnd }) => {
             <div className="w-full h-12 bg-gradient-to-b from-stone-900/0 to-stone-900" />
 
             {/* 컨트롤 영역 */}
-            <div className="w-full px-5 pt-2 pb-8 bg-stone-900 flex justify-between items-center gap-2">
+            <div className="w-full px-5 md:px-6 pt-2 pb-8 bg-stone-900 flex justify-between items-center gap-2">
               {/* 왼쪽 속도 표시 (여백용) */}
               <div className="px-5 py-4 opacity-0 flex justify-center items-center gap-2.5">
                 <span className="text-white text-base font-semibold leading-6">

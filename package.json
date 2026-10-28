@@ -11,12 +11,14 @@
   "dependencies": {
     "@google/genai": "^1.41.0",
     "@vercel/analytics": "^1.6.1",
+    "canvas-confetti": "^1.9.4",
     "lucide-react": "^1.47.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-router-dom": "^7.13.0"
   },
   "devDependencies": {
+    "@types/canvas-confetti": "^1.9.0",
     "@types/node": "^22.14.0",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
