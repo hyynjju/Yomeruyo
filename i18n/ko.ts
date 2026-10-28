@@ -6,6 +6,7 @@ export const ko = {
   },
 
   home: {
+    menu: '메뉴 읽기',
     number: '숫자 읽기',
     keigo: '경어 듣기',
     name: '인명 읽기',
@@ -18,6 +19,7 @@ export const ko = {
     goToNumber: '숫자 읽기 학습하러 가기',
     goToName: '인명 읽기 학습하러 가기',
     goToPlace: '지명 읽기 학습하러 가기',
+    goToMenu: '메뉴 읽기 학습하러 가기',
     goToKeigo: '경어 학습 하러 가기',
 
     study: '학습하기',
@@ -61,6 +63,15 @@ export const ko = {
   },
 
   numberConfig: {
+    register: '레지 업무',
+    dateReading: '날짜 읽기',
+    peopleReading: '사람 숫자(명)',
+    animalsReading: '동물 숫자(마리)',
+    floorsReading: '층수(층)',
+    thingsReading: '물건 숫자(개)',
+    booksReading: '책 숫자(권)',
+    longReading: '긴 물건 숫자(본)',
+
     header: '숫자 읽기 학습 설정',
 
     recommended: '추천 옵션',
@@ -96,6 +107,19 @@ export const ko = {
     koreanReadingExample: '예) 3,800円 → 산젠핫퍄쿠엔',
   },
 
+  menuConfig: {
+    loadingFont: '폰트 불러오는 중…',
+    header: '메뉴 읽기 학습 설정',
+    title: '메뉴 종류 선택',
+    izakaya: '이자카야 · 야키토리',
+    yakiniku: '야키니쿠 · 고기 부위',
+    cafe: '카페',
+    western: '양식',
+    cocktail: '칵테일바',
+    koreanReading: '한국어로 읽는법 표시하기',
+    koreanReadingExample: '예) 砂肝 → 스나기모',
+  },
+
   placeConfig: {
     title: '지역 선택',
     header: '지명 읽기 학습 설정',
@@ -111,6 +135,12 @@ export const ko = {
   },
 
   studySession: {
+    complete: '학습 완료',
+    averageSpeed: '평균 학습 속도',
+    remaining: '아직 진행하지 않은 학습이 있어요',
+    home: '홈으로 돌아가기',
+    progress: '학습 진행 상황',
+
     close: '닫기',
     guessReading: '읽는 방법을 맞춰보세요',
     reveal: '정답 확인',

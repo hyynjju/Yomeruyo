@@ -13,3 +13,6 @@ export const GIVEN_NAMES = names.givenNames;
 export const CELEBRITIES = names.celebrities;
 
 export const PROVERBS = proverb.proverbs;
+
+import menus from './public/data/menus.json';
+export const MENUS = menus;

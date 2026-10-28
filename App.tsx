@@ -1,5 +1,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { AppView, StudyItem, KeigoLine } from './types';
+import MenuConfigView from './features/MenuConfig';
+import { MENUS } from './constants';
 import Home from './features/Home';
 import NumberConfigView from './features/NumberConfig';
 import NameConfigView from './features/NameConfig';
@@ -8,7 +10,6 @@ import KeigoConfigView from './features/KeigoConfig';
 import StudySession from './features/StudySession';
 import KeigoPlayer from './features/KeigoPlayer';
 import FeedbackView from './features/FeedbackView';
-import Footer from './features/Footer';
 import { Analytics } from '@vercel/analytics/react';
 
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -37,6 +38,8 @@ const App: React.FC = () => {
   const location = useLocation();
 
   const [view, setView] = useState<AppView>('HOME');
+  const [studySource, setStudySource] = useState<AppView>('NUMBER_CONFIG');
+  const [completedStudies, setCompletedStudies] = useState<AppView[]>([]);
   const [studyItems, setStudyItems] = useState<StudyItem[]>([]);
   const [keigoCategory, setKeigoCategory] = useState<
     'CAFE' | 'INTERVIEW' | 'BAITO'
@@ -55,6 +58,9 @@ const App: React.FC = () => {
         break;
       case '/name':
         setView('NAME_CONFIG');
+        break;
+      case '/menu':
+        setView('MENU_CONFIG');
         break;
       case '/place':
         setView('PLACE_CONFIG');
@@ -88,6 +94,9 @@ const App: React.FC = () => {
       case 'NAME_CONFIG':
         navigate('/name');
         break;
+      case 'MENU_CONFIG':
+        navigate('/menu');
+        break;
       case 'PLACE_CONFIG':
         navigate('/place');
         break;
@@ -111,7 +120,9 @@ const App: React.FC = () => {
   }, []);
 
   const startStudy = (items: StudyItem[], showKorean: boolean) => {
-    setStudyItems(items);
+    if (!items.length) return;
+    setStudySource(view);
+    setStudyItems(Array.from({ length: 20 }, (_, index) => items[index % items.length]));
     setGlobalShowKorean(showKorean);
     setView('STUDY_SESSION');
   };
@@ -127,11 +138,10 @@ const App: React.FC = () => {
 
   const isPlayerView = view === 'STUDY_SESSION' || view === 'KEIGO_PLAYER';
 
-  const showFooter = view === 'HOME';
 
   return (
     <>
-      <div className="min-h-screen max-w-xl mx-auto relative overflow-hidden flex flex-col bg-white">
+      <div className={`min-h-screen mx-auto relative overflow-hidden flex flex-col bg-white ${view === 'HOME' || isPlayerView ? 'w-full' : 'max-w-xl'}`}>
         <main
           className={`flex-1 flex flex-col ${isNoPaddingView ? 'p-0' : 'p-6'} ${
             isPlayerView ? 'overflow-hidden' : 'overflow-y-auto'
@@ -203,6 +213,23 @@ const App: React.FC = () => {
             />
           )}
 
+          {view === 'MENU_CONFIG' && (
+            <MenuConfigView onBack={handleBack} onStart={async (config) => {
+              const pool = shuffleArray(MENUS[config.category]).slice(0, ITEM_COUNT);
+              const handwritten = config.category === 'izakaya' || config.category === 'yakiniku';
+              const family = handwritten ? 'Yuji Syuku' : 'Noto Serif JP';
+              let questionFont: StudyItem['questionFont'];
+              try {
+                // Load every glyph used in this session, including later questions.
+                const fonts = await document.fonts.load(`400 48px "${family}"`, pool.map(item => item.display).join(''));
+                if (fonts.length > 0) questionFont = handwritten ? 'handwriting' : 'mincho';
+              } catch {
+                // Keep the default font for the whole session if loading fails.
+              }
+              startStudy(pool.map(item => ({ ...item, questionFont })), config.showKorean);
+            }} />
+          )}
+
           {view === 'PLACE_CONFIG' && (
             <PlaceConfigView
               onBack={handleBack}
@@ -254,6 +281,10 @@ const App: React.FC = () => {
           {view === 'STUDY_SESSION' && (
             <StudySession
               items={studyItems}
+              source={studySource}
+              completedStudies={completedStudies}
+              onComplete={() => setCompletedStudies(previous => previous.includes(studySource) ? previous : [...previous, studySource])}
+              onSelectStudy={setView}
               showKorean={globalShowKorean}
               onEnd={handleBack}
             />
@@ -263,7 +294,6 @@ const App: React.FC = () => {
             <KeigoPlayer category={keigoCategory} onEnd={handleBack} />
           )}
 
-          {showFooter && <Footer setView={setView} />}
         </main>
       </div>
       <Analytics />

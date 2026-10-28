@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { AppView } from '../types';
 import Footer from './Footer';
 import Logo from '../assets/yomeruyo.svg?react';
-import { Globe } from 'lucide-react';
+import { ChevronRight, Globe } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 interface HomeProps {
@@ -13,6 +13,134 @@ interface HomeProps {
     korean: string;
   } | null;
 }
+
+const BannerPreview: React.FC<{ kind: AppView }> = ({ kind }) => {
+  const { t } = useLanguage();
+  const [menuFontReady, setMenuFontReady] = useState(false);
+  useEffect(() => {
+    if (kind !== 'MENU_CONFIG') return;
+    let active = true;
+    document.fonts.load('400 40px "Yuji Syuku"', '銀杏砂肝鶏皮').then(() => {
+      if (active) setMenuFontReady(true);
+    }).catch(() => { if (active) setMenuFontReady(true); });
+    return () => { active = false; };
+  }, [kind]);
+  return <>
+    {kind === 'MENU_CONFIG' && (
+      <div lang="ja" className="w-64 h-40 md:h-44 rounded-xl bg-[#fff8e8] border border-amber-900/10 shadow-xl px-6 py-3 md:py-4 text-stone-800">
+        <div style={{ fontFamily: '"Yuji Syuku", "Yu Mincho", serif', opacity: menuFontReady ? 1 : 0 }} className="h-full flex flex-row-reverse justify-between items-center">
+          <span style={{ writingMode: 'vertical-rl' }} className="text-4xl tracking-widest">銀杏</span>
+          <span style={{ writingMode: 'vertical-rl' }} className="text-4xl tracking-widest">砂肝</span>
+          <span style={{ writingMode: 'vertical-rl' }} className="text-4xl tracking-widest">鶏皮</span>
+        </div>
+      </div>
+    )}
+    {kind === 'NUMBER_CONFIG' && (<>
+<div className="w-64 h-32 bg-white rounded-2xl flex items-center justify-center">
+                        <div className="text-center text-red-700 text-5xl font-bold leading-[60px]">
+                          3,874円
+                        </div>
+                      </div>
+    </>)}
+    {kind === 'NAME_CONFIG' && (<>
+<div className="w-64 bg-gradient-to-b from-white to-gray-200 rounded-3xl overflow-hidden">
+                        <div className="flex border-b-2 border-black">
+                          <div className="flex-1 px-2 pt-2.5 pb-2 border-r border-neutral-200 flex justify-center">
+                            <span className="text-black/50 text-sm font-medium">
+                              {t.home.nameExample.name}
+                            </span>
+                          </div>
+
+                          <div className="flex-1 px-2 pt-2.5 pb-2 flex justify-center">
+                            <span className="text-black/50 text-sm font-medium">
+                              {t.home.nameExample.count}
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="flex">
+                          <div className="flex-1 p-2 border-r border-neutral-200 text-center">
+                            <span className="text-blue-950 text-xl font-bold">
+                              堀之内
+                            </span>
+                          </div>
+
+                          <div className="flex-1 p-2 text-center">
+                            <span className="text-blue-950 text-xl font-bold">
+                              2人
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="flex">
+                          <div className="flex-1 px-2 pt-2 pb-3 border-r border-neutral-200 text-center">
+                            <span className="text-blue-950 text-xl font-bold">
+                              安藤
+                            </span>
+                          </div>
+
+                          <div className="flex-1 px-2 pt-2 pb-3 text-center">
+                            <span className="text-blue-950 text-xl font-bold">
+                              3人
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+    </>)}
+    {kind === 'PLACE_CONFIG' && (<>
+<div className="w-72 bg-gradient-to-b from-white to-gray-200 rounded-3xl overflow-hidden">
+                        <div className="pt-3.5 pb-2.5">
+                          <div className="flex items-center justify-center">
+                            <div className="w-6 h-6 rounded border-4 border-lime-400 bg-white" />
+
+                            <div className="mx-2 text-black text-3xl font-bold leading-[48px]">
+                              御徒町
+                            </div>
+
+                            <div className="w-6 h-6 opacity-0 rounded border-4 border-lime-400 bg-white" />
+                          </div>
+
+                          <div className="text-center text-black/50 text-xs font-semibold">
+                            {t.home.placeExample.unknown}
+                          </div>
+                        </div>
+
+                        <div className="px-2 bg-emerald-500 flex items-center justify-between">
+                          <span className="flex-1 text-white text-sm font-semibold">
+                            上野
+                          </span>
+
+                          <div className="w-7 h-7 bg-emerald-300" />
+
+                          <span className="flex-1 text-right text-white text-sm font-semibold">
+                            秋葉原
+                          </span>
+                        </div>
+
+                        <div className="py-2 text-center text-black/50 text-xs font-semibold">
+                          {t.home.placeExample.unknown}
+                        </div>
+                      </div>
+    </>)}
+    {kind === 'KEIGO_CONFIG' && (<div className="relative w-72 h-36">
+<div className="absolute inset-0 w-72 h-36 bg-white rounded-full border-4 border-gray-200" />
+
+                      <div className="absolute w-[340px] left-1/2 -translate-x-1/2 px-5 top-[25px] text-center">
+                        <div className="text-teal-700 text-xl font-bold leading-7">
+                          学生時代に一番力を
+                          <br />
+                          入れたことはなんですか？
+                        </div>
+
+                        <div className="mt-2 text-black/50 text-xs font-semibold leading-4">
+                          학생 때 가장 열심히 했던 활동은
+                          <br />
+                          무엇인가요?
+                        </div>
+                      </div>
+    </div>)}
+  </>;
+};
 
 const Home: React.FC<HomeProps> = ({ setView }) => {
   const { language, setLanguage, t } = useLanguage();
@@ -28,7 +156,7 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
   const isDragging = useRef(false);
   const hasMoved = useRef(false);
 
-  const cardCount = 4;
+  const cardCount = 5;
 
   useEffect(() => {
     if (isSwiping) return;
@@ -172,14 +300,15 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
       label: t.home.place,
       icon: 'fa-map',
     },
+    { id: 'MENU_CONFIG' as AppView, label: t.home.menu, icon: 'fa-utensils' },
   ];
 
   return (
-    <div className="fixed inset-0 bg-stone-900 overflow-hidden">
-      <div className="relative w-full max-w-xl h-full mx-auto bg-gradient-to-b from-pink-950 to-stone-900 overflow-hidden">
+    <div className="fixed inset-0 bg-gradient-to-b from-pink-950 to-stone-900 overflow-hidden">
+      <div className="relative w-full h-full mx-auto overflow-hidden">
         {/* Scroll Area */}
         <main className="absolute inset-0 overflow-y-auto overflow-x-hidden overscroll-contain">
-          <div className="w-full pb-0">
+          <div className="w-full max-w-[873px] mx-auto pb-0 md:px-2">
             {/* Header */}
             <header className="relative w-full px-2 pt-3 pb-2 flex items-center justify-between">
               <div className="w-10 h-10 opacity-0" />
@@ -289,7 +418,7 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
                 <div
                   className="
                     w-full
-                    h-[361px]
+                    h-[361px] md:h-96
                     rounded-[32px]
                     overflow-hidden
                     select-none
@@ -311,11 +440,37 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
                       transform: `translateX(-${activeCard * 100}%)`,
                     }}
                   >
+                    {/* Desktop banners share the mobile carousel index and gestures. */}
+                    {[
+                      { view: 'NUMBER_CONFIG', action: t.home.goToNumber, color: 'from-red-700 via-pink-500 to-red-500', example: '3,874円', ink: 'text-red-700' },
+                      { view: 'NAME_CONFIG', action: t.home.goToName, color: 'from-blue-950 to-teal-400', example: '堀之内　2人', ink: 'text-blue-950' },
+                      { view: 'PLACE_CONFIG', action: t.home.goToPlace, color: 'from-amber-600 to-yellow-500', example: '御徒町', ink: 'text-amber-700' },
+                      { view: 'KEIGO_CONFIG', action: t.home.goToKeigo, color: 'from-teal-700 to-lime-500', example: t.home.keigoExample.question, ink: 'text-teal-700' },
+                      { view: 'MENU_CONFIG', action: t.home.goToMenu, color: 'from-purple-900 via-violet-500 to-fuchsia-500' },
+                    ].map(card => (
+                      <button key={card.view} type="button" onClick={() => handleCardClick(card.view as AppView)}
+                        className={`hidden md:flex shrink-0 w-full h-full relative overflow-hidden bg-gradient-to-br ${card.color} text-left items-center justify-between gap-8 pl-12 pr-16`}>
+                        <div className="pointer-events-none absolute w-[699px] h-96 left-24 top-36 rotate-[9.54deg] rounded-full bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,rgba(255,255,255,0)_66%,rgba(255,255,255,0.20)_100%)] blur" />
+                        <div className="pointer-events-none absolute w-[483px] h-64 left-48 top-56 rotate-[9.54deg] rounded-full bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,rgba(255,255,255,0)_66%,rgba(255,255,255,0.20)_100%)] blur" />
+                        <div className="relative flex-1 min-w-0 flex flex-col gap-8">
+                          <div style={{ lineHeight: 1.4 }} className="text-white text-[32px] lg:text-4xl font-bold whitespace-nowrap">{t.home.canReadInOneSecond}<br />{card.view === 'KEIGO_CONFIG' ? t.home.canAnswer : t.home.canRead}</div>
+                          <div className="flex items-center gap-2 text-white/80 text-lg font-medium leading-6">
+                            <span>{card.action}</span><ChevronRight size={20} className="shrink-0" />
+                          </div>
+                        </div>
+                        <div className="relative w-72 lg:w-80 h-48 shrink-0 flex items-center justify-center">
+                          <div className="relative -rotate-3 scale-105 lg:scale-[1.2]">
+                            <BannerPreview kind={card.view as AppView} />
+                          </div>
+                        </div>
+                      </button>
+                    ))}
                     {/* 숫자 읽기 */}
                     <button
                       type="button"
                       onClick={() => handleCardClick('NUMBER_CONFIG')}
                       className="
+                        md:hidden
                         shrink-0
                         w-full
                         h-full
@@ -333,19 +488,17 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
                       <div className="absolute w-[454px] h-64 left-[-27px] top-[179px] rotate-[9.54deg] rounded-full bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,rgba(255,255,255,0)_66%,rgba(255,255,255,0.20)_100%)] blur" />
 
                       <div className="absolute left-0 top-6 w-full text-center">
-                        <div className="text-white text-2xl font-bold leading-8">
+                        <div style={{ lineHeight: 1.4 }} className="text-white text-2xl font-bold">
                           {t.home.canReadInOneSecond}
                         </div>
 
-                        <div className="text-white/60 text-2xl font-bold leading-9">
+                        <div style={{ lineHeight: 1.4 }} className="text-white/60 text-2xl font-bold">
                           {t.home.canRead}
                         </div>
                       </div>
 
-                      <div className="absolute w-64 h-32 left-1/2 -translate-x-1/2 top-[124px] -rotate-3 bg-white rounded-2xl flex items-center justify-center">
-                        <div className="text-center text-red-700 text-5xl font-bold leading-[60px]">
-                          1,900円
-                        </div>
+                      <div className="absolute w-64 h-32 top-[124px] left-1/2 -translate-x-1/2 -rotate-3">
+                        <BannerPreview kind="NUMBER_CONFIG" />
                       </div>
 
                       <div className="absolute left-0 bottom-5 w-full px-4">
@@ -362,6 +515,7 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
                       type="button"
                       onClick={() => handleCardClick('NAME_CONFIG')}
                       className="
+                        md:hidden
                         shrink-0
                         w-full
                         h-full
@@ -378,57 +532,17 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
                       <div className="absolute w-[454px] h-64 left-[-27px] top-[179px] rotate-[9.54deg] rounded-full bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,rgba(255,255,255,0)_66%,rgba(255,255,255,0.20)_100%)] blur" />
 
                       <div className="absolute left-0 top-6 w-full text-center">
-                        <div className="text-white text-2xl font-bold leading-8">
+                        <div style={{ lineHeight: 1.4 }} className="text-white text-2xl font-bold">
                           {t.home.canReadInOneSecond}
                         </div>
 
-                        <div className="text-white/60 text-2xl font-bold leading-9">
+                        <div style={{ lineHeight: 1.4 }} className="text-white/60 text-2xl font-bold">
                           {t.home.canRead}
                         </div>
                       </div>
 
-                      <div className="absolute w-64 left-1/2 -translate-x-1/2 top-[124px] -rotate-3 bg-gradient-to-b from-white to-gray-200 rounded-3xl overflow-hidden">
-                        <div className="flex border-b-2 border-black">
-                          <div className="flex-1 px-2 pt-2.5 pb-2 border-r border-neutral-200 flex justify-center">
-                            <span className="text-black/50 text-sm font-medium">
-                              {t.home.nameExample.name}
-                            </span>
-                          </div>
-
-                          <div className="flex-1 px-2 pt-2.5 pb-2 flex justify-center">
-                            <span className="text-black/50 text-sm font-medium">
-                              {t.home.nameExample.count}
-                            </span>
-                          </div>
-                        </div>
-
-                        <div className="flex">
-                          <div className="flex-1 p-2 border-r border-neutral-200 text-center">
-                            <span className="text-blue-950 text-xl font-bold">
-                              堀之内
-                            </span>
-                          </div>
-
-                          <div className="flex-1 p-2 text-center">
-                            <span className="text-blue-950 text-xl font-bold">
-                              2人
-                            </span>
-                          </div>
-                        </div>
-
-                        <div className="flex">
-                          <div className="flex-1 px-2 pt-2 pb-3 border-r border-neutral-200 text-center">
-                            <span className="text-blue-950 text-xl font-bold">
-                              安藤
-                            </span>
-                          </div>
-
-                          <div className="flex-1 px-2 pt-2 pb-3 text-center">
-                            <span className="text-blue-950 text-xl font-bold">
-                              3人
-                            </span>
-                          </div>
-                        </div>
+                      <div className="absolute w-64 top-[124px] left-1/2 -translate-x-1/2 -rotate-3">
+                        <BannerPreview kind="NAME_CONFIG" />
                       </div>
 
                       <div className="absolute left-0 bottom-5 w-full px-4">
@@ -445,6 +559,7 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
                       type="button"
                       onClick={() => handleCardClick('PLACE_CONFIG')}
                       className="
+                        md:hidden
                         shrink-0
                         w-full
                         h-full
@@ -461,47 +576,17 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
                       <div className="absolute w-[454px] h-64 left-[-27px] top-[179px] rotate-[9.54deg] rounded-full bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,rgba(255,255,255,0)_66%,rgba(255,255,255,0.20)_100%)] blur" />
 
                       <div className="absolute left-0 top-6 w-full text-center">
-                        <div className="text-white text-2xl font-bold leading-8">
+                        <div style={{ lineHeight: 1.4 }} className="text-white text-2xl font-bold">
                           {t.home.canReadInOneSecond}
                         </div>
 
-                        <div className="text-white/60 text-2xl font-bold leading-9">
+                        <div style={{ lineHeight: 1.4 }} className="text-white/60 text-2xl font-bold">
                           {t.home.canRead}
                         </div>
                       </div>
 
-                      <div className="absolute w-72 left-1/2 -translate-x-1/2 top-[110px] -rotate-3 bg-gradient-to-b from-white to-gray-200 rounded-3xl overflow-hidden">
-                        <div className="pt-3.5 pb-2.5">
-                          <div className="flex items-center justify-center">
-                            <div className="w-6 h-6 rounded border-4 border-lime-400 bg-white" />
-
-                            <div className="mx-2 text-black text-3xl font-bold leading-[48px]">
-                              御徒町
-                            </div>
-
-                            <div className="w-6 h-6 opacity-0 rounded border-4 border-lime-400 bg-white" />
-                          </div>
-
-                          <div className="text-center text-black/50 text-xs font-semibold">
-                            {t.home.placeExample.unknown}
-                          </div>
-                        </div>
-
-                        <div className="px-2 bg-emerald-500 flex items-center justify-between">
-                          <span className="flex-1 text-white text-sm font-semibold">
-                            上野
-                          </span>
-
-                          <div className="w-7 h-7 bg-emerald-300" />
-
-                          <span className="flex-1 text-right text-white text-sm font-semibold">
-                            秋葉原
-                          </span>
-                        </div>
-
-                        <div className="py-2 text-center text-black/50 text-xs font-semibold">
-                          {t.home.placeExample.unknown}
-                        </div>
+                      <div className="absolute w-72 top-[110px] left-1/2 -translate-x-1/2 -rotate-3">
+                        <BannerPreview kind="PLACE_CONFIG" />
                       </div>
 
                       <div className="absolute left-0 bottom-5 w-full px-4">
@@ -518,6 +603,7 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
                       type="button"
                       onClick={() => handleCardClick('KEIGO_CONFIG')}
                       className="
+                        md:hidden
                         shrink-0
                         w-full
                         h-full
@@ -534,35 +620,68 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
                       <div className="absolute w-[454px] h-64 left-[-27px] top-[179px] rotate-[9.54deg] rounded-full bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,rgba(255,255,255,0)_66%,rgba(255,255,255,0.20)_100%)] blur" />
 
                       <div className="absolute left-0 top-6 w-full text-center">
-                        <div className="text-white text-2xl font-bold leading-8">
+                        <div style={{ lineHeight: 1.4 }} className="text-white text-2xl font-bold">
                           {t.home.canReadInOneSecond}
                         </div>
 
-                        <div className="text-white/60 text-2xl font-bold leading-9">
+                        <div style={{ lineHeight: 1.4 }} className="text-white/60 text-2xl font-bold">
                           {t.home.canAnswer}
                         </div>
                       </div>
 
-                      <div className="absolute w-72 h-36 left-1/2 -translate-x-1/2 top-[118px] -rotate-3 bg-white rounded-full border-4 border-gray-200" />
-
-                      <div className="absolute w-full px-5 top-[143px] -rotate-3 text-center">
-                        <div className="text-teal-700 text-xl font-bold leading-7">
-                          学生時代に一番力を
-                          <br />
-                          入れたことはなんですか？
-                        </div>
-
-                        <div className="mt-2 text-black/50 text-xs font-semibold leading-4">
-                          학생 때 가장 열심히 했던 활동은
-                          <br />
-                          무엇인가요?
-                        </div>
+                      <div className="absolute w-72 h-36 top-[118px] left-1/2 -translate-x-1/2 -rotate-3">
+                        <BannerPreview kind="KEIGO_CONFIG" />
                       </div>
 
                       <div className="absolute left-0 bottom-5 w-full px-4">
                         <div className="w-full h-14 bg-black/30 rounded-full flex items-center justify-center">
                           <span className="text-white text-lg font-bold leading-6">
                             {t.home.goToKeigo}
+                          </span>
+                        </div>
+                      </div>
+                    </button>
+
+                    {/* 메뉴 읽기 */}
+                    <button
+                      type="button"
+                      onClick={() => handleCardClick('MENU_CONFIG')}
+                      className="
+                        md:hidden
+                        shrink-0
+                        w-full
+                        h-full
+                        relative
+                        overflow-hidden
+                        bg-gradient-to-br
+                        from-purple-900
+                        via-violet-500
+                        to-fuchsia-500
+                        text-left
+                      "
+                    >
+                      <div className="absolute w-[656px] h-96 left-[-117px] top-[107px] rotate-[9.54deg] rounded-full bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,rgba(255,255,255,0)_66%,rgba(255,255,255,0.20)_100%)] blur" />
+
+                      <div className="absolute w-[454px] h-64 left-[-27px] top-[179px] rotate-[9.54deg] rounded-full bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,rgba(255,255,255,0)_66%,rgba(255,255,255,0.20)_100%)] blur" />
+
+                      <div className="absolute left-0 top-6 w-full text-center">
+                        <div style={{ lineHeight: 1.4 }} className="text-white text-2xl font-bold">
+                          {t.home.canReadInOneSecond}
+                        </div>
+
+                        <div style={{ lineHeight: 1.4 }} className="text-white/60 text-2xl font-bold">
+                          {t.home.canRead}
+                        </div>
+                      </div>
+
+                      <div className="absolute w-64 h-40 top-[118px] left-1/2 -translate-x-1/2 -rotate-3">
+                        <BannerPreview kind="MENU_CONFIG" />
+                      </div>
+
+                      <div className="absolute left-0 bottom-5 w-full px-4">
+                        <div className="w-full h-14 bg-black/30 rounded-full flex items-center justify-center">
+                          <span className="text-white text-lg font-bold leading-6">
+                            {t.home.goToMenu}
                           </span>
                         </div>
                       </div>
@@ -595,10 +714,8 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
                 {t.home.study}
               </div>
 
-              <div className="w-full flex flex-col gap-2">
-                {/* 1행 */}
-                <div className="w-full flex items-center gap-2">
-                  {buttons.slice(0, 2).map((btn) => (
+              <div className="w-full grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3">
+                {buttons.map((btn) => (
                     <button
                       key={btn.id}
                       type="button"
@@ -632,54 +749,13 @@ const Home: React.FC<HomeProps> = ({ setView }) => {
                         {btn.label}
                       </div>
                     </button>
-                  ))}
-                </div>
-
-                {/* 2행 */}
-                <div className="w-full flex items-center gap-2">
-                  {buttons.slice(2, 4).map((btn) => (
-                    <button
-                      key={btn.id}
-                      type="button"
-                      onClick={() => setView(btn.id)}
-                      className="
-                        flex-1
-                        min-w-0
-                        p-4
-                        bg-gradient-to-b
-                        from-white/10
-                        to-white/5
-                        rounded-[20px]
-                        border
-                        border-white/5
-                        flex
-                        flex-col
-                        items-start
-                        gap-4
-                        text-left
-                        active:scale-[0.97]
-                        transition-transform
-                      "
-                    >
-                      <div className="p-1.5 bg-rose-400/10 rounded-lg flex items-center justify-center">
-                        <i
-                          className={`fas ${btn.icon} w-6 h-6 text-rose-400 text-xl flex items-center justify-center`}
-                        />
-                      </div>
-
-                      <div className="text-white text-xl font-bold leading-8">
-                        {btn.label}
-                      </div>
-                    </button>
-                  ))}
-                </div>
+                ))}
               </div>
             </section>
 
-            {/* Footer */}
-            <div className="mt-32">
-              <Footer setView={setView} />
-            </div>
+          </div>
+          <div className="mt-48 md:mt-56">
+            <Footer setView={setView} />
           </div>
         </main>
       </div>

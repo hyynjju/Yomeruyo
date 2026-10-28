@@ -11,7 +11,8 @@ const Footer: React.FC<FooterProps> = ({ setView }) => {
   const { t } = useLanguage();
 
   return (
-    <footer className="w-full px-4 pt-8 pb-28 bg-white/5 flex flex-col items-start gap-5">
+    <footer className="relative left-1/2 w-screen -translate-x-1/2 bg-white/[0.02]">
+      <div className="w-full max-w-[873px] mx-auto px-4 md:px-6 pt-8 pb-28 flex flex-col items-start gap-5">
       <Logo className="w-5 h-5 text-white/50" />
 
       <div className="flex flex-col items-start gap-1">
@@ -40,21 +41,13 @@ const Footer: React.FC<FooterProps> = ({ setView }) => {
           Email
         </a>
 
-        <div className="w-px h-2.5 bg-white/10" />
 
-        <a
-          href="https://github.com/hyynjju"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-white/50 text-xs font-normal hover:text-white transition-colors"
-        >
-          GitHub
-        </a>
       </div>
 
       <p className="w-full text-white/50 text-xs font-normal">
         © 2026 yomeruyo Project. All right reserved.
       </p>
+      </div>
     </footer>
   );
 };

@@ -2,6 +2,8 @@ export type AppView =
   | 'HOME'
   | 'NUMBER_CONFIG'
   | 'NAME_CONFIG'
+  | 'MENU_CONFIG'
+  | 'FEEDBACK'
   | 'PLACE_CONFIG'
   | 'KEIGO_CONFIG'
   | 'STUDY_SESSION'
@@ -34,6 +36,8 @@ export interface KeigoConfig {
 }
 
 export interface StudyItem {
+  questionFont?: 'handwriting' | 'mincho';
+  meaning?: string;
   display: string;
   reading: string;
   korean?: string;
@@ -45,3 +49,6 @@ export interface KeigoLine {
   ko: string;
   audio: string;
 }
+
+export type MenuCategory = 'izakaya' | 'yakiniku' | 'cafe' | 'western' | 'cocktail';
+export interface MenuConfig { category: MenuCategory; showKorean: boolean; }

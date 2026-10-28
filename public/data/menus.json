@@ -1,0 +1,1170 @@
+{
+  "izakaya": [
+    {
+      "display": "ねぎま",
+      "reading": "ねぎま",
+      "korean": "네기마",
+      "meaning": "닭고기와 대파 꼬치"
+    },
+    {
+      "display": "砂肝",
+      "reading": "すなぎも",
+      "korean": "스나기모",
+      "meaning": "닭모래집"
+    },
+    {
+      "display": "鶏皮",
+      "reading": "とりかわ",
+      "korean": "토리카와",
+      "meaning": "닭껍질"
+    },
+    {
+      "display": "軟骨",
+      "reading": "なんこつ",
+      "korean": "난코츠",
+      "meaning": "연골"
+    },
+    {
+      "display": "手羽先",
+      "reading": "てばさき",
+      "korean": "테바사키",
+      "meaning": "닭날개"
+    },
+    {
+      "display": "つくね",
+      "reading": "つくね",
+      "korean": "츠쿠네",
+      "meaning": "다진 닭고기 완자"
+    },
+    {
+      "display": "ぼんじり",
+      "reading": "ぼんじり",
+      "korean": "본지리",
+      "meaning": "닭 꼬리살"
+    },
+    {
+      "display": "せせり",
+      "reading": "せせり",
+      "korean": "세세리",
+      "meaning": "닭 목살"
+    },
+    {
+      "display": "白レバー",
+      "reading": "しろればー",
+      "korean": "시로 레바",
+      "meaning": "닭 흰 간"
+    },
+    {
+      "display": "ささみ",
+      "reading": "ささみ",
+      "korean": "사사미",
+      "meaning": "닭 안심"
+    },
+    {
+      "display": "もも",
+      "reading": "もも",
+      "korean": "모모",
+      "meaning": "닭 다리살"
+    },
+    {
+      "display": "胸肉",
+      "reading": "むねにく",
+      "korean": "무네니쿠",
+      "meaning": "닭 가슴살"
+    },
+    {
+      "display": "肝",
+      "reading": "きも",
+      "korean": "키모",
+      "meaning": "닭 간"
+    },
+    {
+      "display": "心臓",
+      "reading": "しんぞう",
+      "korean": "신조",
+      "meaning": "닭 심장"
+    },
+    {
+      "display": "はつもと",
+      "reading": "はつもと",
+      "korean": "하츠모토",
+      "meaning": "닭 심장 뿌리 부위"
+    },
+    {
+      "display": "さえずり",
+      "reading": "さえずり",
+      "korean": "사에즈리",
+      "meaning": "닭 식도"
+    },
+    {
+      "display": "ふりそで",
+      "reading": "ふりそで",
+      "korean": "후리소데",
+      "meaning": "닭 어깨살"
+    },
+    {
+      "display": "ソリレス",
+      "reading": "そりれす",
+      "korean": "소리레스",
+      "meaning": "닭 넓적다리 안쪽의 희소 부위"
+    },
+    {
+      "display": "ちょうちん",
+      "reading": "ちょうちん",
+      "korean": "초친",
+      "meaning": "미성숙 알과 난관 꼬치"
+    },
+    {
+      "display": "きんかん",
+      "reading": "きんかん",
+      "korean": "킨칸",
+      "meaning": "닭의 미성숙 알"
+    },
+    {
+      "display": "背肝",
+      "reading": "せぎも",
+      "korean": "세기모",
+      "meaning": "닭 신장"
+    },
+    {
+      "display": "おび",
+      "reading": "おび",
+      "korean": "오비",
+      "meaning": "닭 넓적다리 안쪽 살"
+    },
+    {
+      "display": "かしわ",
+      "reading": "かしわ",
+      "korean": "카시와",
+      "meaning": "닭고기"
+    },
+    {
+      "display": "合鴨串",
+      "reading": "あいがもぐし",
+      "korean": "아이가모구시",
+      "meaning": "오리고기 꼬치"
+    },
+    {
+      "display": "ささみ梅しそ",
+      "reading": "ささみうめしそ",
+      "korean": "사사미 우메시소",
+      "meaning": "매실·차조기 닭 안심"
+    },
+    {
+      "display": "手羽元",
+      "reading": "てばもと",
+      "korean": "테바모토",
+      "meaning": "닭 윗날개"
+    },
+    {
+      "display": "手羽中",
+      "reading": "てばなか",
+      "korean": "테바나카",
+      "meaning": "닭 날개 중간 부위"
+    },
+    {
+      "display": "焼鳥盛り合わせ",
+      "reading": "やきとりもりあわせ",
+      "korean": "야키토리 모리아와세",
+      "meaning": "닭꼬치 모둠"
+    },
+    {
+      "display": "串焼き五本盛り",
+      "reading": "くしやきごほんもり",
+      "korean": "쿠시야키 고혼모리",
+      "meaning": "꼬치구이 5종 모둠"
+    },
+    {
+      "display": "椎茸",
+      "reading": "しいたけ",
+      "korean": "시타케",
+      "meaning": "표고버섯"
+    },
+    {
+      "display": "銀杏",
+      "reading": "ぎんなん",
+      "korean": "긴난",
+      "meaning": "은행"
+    },
+    {
+      "display": "獅子唐",
+      "reading": "ししとう",
+      "korean": "시시토",
+      "meaning": "시시토 고추"
+    },
+    {
+      "display": "長ねぎ",
+      "reading": "ながねぎ",
+      "korean": "나가네기",
+      "meaning": "대파"
+    },
+    {
+      "display": "茄子",
+      "reading": "なす",
+      "korean": "나스",
+      "meaning": "가지"
+    },
+    {
+      "display": "うずらの卵",
+      "reading": "うずらのたまご",
+      "korean": "우즈라노 타마고",
+      "meaning": "메추리알"
+    },
+    {
+      "display": "豚バラ串",
+      "reading": "ぶたばらぐし",
+      "korean": "부타바라구시",
+      "meaning": "삼겹살 꼬치"
+    },
+    {
+      "display": "アスパラ豚巻き",
+      "reading": "あすぱらぶたまき",
+      "korean": "아스파라 부타마키",
+      "meaning": "아스파라거스 돼지고기말이"
+    }
+  ],
+  "yakiniku": [
+    {
+      "display": "牛タン",
+      "reading": "ぎゅうたん",
+      "korean": "규탄",
+      "meaning": "소 혀"
+    },
+    {
+      "display": "牛ハラミ",
+      "reading": "ぎゅうはらみ",
+      "korean": "규 하라미",
+      "meaning": "소 횡격막"
+    },
+    {
+      "display": "上カルビ",
+      "reading": "じょうかるび",
+      "korean": "조 카루비",
+      "meaning": "상급 갈비"
+    },
+    {
+      "display": "牛ロース",
+      "reading": "ぎゅうろーす",
+      "korean": "규 로스",
+      "meaning": "소 등심"
+    },
+    {
+      "display": "牛ヒレ",
+      "reading": "ぎゅうひれ",
+      "korean": "규 히레",
+      "meaning": "소 안심"
+    },
+    {
+      "display": "ミスジ",
+      "reading": "みすじ",
+      "korean": "미스지",
+      "meaning": "소 부채살"
+    },
+    {
+      "display": "上ミノ",
+      "reading": "じょうみの",
+      "korean": "조 미노",
+      "meaning": "소 첫 번째 위"
+    },
+    {
+      "display": "シマチョウ",
+      "reading": "しまちょう",
+      "korean": "시마초",
+      "meaning": "소 대창"
+    },
+    {
+      "display": "ハツ",
+      "reading": "はつ",
+      "korean": "하츠",
+      "meaning": "심장"
+    },
+    {
+      "display": "タン塩",
+      "reading": "たんしお",
+      "korean": "탄시오",
+      "meaning": "소금 양념 우설"
+    },
+    {
+      "display": "厚切り牛タン",
+      "reading": "あつぎりぎゅうたん",
+      "korean": "아츠기리 규탄",
+      "meaning": "두껍게 썬 소 혀"
+    },
+    {
+      "display": "ねぎ塩牛タン",
+      "reading": "ねぎしおぎゅうたん",
+      "korean": "네기시오 규탄",
+      "meaning": "파·소금 양념 소 혀"
+    },
+    {
+      "display": "タン先",
+      "reading": "たんさき",
+      "korean": "탄사키",
+      "meaning": "소 혀 끝 부위"
+    },
+    {
+      "display": "タン元",
+      "reading": "たんもと",
+      "korean": "탄모토",
+      "meaning": "소 혀 뿌리 부위"
+    },
+    {
+      "display": "中落ちカルビ",
+      "reading": "なかおちかるび",
+      "korean": "나카오치 카루비",
+      "meaning": "갈비뼈 사이 살"
+    },
+    {
+      "display": "骨付きカルビ",
+      "reading": "ほねつきかるび",
+      "korean": "호네츠키 카루비",
+      "meaning": "뼈가 붙은 갈비"
+    },
+    {
+      "display": "特上カルビ",
+      "reading": "とくじょうかるび",
+      "korean": "토쿠조 카루비",
+      "meaning": "특상급 갈비"
+    },
+    {
+      "display": "上ロース",
+      "reading": "じょうろーす",
+      "korean": "조 로스",
+      "meaning": "상급 등심"
+    },
+    {
+      "display": "サーロイン",
+      "reading": "さーろいん",
+      "korean": "사로인",
+      "meaning": "채끝등심"
+    },
+    {
+      "display": "リブロース",
+      "reading": "りぶろーす",
+      "korean": "리부로스",
+      "meaning": "꽃등심 부위"
+    },
+    {
+      "display": "シャトーブリアン",
+      "reading": "しゃとーぶりあん",
+      "korean": "샤토부리안",
+      "meaning": "안심 중앙의 두꺼운 부위"
+    },
+    {
+      "display": "肩ロース",
+      "reading": "かたろーす",
+      "korean": "카타로스",
+      "meaning": "목심·어깨등심"
+    },
+    {
+      "display": "肩三角",
+      "reading": "かたさんかく",
+      "korean": "카타산카쿠",
+      "meaning": "소 앞다리 어깨의 한 부위"
+    },
+    {
+      "display": "クリミ",
+      "reading": "くりみ",
+      "korean": "쿠리미",
+      "meaning": "소 어깨의 살코기 부위"
+    },
+    {
+      "display": "ウワミスジ",
+      "reading": "うわみすじ",
+      "korean": "우와미스지",
+      "meaning": "부채살 위쪽의 희소 부위"
+    },
+    {
+      "display": "ササミ",
+      "reading": "ささみ",
+      "korean": "사사미",
+      "meaning": "소 뒷다리 주변 뱃살 부위"
+    },
+    {
+      "display": "牛レバー",
+      "reading": "ぎゅうればー",
+      "korean": "규 레바",
+      "meaning": "소 간"
+    },
+    {
+      "display": "センマイ",
+      "reading": "せんまい",
+      "korean": "센마이",
+      "meaning": "소 세 번째 위"
+    },
+    {
+      "display": "マルチョウ",
+      "reading": "まるちょう",
+      "korean": "마루초",
+      "meaning": "소 소창"
+    },
+    {
+      "display": "コプチャン",
+      "reading": "こぷちゃん",
+      "korean": "코푸찬",
+      "meaning": "소 소창"
+    },
+    {
+      "display": "ハツモト",
+      "reading": "はつもと",
+      "korean": "하츠모토",
+      "meaning": "소 대동맥"
+    },
+    {
+      "display": "ツラミ",
+      "reading": "つらみ",
+      "korean": "츠라미",
+      "meaning": "소 볼살"
+    },
+    {
+      "display": "豚トロ",
+      "reading": "とんとろ",
+      "korean": "톤토로",
+      "meaning": "돼지 목 주변 지방 많은 살"
+    },
+    {
+      "display": "豚バラ",
+      "reading": "ぶたばら",
+      "korean": "부타바라",
+      "meaning": "돼지 삼겹살"
+    },
+    {
+      "display": "豚肩ロース",
+      "reading": "ぶたかたろーす",
+      "korean": "부타 카타로스",
+      "meaning": "돼지 목심·어깨등심"
+    },
+    {
+      "display": "ラム肩ロース",
+      "reading": "らむかたろーす",
+      "korean": "라무 카타로스",
+      "meaning": "양 목심·어깨등심"
+    }
+  ],
+  "cafe": [
+    {
+      "display": "カフェラテ",
+      "reading": "かふぇらて",
+      "korean": "카페 라테",
+      "meaning": "카페라테"
+    },
+    {
+      "display": "カプチーノ",
+      "reading": "かぷちーの",
+      "korean": "카푸치노",
+      "meaning": "카푸치노"
+    },
+    {
+      "display": "エスプレッソ",
+      "reading": "えすぷれっそ",
+      "korean": "에스푸렛소",
+      "meaning": "에스프레소"
+    },
+    {
+      "display": "アメリカーノ",
+      "reading": "あめりかーの",
+      "korean": "아메리카노",
+      "meaning": "아메리카노"
+    },
+    {
+      "display": "キャラメルマキアート",
+      "reading": "きゃらめるまきあーと",
+      "korean": "캬라메루 마키아토",
+      "meaning": "캐러멜 마키아토"
+    },
+    {
+      "display": "ロイヤルミルクティー",
+      "reading": "ろいやるみるくてぃー",
+      "korean": "로이야루 미루쿠 티",
+      "meaning": "로열 밀크티"
+    },
+    {
+      "display": "クロワッサン",
+      "reading": "くろわっさん",
+      "korean": "쿠로왓상",
+      "meaning": "크루아상"
+    },
+    {
+      "display": "シフォンケーキ",
+      "reading": "しふぉんけーき",
+      "korean": "시폰 케키",
+      "meaning": "시폰 케이크"
+    },
+    {
+      "display": "チーズケーキ",
+      "reading": "ちーずけーき",
+      "korean": "치즈 케키",
+      "meaning": "치즈 케이크"
+    },
+    {
+      "display": "ホットサンド",
+      "reading": "ほっとさんど",
+      "korean": "홋토 산도",
+      "meaning": "따뜻한 샌드위치"
+    },
+    {
+      "display": "苺のショートケーキ",
+      "reading": "いちごのしょーとけーき",
+      "korean": "이치고노 쇼토케키",
+      "meaning": "딸기 생크림 케이크"
+    },
+    {
+      "display": "苺のミルフィーユ",
+      "reading": "いちごのみるふぃーゆ",
+      "korean": "이치고노 미루피유",
+      "meaning": "딸기 밀푀유"
+    },
+    {
+      "display": "苺のタルト",
+      "reading": "いちごのたると",
+      "korean": "이치고노 타루토",
+      "meaning": "딸기 타르트"
+    },
+    {
+      "display": "苺のロールケーキ",
+      "reading": "いちごのろーるけーき",
+      "korean": "이치고노 로루케키",
+      "meaning": "딸기 롤케이크"
+    },
+    {
+      "display": "季節のフルーツタルト",
+      "reading": "きせつのふるーつたると",
+      "korean": "키세츠노 후루츠 타루토",
+      "meaning": "제철 과일 타르트"
+    },
+    {
+      "display": "白桃のタルト",
+      "reading": "はくとうのたると",
+      "korean": "하쿠토노 타루토",
+      "meaning": "백도 타르트"
+    },
+    {
+      "display": "黄桃のパフェ",
+      "reading": "おうとうのぱふぇ",
+      "korean": "오우토노 파페",
+      "meaning": "황도 파르페"
+    },
+    {
+      "display": "無花果のタルト",
+      "reading": "いちじくのたると",
+      "korean": "이치지쿠노 타루토",
+      "meaning": "무화과 타르트"
+    },
+    {
+      "display": "林檎のパイ",
+      "reading": "りんごのぱい",
+      "korean": "링고노 파이",
+      "meaning": "사과 파이"
+    },
+    {
+      "display": "洋梨のタルト",
+      "reading": "ようなしのたると",
+      "korean": "요우나시노 타루토",
+      "meaning": "서양배 타르트"
+    },
+    {
+      "display": "葡萄のゼリー",
+      "reading": "ぶどうのぜりー",
+      "korean": "부도우노 제리",
+      "meaning": "포도 젤리"
+    },
+    {
+      "display": "檸檬のタルト",
+      "reading": "れもんのたると",
+      "korean": "레몬노 타루토",
+      "meaning": "레몬 타르트"
+    },
+    {
+      "display": "栗のモンブラン",
+      "reading": "くりのもんぶらん",
+      "korean": "쿠리노 몬부란",
+      "meaning": "밤 몽블랑"
+    },
+    {
+      "display": "和栗のモンブラン",
+      "reading": "わぐりのもんぶらん",
+      "korean": "와구리노 몬부란",
+      "meaning": "일본산 밤 몽블랑"
+    },
+    {
+      "display": "抹茶のシフォンケーキ",
+      "reading": "まっちゃのしふぉんけーき",
+      "korean": "맛차노 시폰케키",
+      "meaning": "말차 시폰 케이크"
+    },
+    {
+      "display": "抹茶と小豆のケーキ",
+      "reading": "まっちゃとあずきのけーき",
+      "korean": "맛차토 아즈키노 케키",
+      "meaning": "말차·팥 케이크"
+    },
+    {
+      "display": "黒胡麻のプリン",
+      "reading": "くろごまのぷりん",
+      "korean": "쿠로고마노 푸린",
+      "meaning": "검은깨 푸딩"
+    },
+    {
+      "display": "ほうじ茶ラテ",
+      "reading": "ほうじちゃらて",
+      "korean": "호지차 라테",
+      "meaning": "호지차 라테"
+    },
+    {
+      "display": "柚子ソーダ",
+      "reading": "ゆずそーだ",
+      "korean": "유즈 소다",
+      "meaning": "유자 소다"
+    },
+    {
+      "display": "宇治抹茶ラテ",
+      "reading": "うじまっちゃらて",
+      "korean": "우지 맛차 라테",
+      "meaning": "우지 말차 라테"
+    },
+    {
+      "display": "ガトーショコラ",
+      "reading": "がとーしょこら",
+      "korean": "가토 쇼코라",
+      "meaning": "가토 쇼콜라"
+    },
+    {
+      "display": "ベイクドチーズケーキ",
+      "reading": "べいくどちーずけーき",
+      "korean": "베이쿠도 치즈케키",
+      "meaning": "베이크드 치즈케이크"
+    },
+    {
+      "display": "レアチーズケーキ",
+      "reading": "れあちーずけーき",
+      "korean": "레아 치즈케키",
+      "meaning": "레어 치즈케이크"
+    },
+    {
+      "display": "バスクチーズケーキ",
+      "reading": "ばすくちーずけーき",
+      "korean": "바스쿠 치즈케키",
+      "meaning": "바스크 치즈케이크"
+    },
+    {
+      "display": "キャロットケーキ",
+      "reading": "きゃろっとけーき",
+      "korean": "캬롯토 케키",
+      "meaning": "당근 케이크"
+    },
+    {
+      "display": "フレンチトースト",
+      "reading": "ふれんちとーすと",
+      "korean": "후렌치 토스토",
+      "meaning": "프렌치토스트"
+    },
+    {
+      "display": "パンケーキ",
+      "reading": "ぱんけーき",
+      "korean": "판케키",
+      "meaning": "팬케이크"
+    },
+    {
+      "display": "アフォガート",
+      "reading": "あふぉがーと",
+      "korean": "아포가토",
+      "meaning": "아포가토"
+    },
+    {
+      "display": "エスプレッソトニック",
+      "reading": "えすぷれっそとにっく",
+      "korean": "에스푸렛소 토닉쿠",
+      "meaning": "에스프레소 토닉"
+    },
+    {
+      "display": "カフェモカ",
+      "reading": "かふぇもか",
+      "korean": "카페 모카",
+      "meaning": "카페모카"
+    }
+  ],
+  "cocktail": [
+    {
+      "display": "ジントニック",
+      "reading": "じんとにっく",
+      "korean": "진 토닉쿠",
+      "meaning": "진토닉"
+    },
+    {
+      "display": "モスコミュール",
+      "reading": "もすこみゅーる",
+      "korean": "모스코 뮬",
+      "meaning": "모스코 뮬"
+    },
+    {
+      "display": "スクリュードライバー",
+      "reading": "すくりゅーどらいばー",
+      "korean": "스쿠류 도라이바",
+      "meaning": "스크루드라이버"
+    },
+    {
+      "display": "カシスオレンジ",
+      "reading": "かしすおれんじ",
+      "korean": "카시스 오렌지",
+      "meaning": "카시스 오렌지"
+    },
+    {
+      "display": "ファジーネーブル",
+      "reading": "ふぁじーねーぶる",
+      "korean": "파지 네부루",
+      "meaning": "퍼지 네이블"
+    },
+    {
+      "display": "マティーニ",
+      "reading": "まてぃーに",
+      "korean": "마티니",
+      "meaning": "마티니"
+    },
+    {
+      "display": "マンハッタン",
+      "reading": "まんはったん",
+      "korean": "만핫탄",
+      "meaning": "맨해튼"
+    },
+    {
+      "display": "モヒート",
+      "reading": "もひーと",
+      "korean": "모히토",
+      "meaning": "모히토"
+    },
+    {
+      "display": "ダイキリ",
+      "reading": "だいきり",
+      "korean": "다이키리",
+      "meaning": "다이키리"
+    },
+    {
+      "display": "マルガリータ",
+      "reading": "まるがりーた",
+      "korean": "마루가리타",
+      "meaning": "마르가리타"
+    },
+    {
+      "display": "ギムレット",
+      "reading": "ぎむれっと",
+      "korean": "기무렛토",
+      "meaning": "김렛"
+    },
+    {
+      "display": "ネグローニ",
+      "reading": "ねぐろーに",
+      "korean": "네구로니",
+      "meaning": "네그로니"
+    },
+    {
+      "display": "ジンフィズ",
+      "reading": "じんふぃず",
+      "korean": "진 피즈",
+      "meaning": "진 피즈"
+    },
+    {
+      "display": "ジンバック",
+      "reading": "じんばっく",
+      "korean": "진 박쿠",
+      "meaning": "진 벅"
+    },
+    {
+      "display": "トムコリンズ",
+      "reading": "とむこりんず",
+      "korean": "토무 코린즈",
+      "meaning": "톰 콜린스"
+    },
+    {
+      "display": "シンガポールスリング",
+      "reading": "しんがぽーるすりんぐ",
+      "korean": "싱가포루 스링구",
+      "meaning": "싱가포르 슬링"
+    },
+    {
+      "display": "ホワイトレディ",
+      "reading": "ほわいとれでぃ",
+      "korean": "호와이토 레디",
+      "meaning": "화이트 레이디"
+    },
+    {
+      "display": "ブルームーン",
+      "reading": "ぶるーむーん",
+      "korean": "부루 문",
+      "meaning": "블루 문"
+    },
+    {
+      "display": "ソルティドッグ",
+      "reading": "そるてぃどっぐ",
+      "korean": "소루티 돗구",
+      "meaning": "솔티 도그"
+    },
+    {
+      "display": "ブラッディメアリー",
+      "reading": "ぶらっでぃめありー",
+      "korean": "부랏디 메아리",
+      "meaning": "블러디 메리"
+    },
+    {
+      "display": "バラライカ",
+      "reading": "ばららいか",
+      "korean": "바라라이카",
+      "meaning": "발랄라이카"
+    },
+    {
+      "display": "ブラックルシアン",
+      "reading": "ぶらっくるしあん",
+      "korean": "부락쿠 루시안",
+      "meaning": "블랙 러시안"
+    },
+    {
+      "display": "ホワイトルシアン",
+      "reading": "ほわいとるしあん",
+      "korean": "호와이토 루시안",
+      "meaning": "화이트 러시안"
+    },
+    {
+      "display": "コスモポリタン",
+      "reading": "こすもぽりたん",
+      "korean": "코스모포리탄",
+      "meaning": "코스모폴리탄"
+    },
+    {
+      "display": "キューバリブレ",
+      "reading": "きゅーばりぶれ",
+      "korean": "큐바 리부레",
+      "meaning": "쿠바 리브레"
+    },
+    {
+      "display": "ピニャコラーダ",
+      "reading": "ぴにゃこらーだ",
+      "korean": "피냐 코라다",
+      "meaning": "피냐 콜라다"
+    },
+    {
+      "display": "ボストンクーラー",
+      "reading": "ぼすとんくーらー",
+      "korean": "보스톤 쿠라",
+      "meaning": "보스턴 쿨러"
+    },
+    {
+      "display": "テキーラサンライズ",
+      "reading": "てきーらさんらいず",
+      "korean": "테키라 산라이즈",
+      "meaning": "테킬라 선라이즈"
+    },
+    {
+      "display": "エルディアブロ",
+      "reading": "えるでぃあぶろ",
+      "korean": "에루 디아부로",
+      "meaning": "엘 디아블로"
+    },
+    {
+      "display": "サイドカー",
+      "reading": "さいどかー",
+      "korean": "사이도카",
+      "meaning": "사이드카"
+    },
+    {
+      "display": "アレキサンダー",
+      "reading": "あれきさんだー",
+      "korean": "아레키산다",
+      "meaning": "알렉산더"
+    },
+    {
+      "display": "オールドファッションド",
+      "reading": "おーるどふぁっしょんど",
+      "korean": "오루도 팟숀도",
+      "meaning": "올드 패션드"
+    },
+    {
+      "display": "ウイスキーサワー",
+      "reading": "ういすきーさわー",
+      "korean": "우이스키 사와",
+      "meaning": "위스키 사워"
+    },
+    {
+      "display": "ニューヨーク",
+      "reading": "にゅーよーく",
+      "korean": "뉴 요쿠",
+      "meaning": "뉴욕 칵테일"
+    },
+    {
+      "display": "ラスティネイル",
+      "reading": "らすてぃねいる",
+      "korean": "라스티 네이루",
+      "meaning": "러스티 네일"
+    },
+    {
+      "display": "ゴッドファーザー",
+      "reading": "ごっどふぁーざー",
+      "korean": "곳도 파자",
+      "meaning": "갓파더"
+    },
+    {
+      "display": "キール",
+      "reading": "きーる",
+      "korean": "키루",
+      "meaning": "키르"
+    },
+    {
+      "display": "キールロワイヤル",
+      "reading": "きーるろわいやる",
+      "korean": "키루 로와이야루",
+      "meaning": "키르 로얄"
+    },
+    {
+      "display": "ミモザ",
+      "reading": "みもざ",
+      "korean": "미모자",
+      "meaning": "미모사"
+    },
+    {
+      "display": "スプモーニ",
+      "reading": "すぷもーに",
+      "korean": "스푸모니",
+      "meaning": "스푸모니"
+    }
+  ],
+  "western": [
+    {
+      "display": "カルボナーラ",
+      "reading": "かるぼなーら",
+      "korean": "카루보나라",
+      "meaning": "카르보나라"
+    },
+    {
+      "display": "ペペロンチーノ",
+      "reading": "ぺぺろんちーの",
+      "korean": "페페론치노",
+      "meaning": "페페론치노"
+    },
+    {
+      "display": "ボロネーゼ",
+      "reading": "ぼろねーぜ",
+      "korean": "보로네제",
+      "meaning": "볼로네제"
+    },
+    {
+      "display": "マルゲリータ",
+      "reading": "まるげりーた",
+      "korean": "마루게리타",
+      "meaning": "마르게리타 피자"
+    },
+    {
+      "display": "クアトロフォルマッジ",
+      "reading": "くあとろふぉるまっじ",
+      "korean": "쿠아토로 포루맛지",
+      "meaning": "네 가지 치즈 피자"
+    },
+    {
+      "display": "リゾット",
+      "reading": "りぞっと",
+      "korean": "리좃토",
+      "meaning": "리소토"
+    },
+    {
+      "display": "アラビアータ",
+      "reading": "あらびあーた",
+      "korean": "아라비아타",
+      "meaning": "아라비아타"
+    },
+    {
+      "display": "カプレーゼ",
+      "reading": "かぷれーぜ",
+      "korean": "카푸레제",
+      "meaning": "카프레제"
+    },
+    {
+      "display": "ブルスケッタ",
+      "reading": "ぶるすけった",
+      "korean": "부루스켓타",
+      "meaning": "브루스케타"
+    },
+    {
+      "display": "ティラミス",
+      "reading": "てぃらみす",
+      "korean": "티라미스",
+      "meaning": "티라미수"
+    },
+    {
+      "display": "キッシュ",
+      "reading": "きっしゅ",
+      "korean": "킷슈",
+      "meaning": "키슈"
+    },
+    {
+      "display": "ラタトゥイユ",
+      "reading": "らたとぅいゆ",
+      "korean": "라타투이유",
+      "meaning": "라타투이"
+    },
+    {
+      "display": "ブイヤベース",
+      "reading": "ぶいやべーす",
+      "korean": "부이야베스",
+      "meaning": "부야베스"
+    },
+    {
+      "display": "パテ・ド・カンパーニュ",
+      "reading": "ぱてどかんぱーにゅ",
+      "korean": "파테 도 칸파뉴",
+      "meaning": "시골식 고기 파테"
+    },
+    {
+      "display": "コンフィ",
+      "reading": "こんふぃ",
+      "korean": "콘피",
+      "meaning": "기름에 천천히 익힌 요리"
+    },
+    {
+      "display": "テリーヌ",
+      "reading": "てりーぬ",
+      "korean": "테리누",
+      "meaning": "테린"
+    },
+    {
+      "display": "エスカルゴ",
+      "reading": "えすかるご",
+      "korean": "에스카루고",
+      "meaning": "달팽이 요리"
+    },
+    {
+      "display": "ガレット",
+      "reading": "がれっと",
+      "korean": "가렛토",
+      "meaning": "갈레트"
+    },
+    {
+      "display": "クレームブリュレ",
+      "reading": "くれーむぶりゅれ",
+      "korean": "쿠레무 부류레",
+      "meaning": "크렘 브륄레"
+    },
+    {
+      "display": "タルトタタン",
+      "reading": "たるとたたん",
+      "korean": "타루토 타탄",
+      "meaning": "타르트 타탱"
+    },
+    {
+      "display": "アヒージョ",
+      "reading": "あひーじょ",
+      "korean": "아히조",
+      "meaning": "마늘 오일에 익힌 스페인 요리·감바스류"
+    },
+    {
+      "display": "海老のアヒージョ",
+      "reading": "えびのあひーじょ",
+      "korean": "에비노 아히조",
+      "meaning": "새우 감바스"
+    },
+    {
+      "display": "マッシュルームのアヒージョ",
+      "reading": "まっしゅるーむのあひーじょ",
+      "korean": "맛슈루무노 아히조",
+      "meaning": "양송이 아히조"
+    },
+    {
+      "display": "ペスカトーレ",
+      "reading": "ぺすかとーれ",
+      "korean": "페스카토레",
+      "meaning": "해산물 토마토 파스타"
+    },
+    {
+      "display": "ボンゴレビアンコ",
+      "reading": "ぼんごれびあんこ",
+      "korean": "본고레 비안코",
+      "meaning": "조개 오일 파스타"
+    },
+    {
+      "display": "ボンゴレロッソ",
+      "reading": "ぼんごれろっそ",
+      "korean": "본고레 롯소",
+      "meaning": "조개 토마토 파스타"
+    },
+    {
+      "display": "ジェノベーゼ",
+      "reading": "じぇのべーぜ",
+      "korean": "제노베제",
+      "meaning": "바질 페스토 파스타"
+    },
+    {
+      "display": "プッタネスカ",
+      "reading": "ぷったねすか",
+      "korean": "풋타네스카",
+      "meaning": "올리브·케이퍼 토마토 파스타"
+    },
+    {
+      "display": "ナポリタン",
+      "reading": "なぽりたん",
+      "korean": "나포리탄",
+      "meaning": "일본식 케첩 스파게티"
+    },
+    {
+      "display": "明太子パスタ",
+      "reading": "めんたいこぱすた",
+      "korean": "멘타이코 파스타",
+      "meaning": "명란 파스타"
+    },
+    {
+      "display": "ミラノ風ドリア",
+      "reading": "みらのふうどりあ",
+      "korean": "미라노후 도리아",
+      "meaning": "밀라노풍 도리아"
+    },
+    {
+      "display": "ラザニア",
+      "reading": "らざにあ",
+      "korean": "라자니아",
+      "meaning": "라자냐"
+    },
+    {
+      "display": "ニョッキ",
+      "reading": "にょっき",
+      "korean": "뇻키",
+      "meaning": "뇨키"
+    },
+    {
+      "display": "アクアパッツァ",
+      "reading": "あくあぱっつぁ",
+      "korean": "아쿠아 팟차",
+      "meaning": "생선·조개찜"
+    },
+    {
+      "display": "カルパッチョ",
+      "reading": "かるぱっちょ",
+      "korean": "카루팟초",
+      "meaning": "카르파초"
+    },
+    {
+      "display": "バーニャカウダ",
+      "reading": "ばーにゃかうだ",
+      "korean": "바냐 카우다",
+      "meaning": "채소와 따뜻한 앤초비 소스"
+    },
+    {
+      "display": "ムニエル",
+      "reading": "むにえる",
+      "korean": "무니에루",
+      "meaning": "뫼니에르"
+    },
+    {
+      "display": "ビーフシチュー",
+      "reading": "びーふしちゅー",
+      "korean": "비후 시추",
+      "meaning": "비프 스튜"
+    },
+    {
+      "display": "ハンバーグ",
+      "reading": "はんばーぐ",
+      "korean": "한바구",
+      "meaning": "함박스테이크"
+    },
+    {
+      "display": "オムライス",
+      "reading": "おむらいす",
+      "korean": "오무라이스",
+      "meaning": "오므라이스"
+    }
+  ]
+}

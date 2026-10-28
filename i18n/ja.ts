@@ -6,6 +6,7 @@ export const ja = {
   },
 
   home: {
+    menu: 'メニューの読み方',
     number: '数字の読み方',
     keigo: '敬語を聞く',
     name: '人名の読み方',
@@ -18,6 +19,7 @@ export const ja = {
     goToNumber: '数字の読み方を練習する',
     goToName: '人名の読み方を練習する',
     goToPlace: '地名の読み方を練習する',
+    goToMenu: 'メニューの読み方を練習する',
     goToKeigo: '敬語を練習する',
 
     study: '学習する',
@@ -61,6 +63,15 @@ export const ja = {
   },
 
   numberConfig: {
+    register: 'レジ業務',
+    dateReading: '日付を読む',
+    peopleReading: '人数（人）',
+    animalsReading: '動物の数（匹）',
+    floorsReading: '階数（階）',
+    thingsReading: '物の数（個）',
+    booksReading: '本の数（冊）',
+    longReading: '細長い物の数（本）',
+
     header: '数字の読み方の設定',
 
     recommended: 'おすすめの練習',
@@ -96,6 +107,19 @@ export const ja = {
     koreanReadingExample: '例）3,800円 → 산젠핫퍄쿠엔',
   },
 
+  menuConfig: {
+    loadingFont: 'フォントを読み込み中…',
+    header: 'メニューの読み方の設定',
+    title: 'メニューを選択',
+    izakaya: '居酒屋・焼き鳥',
+    yakiniku: '焼肉・肉の部位',
+    cafe: 'カフェ',
+    western: '洋食',
+    cocktail: 'カクテルバー',
+    koreanReading: '韓国語の読み方を表示',
+    koreanReadingExample: '例）砂肝 → 스나기모',
+  },
+
   placeConfig: {
     title: '地域を選択',
     header: '地名の読み方の設定',
@@ -111,6 +135,12 @@ export const ja = {
   },
 
   studySession: {
+    complete: '学習完了',
+    averageSpeed: '平均回答時間',
+    remaining: 'まだ完了していない学習があります',
+    home: 'ホームに戻る',
+    progress: '学習の進捗',
+
     close: '閉じる',
     guessReading: '読み方を当ててみましょう',
     reveal: '答えを見る',
