@@ -165,7 +165,9 @@ const StudySession: React.FC<StudySessionProps> = ({
               fontFamily: currentItem.questionFont === 'handwriting'
                 ? '"Yuji Syuku", "Yu Mincho", serif' : '"Noto Serif JP", "Yu Mincho", serif',
               fontWeight: currentItem.questionFont === 'handwriting' ? 400 : 600,
-              fontSize: 'clamp(1.75rem, 7vw, 3.75rem)',
+              fontSize: currentItem.questionFont === 'handwriting'
+                ? 'clamp(2.5rem, 11vw, 3.75rem)'
+                : 'clamp(1.75rem, 7vw, 3.75rem)',
               overflowWrap: 'anywhere',
             } : undefined} className="text-center text-white text-5xl sm:text-6xl font-bold tracking-tight leading-tight break-keep">
               {currentItem.display}
